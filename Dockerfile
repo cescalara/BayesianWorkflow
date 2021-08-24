@@ -1,5 +1,5 @@
 # Use scipy notebook as base
-FROM jupyter/scipy-notebook:latest
+FROM jupyter/scipy-notebook:notebook-6.4.2
 
 # As root
 USER root
@@ -24,6 +24,9 @@ ENTRYPOINT []
 
 # Copy over notebooks
 COPY src/notebooks/*.ipynb work/
+COPY src/notebooks/figures work/figures
+COPY src/notebooks/stan work/stan
+COPY src/notebooks/data work/data
 
 # Set permissions
 USER root
