@@ -11,7 +11,7 @@ RUN apt-get update -y && apt-get install -y build-essential
 USER ${NB_UID}
 
 # Setup environment
-RUN pip install cmdstanpy==0.9.76 jupyterthemes==0.20.0
+RUN pip install cmdstanpy==0.9.76 jupyterthemes==0.20.0 arviz==0.11.2
 
 # Install cmdstan
 RUN install_cmdstan
