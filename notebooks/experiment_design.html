@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>A test notebook &mdash; Bayesian workflow  documentation</title>
+  <title>6. Experiment design &mdash; Bayesian workflow  documentation</title>
   
 
   
@@ -45,7 +45,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Bayesian Workflow" href="../index.html" /> 
+    <link rel="prev" title="5. Model comparison" href="model_comparison.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,7 +92,12 @@
             
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">A test notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Bayesian workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_development.html">4. Model development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_comparison.html">5. Model comparison</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Experiment design</a></li>
 </ul>
 
             
@@ -141,13 +146,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>A test notebook</li>
+      <li>6. Experiment design</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/notebooks/test_notebook.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/notebooks/experiment_design.ipynb.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -430,16 +435,61 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="A-test-notebook">
-<h1>A test notebook<a class="headerlink" href="#A-test-notebook" title="Permalink to this headline">¶</a></h1>
+<section id="6.-Experiment-design">
+<h1>6. Experiment design<a class="headerlink" href="#6.-Experiment-design" title="Permalink to this headline">¶</a></h1>
+<p>So far in our workflow, we have been working forward from a given experimental design and dataset to build up our model and inferences. However, looking back, we can realise that many steps in our workflow actually do not require the collection and use of actual data. Let’s recall our workflow from the <a class="reference internal" href="introduction.html"><span class="doc">introduction</span></a>:</p>
+<p><img alt="The workflow!" class="no-scaled-link" src="../_images/workflow1.pdf" style="width: 800px;" /></p>
+<p>If we have a particular problem in mind, <em>we don’t even need any data</em> before we can start to utilise a Bayesian workflow. We can build a <strong>generative model</strong> to represent our planned experiment, and use this to produce simulated data, upon which we can <strong>build</strong> and <strong>check</strong> our <strong>statistical model</strong> in a controlled environment.</p>
+<p>Imagine that we have just completed an experiment followed by a Bayesian analysis, and were not able to make strong conclusions regarding our initial question. With all the tools we developed as part of our workflow, we can plan a new and improved experiment that should be able to do so! This kind of approach can be useful in putting together or evaluating research proposals.</p>
+<blockquote>
+<div><p>As the course comes towards an end, I’ll also take this opportunity to note that there are many paths through the workflow, and it should <em>not</em> be seen as a strict, ordered to-do list. What we have looked at so far is just one path, and the next workflow you attempt may look quite different.</p>
+</div></blockquote>
+<p>We can start by considering a really simple example, like the normal model used to introduce Stan in the <a class="reference internal" href="introduction.html"><span class="doc">introduction</span></a>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span>import numpy as np
 from matplotlib import pyplot as plt
+from cmdstanpy import CmdStanModel
+import arviz as av
+import logging
 </pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># simulate some data from a normal distribution
+N = 20
+mu = 5
+sigma = 3
+x = np.random.normal(mu, sigma, N)
+
+# plot histogram
+fig, ax = plt.subplots()
+ax.hist(x, bins=np.linspace(min(x), max(x), 10))
+ax.axvline(mu, color=&quot;k&quot;, linestyle=&quot;:&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.lines.Line2D at 0x13d84b3a0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_experiment_design_2_1.png" src="../_images/notebooks_experiment_design_2_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -447,36 +497,113 @@ from matplotlib import pyplot as plt
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>my_grid = np.linspace(0, 10)
-my_data = np.random.normal(0, 2, 50)
+<span></span># data for Stan model
+data = {}
+data[&quot;N&quot;] = N
+data[&quot;x&quot;] = x
 
-fig, ax = plt.subplots()
-ax.plot(my_grid, my_data)
+# compile and fit
+stan_model = CmdStanModel(stan_file=&quot;stan/normal.stan&quot;)
+fit = stan_model.sample(data=data, iter_sampling=1000, chains=4)
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
 </div>
-<div class="output_area docutils container">
+<div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-[&lt;matplotlib.lines.Line2D at 0x1068843d0&gt;]
+INFO:cmdstanpy:found newer exe file, not recompiling
+INFO:cmdstanpy:compiled model file: /Users/fran/projects/bayesian_workflow_prep/stan/normal
+INFO:cmdstanpy:start chain 1
+INFO:cmdstanpy:start chain 2
+INFO:cmdstanpy:start chain 3
+INFO:cmdstanpy:start chain 4
+INFO:cmdstanpy:finish chain 1
+INFO:cmdstanpy:finish chain 2
+INFO:cmdstanpy:finish chain 3
+INFO:cmdstanpy:finish chain 4
 </pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>av.plot_trace(fit);
+</pre></div>
+</div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_test_notebook_2_1.png" src="../_images/notebooks_test_notebook_2_1.png" />
+<img alt="../_images/notebooks_experiment_design_4_0.png" src="../_images/notebooks_experiment_design_4_0.png" />
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from cmdstanpy import CmdStanModel
+<span></span>out = av.plot_posterior(fit, hdi_prob=0.68, var_names=&quot;mu&quot;);
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_experiment_design_5_0.png" src="../_images/notebooks_experiment_design_5_0.png" />
+</div>
+</div>
+<p>Imagine that the goal for your experiment is to determine the value of <span class="math notranslate nohighlight">\(\mu\)</span> to a precision of 0.1 - i.e. the standard deviation of the posterior for <span class="math notranslate nohighlight">\(\mu\)</span> should be &lt; 0.1.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>np.std(fit.stan_variable(&quot;mu&quot;))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.7706887176946432
+</pre></div></div>
+</div>
+<p>It seems our current “experimental setup” with <span class="math notranslate nohighlight">\(N=20\)</span> will not be capable of doing this. In this simple demo, there is only really one obvious way we can reduce our uncertainty in the estimate of <span class="math notranslate nohighlight">\(\mu\)</span>: increasing the number of observations.</p>
+<p>We can play around with our simulation to understand roughly how many observations would be needed.</p>
+<p>We could make a plot of the standard deviation of our posterior for <span class="math notranslate nohighlight">\(\mu\)</span> as a function fo <span class="math notranslate nohighlight">\(N\)</span>:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># silence logging
+logger = logging.getLogger(&quot;log&quot;)
+logger.setLevel(logging.WARNING)
+stan_model = CmdStanModel(stan_file=&quot;stan/normal.stan&quot;, logger=logger)
+
+# run for many N
+standard_devs = []
+N_vals = np.arange(100, 1500, 5)
+for n in N_vals:
+
+    # simuate data
+    x = np.random.normal(mu, sigma, n)
+
+    # fit data
+    data[&quot;N&quot;] = n
+    data[&quot;x&quot;] = x
+    fit = stan_model.sample(data=data, iter_sampling=1000, chains=4)
+
+    # find std
+    standard_devs.append(np.std(fit.stan_variable(&quot;mu&quot;)))
 </pre></div>
 </div>
 </div>
@@ -485,7 +612,34 @@ ax.plot(my_grid, my_data)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<span></span>fig, ax = plt.subplots()
+ax.plot(N_vals, standard_devs)
+ax.axhline(0.1, color=&quot;k&quot;, linestyle=&quot;:&quot;)
+ax.set_xlabel(&quot;N&quot;)
+ax.set_ylabel(&quot;Width of mu distribution&quot;)
+</pre></div>
+</div>
+</div>
+<p>So we can see that we would probably need something like &gt; 900 observations to constrain the standard deviation of the <span class="math notranslate nohighlight">\(\mu\)</span> posterior to &lt; 1.</p>
+<p>A few notes on implementing this in practice: * We skipped our usual sampler checks when running the fit many times, of course we should still include this, and find a way to automate it. * We can see that the above plot fluctuates depending on the exact simulated realisation at any <span class="math notranslate nohighlight">\(N\)</span> value. We could repeat an experiment a number of times at each <span class="math notranslate nohighlight">\(N\)</span> to account for this. * For posteriors that may have non-standard shapes, the highest density interval (HDI) is a better measure of
+the width of a distribution.</p>
+<p><strong>Exercise 6.1:</strong> Consider the simple mixture model example from the <a class="reference internal" href="model_comparison.html"><span class="doc">model comparison</span></a> notebook. We decide that we can conclude signal is present if the tail probability of the marginal posterior, <span class="math notranslate nohighlight">\(p(f&lt;0.1)\)</span>, is less than 0.01. How many observations are required to achieve this if the true <span class="math notranslate nohighlight">\(f=0.5\)</span>?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 6.2:</strong> Return to the Cepheid variable example and the Hubble constant estimate completed in the <a class="reference internal" href="model_development.html"><span class="doc">model development</span></a> notebook. Investigate what changes could be made to our Cepheid observations to better constrain the Hubble constant. How could we reach a 90% HDI region of &lt; 10? Make some plots to summarise your results.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
 </pre></div>
 </div>
 </div>
@@ -497,7 +651,7 @@ ax.plot(my_grid, my_data)
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../index.html" class="btn btn-neutral float-left" title="Bayesian Workflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="model_comparison.html" class="btn btn-neutral float-left" title="5. Model comparison" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

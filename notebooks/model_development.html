@@ -1,0 +1,1075 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>4. Model development &mdash; Bayesian workflow  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Model comparison" href="model_comparison.html" />
+    <link rel="prev" title="3. Model checking" href="model_checking.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Bayesian workflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Bayesian workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Model development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#4.1.-Hierarchical-models">4.1. Hierarchical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.2.-A-joint-hierarchical-fit-of-all-galaxies">4.2. A joint hierarchical fit of all galaxies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.3.-Estimation-of-the-Hubble-constant">4.3. Estimation of the Hubble constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_comparison.html">5. Model comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">6. Experiment design</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bayesian workflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>4. Model development</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/notebooks/model_development.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="4.-Model-development">
+<h1>4. Model development<a class="headerlink" href="#4.-Model-development" title="Permalink to this headline">¶</a></h1>
+<p>Last time we used simulations as well as prior and posterior predictive checks to check and improve upon our model for Cepheids in a single galaxy. We then found the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> posteriors for each galaxy independently.</p>
+<p>In order to use the period luminosity relation to extend the cosmic distance ladder, and eventually estimate the Hubble constant, the relation needs be <em>universal</em>, i.e. the same <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> should hold for all galaxies, within uncertainties.</p>
+<p>From our studies of individual galaxies, we should be able to see the similarities and differences between the results. But, how do we combine these results properly, and keep track of the uncertainties or correlations between parameters?</p>
+<section id="4.1.-Hierarchical-models">
+<h2>4.1. Hierarchical models<a class="headerlink" href="#4.1.-Hierarchical-models" title="Permalink to this headline">¶</a></h2>
+<p>A natural way to combine the inidividual galaxy results is to build a <strong>hierarchical model</strong> for all galaxies that we have data for. To understand how to do this, we can start with a simpler example of a simple normal model, like the one we used to understand Stan in the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>.</p>
+<p><img alt="Going from a single-level normal model to an hierarchical normal model" class="no-scaled-link" src="../_images/hierarchical_model.pdf" style="width: 600px;" /></p>
+<p>Imagine that <span class="math notranslate nohighlight">\(\mu\)</span> is now sampled from some parent distribution, with mean <span class="math notranslate nohighlight">\(\theta\)</span> and standard deviation <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
+<p>Single-level normal model:</p>
+<div class="math notranslate nohighlight">
+\[p(\mu, \sigma|x) \propto p(x|\mu, \sigma) p(\mu, \sigma).\]</div>
+<p>Hierarchical normal model:</p>
+<div class="math notranslate nohighlight">
+\[p(\theta, \tau | x) \propto p(x|\mu, \sigma) p(\sigma) p(\mu | \theta, \tau) p(\theta, \tau)\]</div>
+<p>Hierarchical models are ideal for describing populations of objects with similar properties, like our Cepheid-hosting galaxies. If we let <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> for each galaxy come from parent distributions with means <code class="docutils literal notranslate"><span class="pre">mu_X</span></code> and standard deviations <code class="docutils literal notranslate"><span class="pre">tau_X</span></code>, we can then fit for the shape of the universal <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> distributions!</p>
+<p>We see that building up hierarchies in this way can quickly lead to a large number of free parameters, which may seem scary. However, Hamiltonian Monte Carlo is designed to cope with these kind of models, and this should be no problem for Stan.</p>
+<blockquote>
+<div><p>Note: Even though the models we were working with so far often had multiple levels, the relationship between parameters across these levels was purely deterministic (e.g. between m and M). In a true hierarchical model, parameters in the hierarchy have probabilistic relationships.</p>
+</div></blockquote>
+</section>
+<section id="4.2.-A-joint-hierarchical-fit-of-all-galaxies">
+<h2>4.2. A joint hierarchical fit of all galaxies<a class="headerlink" href="#4.2.-A-joint-hierarchical-fit-of-all-galaxies" title="Permalink to this headline">¶</a></h2>
+<p><strong>Exercise 4.1:</strong> Sketch the graphical model for our hierarchical model for Cepheids over all galaxies</p>
+<p>A simplified Stan model for the full hierarchy can be found in <code class="docutils literal notranslate"><span class="pre">cepheid_v3.stan</span></code>. Note that this is based on <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code>, and you should also incorporate the changes that you made during the exercises in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> in order to achieve a good fit to the data. I will use <code class="docutils literal notranslate"><span class="pre">cepheid_v3.stan</span></code> here to demonstrate a few important points about hierarchical modelling.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>!cat stan/cepheid_v3.stan
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/**
+ * Hierarchical model for Cepheid variables
+ * - Multiple galaxies
+ * - Shared sigma_m
+ * - Weakly informative priors
+ **/
+
+data {
+
+  /* usual inputs */
+  int Ng; // number of Galaxies
+  int Nt; // sum(Nc_g)
+
+  int gal_id[Nt]; // galaxy id for each entry [1 - 9]
+  vector[Nt] m_obs; // obs apparent mag.
+  real sigma_m; // mag uncertainty
+  vector[Nt] log10P; // log10(periods/days)
+  vector[Ng] z; // redshift of single galaxy
+
+}
+
+transformed data {
+
+  vector[Ng] dL;
+
+  /* luminosity distance */
+  dL = (3.0e5 * z) / 70.0; // Mpc
+
+}
+
+parameters {
+
+  /* parameters of the parent distributions */
+  real mu_alpha;
+  real&lt;lower=0&gt; tau_alpha;
+
+  real mu_beta;
+  real&lt;lower=0&gt; tau_beta;
+
+  /* individual galaxy parameters */
+  vector[Ng] alpha;
+  vector[Ng] beta;
+
+}
+
+transformed parameters {
+
+  vector[Nt] M_true;
+  vector[Nt] m_true;
+
+  /* P-L relation */
+  M_true = alpha[gal_id] + beta[gal_id] .* log10P;
+
+  /* convert to m */
+  m_true = M_true + 5 * log10(dL[gal_id]) + 25;
+
+}
+
+model {
+
+  /* priors */
+  mu_alpha ~ normal(0, 10);
+  mu_beta ~ normal(-5, 5);
+  tau_alpha ~ cauchy(0, 2.5);
+  tau_beta ~ cauchy(0, 2.5);
+
+  /* connection to latent params */
+  alpha ~ normal(mu_alpha, tau_alpha);
+  beta ~ normal(mu_beta, tau_beta);
+
+  /* connection to data */
+  m_obs ~ normal(m_true, sigma_m);
+
+}
+
+</pre></div></div>
+</div>
+<p>A few things worth noting: * The easiest way to deal with a ragged array structure (different number of Cepheids in each galaxy) in Stan is to flatten the array, and pass a vector with the galaxy IDs. * We introduce <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">tau</span></code> parameters for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, with sensible priors. * We assume the parent <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> distributions are independent, as a starting point. * In a hierarchical model, it is not so clear how to separate the priors and likelihood, the model is
+more a series of conditional steps.</p>
+<p>Now, let’s see how the model performs when fitting out dataset.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import h5py
+import numpy as np
+import arviz as av
+from cmdstanpy import CmdStanModel
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># load data
+galaxy_info = np.loadtxt(&quot;data/galaxies.dat&quot;)
+cepheid_info = np.loadtxt(&quot;data/cepheids.dat&quot;)
+
+# compile data from all galaxies
+galaxies = [int(ngc_no) for ngc_no in galaxy_info[:, 0]]
+data = {int(x[0]):{&#39;z&#39;:x[1]} for x in galaxy_info}
+with h5py.File(&quot;data/my_cepheid_data.h5&quot;, &quot;r&quot;) as f:
+    for g in galaxies:
+        group = f[str(g)]
+        for k in group:
+            data[g][k] = group[k][()]
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># Select out two galaxies
+sel = 2
+
+# prepare Stan input
+input_data = {}
+input_data[&quot;Ng&quot;] = len(galaxies[0:sel])
+input_data[&quot;Nt&quot;] = sum([data[g][&quot;Nc&quot;] for g in galaxies[0:sel]])
+input_data[&quot;m_obs&quot;] = np.concatenate([data[g][&quot;m_obs&quot;] for g in galaxies[0:sel]])
+input_data[&quot;log10P&quot;] = np.concatenate([data[g][&quot;log10P_true&quot;] for g in galaxies[0:sel]])
+input_data[&quot;gal_id&quot;] = np.concatenate([np.tile(i, data[g][&quot;Nc&quot;])
+                                       for i, g in enumerate(galaxies[0:sel])]) + 1
+input_data[&quot;z&quot;] = galaxy_info.T[1][0:sel]
+input_data[&quot;sigma_m&quot;] = 0.5
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>stan_model = CmdStanModel(stan_file=&quot;stan/cepheid_v3.stan&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:cmdstanpy:compiling stan program, exe file: /Users/fran/projects/bayesian_workflow_prep/stan/cepheid_v3
+INFO:cmdstanpy:compiler options: stanc_options=None, cpp_options=None
+INFO:cmdstanpy:compiled model file: /Users/fran/projects/bayesian_workflow_prep/stan/cepheid_v3
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>fit = stan_model.sample(data=input_data, chains=4, iter_sampling=1000)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:cmdstanpy:start chain 1
+INFO:cmdstanpy:start chain 2
+INFO:cmdstanpy:start chain 3
+INFO:cmdstanpy:start chain 4
+INFO:cmdstanpy:finish chain 4
+INFO:cmdstanpy:finish chain 3
+INFO:cmdstanpy:finish chain 2
+INFO:cmdstanpy:finish chain 1
+</pre></div></div>
+</div>
+<p>We should always check the sampler diagnostics first!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>fit.diagnose();
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpkrh3070j/cepheid_v3-202108241535-1-siwu8qu5.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpkrh3070j/cepheid_v3-202108241535-2-80wmkq_t.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpkrh3070j/cepheid_v3-202108241535-3-63ca8qiy.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpkrh3070j/cepheid_v3-202108241535-4-rcx1e0t7.csv
+
+Checking sampler transitions treedepth.
+Treedepth satisfactory for all transitions.
+
+Checking sampler transitions for divergences.
+24 of 4000 (0.6%) transitions ended with a divergence.
+These divergent transitions indicate that HMC is not fully able to explore the posterior distribution.
+Try increasing adapt delta closer to 1.
+If this doesn&#39;t remove all divergences, try to reparameterize the model.
+
+Checking E-BFMI - sampler transitions HMC potential energy.
+E-BFMI satisfactory.
+
+Effective sample size satisfactory.
+
+Split R-hat values satisfactory all parameters.
+
+Processing complete.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>fit.summary()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mean</th>
+      <th>MCSE</th>
+      <th>StdDev</th>
+      <th>5%</th>
+      <th>50%</th>
+      <th>95%</th>
+      <th>N_Eff</th>
+      <th>N_Eff/s</th>
+      <th>R_hat</th>
+    </tr>
+    <tr>
+      <th>name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>lp__</th>
+      <td>-720.00</td>
+      <td>0.09100</td>
+      <td>2.600</td>
+      <td>-720.00</td>
+      <td>-720.00</td>
+      <td>-710.0</td>
+      <td>800.0</td>
+      <td>410.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>mu_alpha</th>
+      <td>-0.85</td>
+      <td>0.09200</td>
+      <td>2.200</td>
+      <td>-3.20</td>
+      <td>-0.81</td>
+      <td>1.3</td>
+      <td>550.0</td>
+      <td>290.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>tau_alpha</th>
+      <td>1.80</td>
+      <td>0.12000</td>
+      <td>2.600</td>
+      <td>0.30</td>
+      <td>1.10</td>
+      <td>5.5</td>
+      <td>490.0</td>
+      <td>250.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>mu_beta</th>
+      <td>-4.30</td>
+      <td>0.04300</td>
+      <td>1.800</td>
+      <td>-7.10</td>
+      <td>-4.20</td>
+      <td>-1.5</td>
+      <td>1600.0</td>
+      <td>850.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>tau_beta</th>
+      <td>2.50</td>
+      <td>0.07200</td>
+      <td>2.500</td>
+      <td>0.71</td>
+      <td>1.80</td>
+      <td>6.5</td>
+      <td>1200.0</td>
+      <td>630.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>m_true[295]</th>
+      <td>28.00</td>
+      <td>0.00190</td>
+      <td>0.081</td>
+      <td>28.00</td>
+      <td>28.00</td>
+      <td>29.0</td>
+      <td>1851.0</td>
+      <td>958.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>m_true[296]</th>
+      <td>27.00</td>
+      <td>0.00160</td>
+      <td>0.068</td>
+      <td>27.00</td>
+      <td>27.00</td>
+      <td>28.0</td>
+      <td>1897.0</td>
+      <td>981.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>m_true[297]</th>
+      <td>24.00</td>
+      <td>0.00072</td>
+      <td>0.039</td>
+      <td>24.00</td>
+      <td>24.00</td>
+      <td>24.0</td>
+      <td>2984.0</td>
+      <td>1544.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>m_true[298]</th>
+      <td>20.00</td>
+      <td>0.00091</td>
+      <td>0.050</td>
+      <td>20.00</td>
+      <td>20.00</td>
+      <td>21.0</td>
+      <td>3084.0</td>
+      <td>1595.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>m_true[299]</th>
+      <td>23.00</td>
+      <td>0.00054</td>
+      <td>0.036</td>
+      <td>23.00</td>
+      <td>23.00</td>
+      <td>23.0</td>
+      <td>4425.0</td>
+      <td>2289.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>607 rows × 9 columns</p>
+</div></div>
+</div>
+<p>Hmmm, it seems something is off. Let’s check the trace and pair plots…</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>av.plot_trace(fit, var_names=[&quot;mu_alpha&quot;, &quot;mu_beta&quot;, &quot;alpha&quot;, &quot;beta&quot;]);
+</pre></div>
+</div>
+</div>
+<p>To make a sensibly-sized pair plot and view divergent transitions, we have to pass some more information to <code class="docutils literal notranslate"><span class="pre">arviz</span></code>. Let’s focus on the relationship between the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> hyperparameters and <code class="docutils literal notranslate"><span class="pre">M_true</span></code> latent parameters for now:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>fit_a = av.from_cmdstanpy(fit, coords={&quot;Ng&quot; : np.arange(input_data[&quot;Ng&quot;]),
+                                       &quot;Nt&quot; : np.arange(input_data[&quot;Nt&quot;])},
+                             dims={&quot;alpha&quot;: [&quot;Ng&quot;], &quot;beta&quot;: [&quot;Ng&quot;], &quot;M_true&quot;:[&quot;Nt&quot;]})
+av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta&quot;],
+                divergences=True, coords={&quot;Ng&quot;: np.array([0, 1]),
+                                          &quot;Nt&quot;: np.array([0])});
+</pre></div>
+</div>
+</div>
+<p>The goemetry of a hierarchical model with its many latent parameters is much more complex than that of a single model, and divergent transitions can occur. Fortunately, these can be used to help us understand and fix our model.</p>
+<p>Here, we can see that the misspecification of the magnitude uncertainty causes problems, although these issues become less servere if we add data from more galaxies, as I’ll now demonstrate. It is important to remember that <strong>the geometry the sampler sees depends on both the model and the data</strong>.</p>
+<p><strong>Exercsie 4.2.1:</strong> Update the above Stan code with your improvements from the single galaxy case that you carried out in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> and display the code. Verify that you can run the above demo with no divergent transitions.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 4.2.2:</strong> Perform a joint fit of all the galaxies using your improved model, and visualise the posterior predictive distribution of your fit. Can you fit the data well?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 4.2.3:</strong> Compare the galaxy-level <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> distributions to those found from individual fits that you completed as part of the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a>. What differences can you see?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 4.2.4:</strong> Make a plot to show how the constraints on the parent distributions for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> change depending on the number of galaxies used in the sample. What happens when we only use one or two galaxies?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+</section>
+<section id="4.3.-Estimation-of-the-Hubble-constant">
+<h2>4.3. Estimation of the Hubble constant<a class="headerlink" href="#4.3.-Estimation-of-the-Hubble-constant" title="Permalink to this headline">¶</a></h2>
+<p>So far we have assumed a value for <code class="docutils literal notranslate"><span class="pre">H0</span></code> in our fits in order to convert between apparent and absolute magnitude. This is necessary to fit for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Let’s think about how we can extend the model to make an estimate of <code class="docutils literal notranslate"><span class="pre">H0</span></code>, rather than assuming it.</p>
+<p><strong>Exercise 4.3.1:</strong> What happens if we simply leave <code class="docutils literal notranslate"><span class="pre">H0</span></code> as a free parameter in our existing hierarchical model? Why is this?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 4.3.2:</strong> What happens if we change the value of <code class="docutils literal notranslate"><span class="pre">H0</span></code> assumed in our analysis? Which results change, and which stay the same?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p>The Cepheid variable experts that we talked to earlier are impressed with our careful analysis of the period-luminosity relation. They share a new dataset of Cepheid variable stars that are in our own Galaxy, the Milky Way. The distances to these stars are well-measured using geometric methods.</p>
+<p>This dataset is given in <code class="docutils literal notranslate"><span class="pre">milkyway_cepheids.dat</span></code>. It similar to that we have seen before, except that each Cepheid has a distance measurement in kpc. We are also told that the uncertainty in the distance measurements is 150 pc, and that on the apparent magnitudes is 0.1, for all Cepheids. Any effect due to metallicity can be assumed to be negligible here.</p>
+<p>Let’s take a look a the data:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>mw_cepheids = np.loadtxt(&quot;data/milkyway_cepheids.dat&quot;)
+d = mw_cepheids.T[0] # distance in kpc
+m_obs = mw_cepheids.T[1] # apparent mag
+P = mw_cepheids.T[2] # period in days
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 4.3.1:</strong> Use this new data set to make an independent estimate of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, without assuming <code class="docutils literal notranslate"><span class="pre">H0</span></code>, what do you find?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 4.3.2:</strong> Update the hierarchical model that you have to include key information from the calibration data into your joint fit. If done correctly, this should allow you to break the degeneracy in the model and directly estimate the Hubble constant. Try to include all relevant uncertainties.</p>
+<blockquote>
+<div><p><strong>Hint</strong>: Assume that <code class="docutils literal notranslate"><span class="pre">alpha</span></code> from the Milky Way dataset is a fair representaion of <code class="docutils literal notranslate"><span class="pre">mu_alpha</span></code></p>
+</div></blockquote>
+<p><strong>Exercise 4.3.4:</strong> What factors affect the uncertainties in your estimate? How could you get a more constrained result?</p>
+</section>
+<section id="Further-reading">
+<h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline">¶</a></h2>
+<p>Hierarchical models: Chapter 5 in <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian data analysis</a> by Gelman et al.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="model_comparison.html" class="btn btn-neutral float-right" title="5. Model comparison" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="model_checking.html" class="btn btn-neutral float-left" title="3. Model checking" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Francesca Capel.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

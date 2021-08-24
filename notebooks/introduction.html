@@ -1,0 +1,942 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Bayesian workflow &mdash; Bayesian workflow  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Model building" href="model_building.html" />
+    <link rel="prev" title="Bayesian Workflow" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Bayesian workflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bayesian workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Introduction">1. Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#1.1.-Are-you-ready?">1.1. Are you ready?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.2.-Workflow-overview">1.2. Workflow overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.3.-A-note-on-context">1.3. A note on context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.4.-Some-more-fun-with-Stan">1.4. Some more fun with Stan</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_development.html">4. Model development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_comparison.html">5. Model comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">6. Experiment design</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bayesian workflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Bayesian workflow</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/notebooks/introduction.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="Bayesian-workflow">
+<h1>Bayesian workflow<a class="headerlink" href="#Bayesian-workflow" title="Permalink to this headline">¶</a></h1>
+<p>So, you know what Bayes theorem is and have learned how to write a Markov chain Monte Carlo algorithm. Life feels good and you are ready to set out and start seeing how you can use Bayesian inference to solve problems and impress your friends with posteriors and corner plots. Right!?</p>
+<p><img alt="Alas" class="no-scaled-link" src="../_images/corner_plot.pdf" style="width: 600px;" /></p>
+<p>Unfortunately, real world research problems are often much more complex than the straightforward examples we encounter in textbooks and statistics classes. While it is always good to start simple, making the leap to something more realistic can be quite daunting…</p>
+<section id="1.-Introduction">
+<h2>1. Introduction<a class="headerlink" href="#1.-Introduction" title="Permalink to this headline">¶</a></h2>
+<p>The Bayesian workflow course is here for you! The idea with this course is to connect from an introductory class to the actual application of these methods to your research.</p>
+<p>We will learn about: * Going from a science question to a statistical model * Defining sensible priors for your problem * Diagnosing problems in models and computation * Verification of a statistical model through simulations * Experiment design * Model comparison</p>
+<p>How the course works</p>
+<p>The course is scheduled to cover one week of intensive lectures/tutorials from the 13th September 2021 as part of the ODSL Block Course <a class="reference external" href="https://indico.ph.tum.de/event/6875/">Practical Inference for Researchers in the Physical Sciences</a>. The course is also designed such that it is self-contained and can be followed independently at your own pace.</p>
+<p>All course information is contained in notebooks, and information on how to get set up and running can be found on the <a class="reference external" href="https://francescacapel.com/BayesianWorkflow/">course website</a>. If you have questions regarding the course, please feel free to contact me at <a class="reference external" href="mailto:f&#46;capel&#37;&#52;&#48;tum&#46;de">f<span>&#46;</span>capel<span>&#64;</span>tum<span>&#46;</span>de</a>.</p>
+<p>Further reading</p>
+<p>It is impossible to cover many interesting and important things in a such a short course, so I will often make references to further reading in the <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis textbook</a> and <a class="reference external" href="https://betanalpha.github.io/writing/">Michael Betancourt’s tutorials and case studies</a>.</p>
+<section id="1.1.-Are-you-ready?">
+<h3>1.1. Are you ready?<a class="headerlink" href="#1.1.-Are-you-ready?" title="Permalink to this headline">¶</a></h3>
+<p>Assumed prerequisites for the course are a basic understanding of Bayesian probability theory and Markov chain Monte Carlo (MCMC) methods.</p>
+<p>We will be using the <a class="reference external" href="https://mc-stan.org">Stan</a> statistical programming language to demonstrate a Bayesian workflow. In particular, we will use Stan’s implementation of <em>Hamiltonian Monte Carlo</em> (HMC) through the <code class="docutils literal notranslate"><span class="pre">cmdstanpy</span></code> python interface.</p>
+<p>To start with, we will make sure everything is working by simulating some data from a normal distribution and verifying that we can fit the parameters of this distribution using <code class="docutils literal notranslate"><span class="pre">cmdstanpy</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import numpy as np
+from scipy import stats
+from matplotlib import pyplot as plt
+from cmdstanpy import CmdStanModel
+import arviz as av
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># simulate some data from a normal distribution
+N = 50
+mu = 5
+sigma = 3
+x = stats.norm(loc=mu, scale=sigma).rvs(N)
+
+# plot histogram
+fig, ax = plt.subplots()
+ax.hist(x, bins=np.linspace(min(x), max(x), 10))
+ax.axvline(mu, color=&quot;k&quot;, linestyle=&quot;:&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.lines.Line2D at 0x14548e2e0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_introduction_4_1.png" src="../_images/notebooks_introduction_4_1.png" />
+</div>
+</div>
+<p>To fit this data with Stan to try and recover <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code>, we need to write our model in the Stan language. More details can be found in the <a class="reference external" href="https://mc-stan.org/docs/2_27/stan-users-guide/index.html">Stan user’s guide</a>. The model for normal-distributed data looks like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">vector</span><span class="p">[</span><span class="n">N</span><span class="p">]</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">parameters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">real</span><span class="w"> </span><span class="n">mu</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">real</span><span class="w"> </span><span class="n">sigma</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="n">model</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>NB: by not specifying priors or bounds on the parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code>, we implicitly define uniform priors over +/- infinity.</p>
+</div></blockquote>
+<p>You can find this model in the file <code class="docutils literal notranslate"><span class="pre">stan/normal.stan</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># compile the Stan model
+stan_model = CmdStanModel(stan_file=&quot;stan/normal.stan&quot;)
+
+print(stan_model)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:cmdstanpy:found newer exe file, not recompiling
+INFO:cmdstanpy:compiled model file: /Users/fran/projects/bayesian_workflow_prep/stan/normal
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CmdStanModel: name=normal
+         stan_file=/Users/fran/projects/bayesian_workflow_prep/stan/normal.stan
+         exe_file=/Users/fran/projects/bayesian_workflow_prep/stan/normal
+         compiler_options=stanc_options=None, cpp_options=None
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># put data in dict to pass to the CmdStanModel
+# the keys have to match the variable names in the Stan file data block
+data = {}
+data[&quot;N&quot;] = N
+data[&quot;x&quot;] = x
+
+# run HMC for 1000 iterations with 4 chains
+fit = stan_model.sample(data=data, iter_sampling=1000, chains=4)
+
+# check the results
+fit.summary()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:cmdstanpy:start chain 1
+INFO:cmdstanpy:start chain 2
+INFO:cmdstanpy:start chain 3
+INFO:cmdstanpy:start chain 4
+INFO:cmdstanpy:finish chain 1
+INFO:cmdstanpy:finish chain 2
+INFO:cmdstanpy:finish chain 3
+INFO:cmdstanpy:finish chain 4
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Mean</th>
+      <th>MCSE</th>
+      <th>StdDev</th>
+      <th>5%</th>
+      <th>50%</th>
+      <th>95%</th>
+      <th>N_Eff</th>
+      <th>N_Eff/s</th>
+      <th>R_hat</th>
+    </tr>
+    <tr>
+      <th>name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>lp__</th>
+      <td>-76.0</td>
+      <td>0.0260</td>
+      <td>1.0</td>
+      <td>-78.0</td>
+      <td>-75.0</td>
+      <td>-75.0</td>
+      <td>1600.0</td>
+      <td>23000.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>mu</th>
+      <td>4.2</td>
+      <td>0.0074</td>
+      <td>0.4</td>
+      <td>3.5</td>
+      <td>4.2</td>
+      <td>4.8</td>
+      <td>2800.0</td>
+      <td>41000.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>sigma</th>
+      <td>2.8</td>
+      <td>0.0061</td>
+      <td>0.3</td>
+      <td>2.4</td>
+      <td>2.8</td>
+      <td>3.3</td>
+      <td>2300.0</td>
+      <td>33000.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># check diagnostics
+fit.diagnose();
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmp8vmhuwaf/normal-202108241125-1-af4be0vu.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmp8vmhuwaf/normal-202108241125-2-pik859n2.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmp8vmhuwaf/normal-202108241125-3-ep165380.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmp8vmhuwaf/normal-202108241125-4-ud2uglav.csv
+
+Checking sampler transitions treedepth.
+Treedepth satisfactory for all transitions.
+
+Checking sampler transitions for divergences.
+No divergent transitions found.
+
+Checking E-BFMI - sampler transitions HMC potential energy.
+E-BFMI satisfactory.
+
+Effective sample size satisfactory.
+
+Split R-hat values satisfactory all parameters.
+
+Processing complete, no problems detected.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># use arviz to visualise the results
+av.plot_trace(fit);
+
+av.plot_pair(fit, marginals=True);
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_introduction_9_0.png" src="../_images/notebooks_introduction_9_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_introduction_9_1.png" src="../_images/notebooks_introduction_9_1.png" />
+</div>
+</div>
+<p>Ok, so it looks like everything is up and running. You can try changing the input data and see how the results change accordingly.</p>
+<p><strong>Exercise 1.1.1:</strong> What happens to the shape marginal distributions in the case of very few data points and very large amounts of data? Can you plot the comparison?</p>
+<p><strong>Exercise 1.1.2:</strong> How do the results change if you specify wide/narrow priors on <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code> in the Stan file?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+</section>
+<section id="1.2.-Workflow-overview">
+<h3>1.2. Workflow overview<a class="headerlink" href="#1.2.-Workflow-overview" title="Permalink to this headline">¶</a></h3>
+<p>As we just saw above, building and fitting Bayesian model can be very easy with the tools available to us. However, for most scientific problems of interest, we won’t be dealing with idealised observations of normally-distributed data. The situation is to start out with <strong>data</strong> and a <strong>question</strong>. There is no simple recipe to go from this starting point to completing your analysis and drawing robust <strong>conclusions</strong>, but the idea of the workflow that we will discuss in this course is to present
+a general strategy for doing so.</p>
+<p><img alt="The workflow!" class="no-scaled-link" src="../_images/workflow0.pdf" style="width: 600px;" /></p>
+<p>The workflow itself is made up of many different components and iterative processes. We want to start by using our question and data to define a <strong>meaningful statistical model</strong>. This stage often involves some form of <strong>exploratory data analysis</strong> and/or g<strong>enerative modelling</strong>. Once we have defined our model, we want to <strong>check</strong> if it makes sense or needs improvement. We therefore iterate through <strong>model development</strong> and <strong>implementation</strong> until we are satisfied. Our final model can be
+used to <strong>draw conclusions</strong> via <strong>inference</strong>. With the final model in hard, we can also think about performing <strong>model comparison</strong> with other models, or using the model to inform better <strong>experiment design</strong> in the future.</p>
+<p><img alt="The workflow!" class="no-scaled-link" src="../_images/workflow1.pdf" style="width: 800px;" /></p>
+<p>For this 3-day course, we will roughly break things up into the following categories…</p>
+<p><img alt="The workflow!" class="no-scaled-link" src="../_images/workflow2.pdf" style="width: 800px;" /></p>
+</section>
+<section id="1.3.-A-note-on-context">
+<h3>1.3. A note on context<a class="headerlink" href="#1.3.-A-note-on-context" title="Permalink to this headline">¶</a></h3>
+<p>In this short course, we will <em>not</em> learn about <strong>frequentist</strong> statistical methods or <strong>machine learning</strong> approaches, which are both things you have probably heard of and may be interested in using in your research. While I might make fun of them a bit below, there are certainly cases where these could be more appropriate than what we will focus on.</p>
+<p>So, before jumping into the Bayesian workflow, I’ll try to <em>briefly</em> highlight some similarities and differences between these topics, from the Bayesian perspective.</p>
+<p>Let’s start by recalling Bayes’ theorem with data, <span class="math notranslate nohighlight">\(x\)</span>, and model parameters <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
+<p><img alt="03dd53532dcd4b34b58adf689f3c25d0" class="no-scaled-link" src="../_images/bayes_theorem.pdf" style="width: 700px;" /></p>
+<p>Frequentist methods</p>
+<p>We can start to think about some differences between Bayesian and frequentist statistical views by studying the following xkcd comic:</p>
+<p><img alt="0e48a4133f9d47c9aeab56bffc2e0b59" class="no-scaled-link" src="https://imgs.xkcd.com/comics/frequentists_vs_bayesians.png" style="width: 350px;" /></p>
+<p>Both approaches involve a likelihood - <span class="math notranslate nohighlight">\(p(\mathrm{answer}~|~\mathrm{sun~status})\)</span>. For this problem, the probability of the machine saying “yes” given the sun has <em>not</em> exploded is equal to the probablity of rolling two sixes, i.e.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(\mathrm{yes}~|~\mathrm{sun~ok}) = 1/36, \\
+p(\mathrm{yes}~|~\mathrm{sun~exploded}) = 35/36.\end{split}\]</div>
+<p>One frequentist approach would be to perform a <em>hypothesis test</em>, with the null hypothesis being “sun ok” and the alternative hypothesis being “sun exploded”. The <em>p-value</em> is the probability that we observe a result as least as extreme as that observed, under the null hypothesis. In this case, that is equal to the first statement above. In many fields, it is standard to reject the null hypothesis if the p-value is &lt; 0.05, leading us to conclude the sun has exploded…</p>
+<blockquote>
+<div><p><strong>Note:</strong> In physics it is common use a much stronger threshold for null hypothesis rejection such as “5 sigma”, or a p-value lower than 0.0000001, so we would not lose a bet with a Bayesian this time.</p>
+</div></blockquote>
+<p>But on the Bayesian side, we would compute the posterior probability, <span class="math notranslate nohighlight">\(p(\mathrm{sun~exploded}~|~\mathrm{yes})\)</span>, proportional on the prior probability, <span class="math notranslate nohighlight">\(p(\mathrm{sun~exploded})\)</span>, which we would probably assume to be so tiny it would dominate our conclusion that the sun has not in fact exploded.</p>
+<p>So is frequentist statistics just Bayesian statistics without priors? Unfortunately, it is not so simple. Sure, we can think about the cases where they might seem equivalent. In frequentist approaches it is typical to find the <em>maximum likelihood estimate</em> of a parameter based on data. Could this be the same as the <em>maximum a posterior</em> value of a parameter for a uniform prior?</p>
+<p>However, it is important to keep in mind the different definitions of probability that the two views are based on: probability as a <em>degree of belief</em> vs. probability as a <em>frequency in the limit of infinte observations</em>. This also comes into the treatment of uncertainty. In the Bayesian view, <strong>the data are fixed and parameters are uncertain</strong>, whereas in the frequentist case, <strong>the true parameters are fixed, and we estimate them imperfectly due to uncertainty present in the data from finite
+sampling</strong>.</p>
+<p><img alt="8e1e39c4f01042b39035bdd513bb4e66" class="no-scaled-link" src="../_images/bayes_vs_freq.png" style="width: 800px;" /></p>
+<p>Machine learning</p>
+<p>Machine learning is used to describe basically anything these days, but here I am referring to methods based on neural networks.</p>
+<p><img alt="877e27bf6e434f85b7cd8ebe9a45c738" class="no-scaled-link" src="https://imgs.xkcd.com/comics/machine_learning.png" style="width: 350px;" /></p>
+<p>We can think about standard machine learning approaches as similar to maximum likliehood estimation. If we don’t know what the likelihood looks like, or cannot come up with a functional form for it, we can choose to represent it as a matrix of unknown weights.</p>
+<p>We can then <em>train</em> a neural network with simulated or labelled data in order to <em>learn</em> the appropriate weights, an optimisation process that can be thought of as maximising the likelihood. Once trained, the resulting matrix of weights can be used like an operator to return the maximum likelihood estimate for new input data.</p>
+<p>A key difference in this approach is that the likelihood itself is now a <em>black box</em>, and so <strong>it is not so clear how we should interpret our model or the resulting inferences</strong>. <strong>The quantification of uncertainty is also not straightforward</strong>. This is fine if you just want to make classifications or predictions, without asking why. That said, there is plenty of work being done on ways to interpret neural networks and methods exist to bring more Bayesian thinking in and allow uncertainty
+quantification.</p>
+</section>
+<section id="1.4.-Some-more-fun-with-Stan">
+<h3>1.4. Some more fun with Stan<a class="headerlink" href="#1.4.-Some-more-fun-with-Stan" title="Permalink to this headline">¶</a></h3>
+<p>Let’s consider a simple linear regression problem. We observe a variable <span class="math notranslate nohighlight">\(y\)</span> that is related to a known quantity <span class="math notranslate nohighlight">\(x\)</span> via</p>
+<div class="math notranslate nohighlight">
+\[y = mx + c,\]</div>
+<p>where <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(c\)</span> are the unknown slope and intercept, to be determined. Our observation process introduces uncertainty, such that</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} \sim \mathcal{N}(y, \sigma),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is a known quantity that is constant for all observations.</p>
+<p><strong>Exercise 1.4.1:</strong> Write a Stan model for the above model, considering the dataset introduced below. Verify that it compiles.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># load data
+data = np.loadtxt(&quot;data/linear.dat&quot;)
+x_obs = data[0]
+y_obs = data[1]
+sigma = data[2][0] # all the same
+
+# plot
+fig, ax = plt.subplots()
+ax.errorbar(x_obs, y_obs, yerr=sigma, fmt=&quot;.&quot;)
+ax.set_xlabel(&quot;x&quot;)
+ax.set_ylabel(&quot;y&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;y&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_introduction_17_1.png" src="../_images/notebooks_introduction_17_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+# write stan code in a seperate .stan file
+# compile
+# stan_model = CmdStanModel(stan_file=&quot;...&quot;)
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 1.4.2:</strong> Build a dictionary to pass the data to Stan and fit the model. Visualise your results for <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 1.4.3:</strong> We now learn that the <span class="math notranslate nohighlight">\(x\)</span> observations also have an associated uncertainty, <span class="math notranslate nohighlight">\(\tau\)</span>, such that</p>
+<div class="math notranslate nohighlight">
+\[\hat{x} \sim \mathcal{N}(x, \tau)\]</div>
+<p>We are told that <span class="math notranslate nohighlight">\(\tau = 1\)</span>. Update your Stan model to include this information and repeat the fit to data. How does this affect our results for the line fit?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 1.4.4:</strong> Find a coin and flip it 5 times, recording the answer as 0 for tails, and 1 for heads. * Write a Stan model for your observations. * Use it to determine the probability, <span class="math notranslate nohighlight">\(p\)</span>, that a coin flip gives heads, given your observations. * Make another 5 observations of coin flips and add these to your original sample. How does this affect the result for <span class="math notranslate nohighlight">\(p\)</span>?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="model_building.html" class="btn btn-neutral float-right" title="2. Model building" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Bayesian Workflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Francesca Capel.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

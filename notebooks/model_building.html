@@ -1,0 +1,1088 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>2. Model building &mdash; Bayesian workflow  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Model checking" href="model_checking.html" />
+    <link rel="prev" title="Bayesian workflow" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Bayesian workflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Bayesian workflow</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Model building</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#2.1.-Going-from-a-scientific-question-to-a-statistical-model">2.1. Going from a scientific question to a statistical model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.2.-The-impossible-model">2.2. The impossible model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.3.-Probabilistic-graphical-models">2.3. Probabilistic graphical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.4.-An-example:-the-period-luminosity-relation-of-Cepheid-variable-stars">2.4. An example: the period-luminosity relation of Cepheid variable stars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.5.-Generative-modelling">2.5. Generative modelling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#2.6.-Exploratory-data-analysis">2.6. Exploratory data analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_development.html">4. Model development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_comparison.html">5. Model comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">6. Experiment design</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bayesian workflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>2. Model building</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/notebooks/model_building.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="2.-Model-building">
+<h1>2. Model building<a class="headerlink" href="#2.-Model-building" title="Permalink to this headline">¶</a></h1>
+<p>A <strong>Bayesian statistical model</strong> is specified by the <strong>likelihood model</strong> (also called observational model) and <strong>prior model</strong>. This can be expressed as the joint probability density of the data, <span class="math notranslate nohighlight">\(x\)</span>, and model parameters, <span class="math notranslate nohighlight">\(\theta\)</span>, such that</p>
+<div class="math notranslate nohighlight">
+\[p(x, \theta) = p(x | \theta) p(\theta).\]</div>
+<p>We perform inference by conditioning on the data and calculating expectation values of the resulting posterior distribution. Recalling <strong>Bayes’ theorem</strong></p>
+<div class="math notranslate nohighlight">
+\[p(\theta | x) = \frac{p(x | \theta)p(\theta)}{p(x)} \propto p(x, \theta),\]</div>
+<p>we note that the results of our inference are <em>completely dependent on the assumed model</em>. Bayes’ theorem is not some magical guarantee, and if our model does not represent the actual <em>data generating process</em> our inference will yield results that are meaningless in practice. Even worse, if we are not careful, a misspecified model may produce results that “look good” but are far from the truth - leading us to draw the wrong conclusions from our analysis.</p>
+<p>Our workflow begins with building our first sensible model as a starting point, that we can later check and iterate upon to make sure our inferences are useful. The first model doesn’t need to be perfect, and in fact should be as simple as possible while still including the scientific phenomenon of interest. This process is what we will focus on here.</p>
+<section id="2.1.-Going-from-a-scientific-question-to-a-statistical-model">
+<h2>2.1. Going from a scientific question to a statistical model<a class="headerlink" href="#2.1.-Going-from-a-scientific-question-to-a-statistical-model" title="Permalink to this headline">¶</a></h2>
+<p>So, model building is very important, but where to start? It can be helpful to break down the problem into the following components:</p>
+<ul class="simple">
+<li><p>Scientific question</p></li>
+<li><p>Data</p></li>
+<li><p>Parameter(s) of interest</p></li>
+<li><p>Key nuisance parameter(s)</p></li>
+<li><p>Relevant domain expertise</p></li>
+</ul>
+<p>The model-building problem then comes down to <strong>defining a connection between your parameters and data</strong> (the likelihood/observational model) and <strong>incorporating relevant domain expertise</strong> (the prior model).</p>
+<p>To get a feel for how this can work, consider the following examples:</p>
+<p><img alt="Going from a scientific question to a statistical model" class="no-scaled-link" src="../_images/science_stats.pdf" style="width: 750px;" /></p>
+<p><strong>Exercise 2.1:</strong> Fill out this table for some more complicated examples such as * What is the value of the Hubble constant? * What is the mass of the Higgs boson? Below are some relevant plots of data used to make such measurements.</p>
+<p>The original Hubble diagram from <a class="reference external" href="https://www.pnas.org/content/15/3/168">this paper</a>:</p>
+<p><img alt="The original Hubble diagram" class="no-scaled-link" src="../_images/hubble.jpg" style="width: 600px;" /></p>
+<p>First presentation of ATLAS Higgs to <span class="math notranslate nohighlight">\(\gamma\gamma\)</span> results on 4th July 2012:</p>
+<p><img alt="https://atlas.cern/updates/feature/higgs-boson" class="no-scaled-link" src="../_images/higgs.png" style="width: 500px;" /></p>
+<p>Can you add an example or two from your own field to this list?</p>
+</section>
+<section id="2.2.-The-impossible-model">
+<h2>2.2. The impossible model<a class="headerlink" href="#2.2.-The-impossible-model" title="Permalink to this headline">¶</a></h2>
+<p>When starting the model-building process, it can also be helpful to think about the ideal model that you would fit if you had no restrictions on model complexity or computational resources. The purpose of this is to consider each step of the <em>data generating process</em> in detail, from start to finish. We are forced to think about complexities of the physical system and measurement process that may or may not be important for our later inference. The model itself may be impossible to actually write
+down or implement, but in doing this, we give can identify important steps and give context to the simpler models we will later go on to create.</p>
+<p>Taking the first example in the table above, consider what other effects may be important…</p>
+<p><img alt="Thinking about more complete models" class="no-scaled-link" src="../_images/ball_drop.pdf" style="width: 750px;" /></p>
+<p><strong>Exercise 2.2:</strong> Can you expand the complexity for one of the other models that we discussed?</p>
+</section>
+<section id="2.3.-Probabilistic-graphical-models">
+<h2>2.3. Probabilistic graphical models<a class="headerlink" href="#2.3.-Probabilistic-graphical-models" title="Permalink to this headline">¶</a></h2>
+<p>For both of the above steps, it can be useful to sketch out connections between data and parameters using directed acyclic graphs (DAGs), often also called probabilistic graphical models (PGMs). These can be thought of as a visualisation of the data generating process, with parameters in unshaded circles, data or observations in shaded circles, and the arrows representing the connections between them.</p>
+<p>Here is a trivial example for that of data sampled from a normal distribution, such as what we looked at when introducing Stan in the <em>Are you ready?</em> section of the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>. The normal distribution is defined by two parameters, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. <span class="math notranslate nohighlight">\(N\)</span> independent samples from this distribution are then taken, shown by <span class="math notranslate nohighlight">\(x_i\)</span>. The box around <span class="math notranslate nohighlight">\(x_i\)</span> shows that there are a number of repeated samples, that we can think of as
+observations or measurements.</p>
+<p><img alt="A simple DAG or PGM for normally-distributed data" class="no-scaled-link" src="../_images/simple_dag.pdf" style="width: 200px;" /></p>
+<p><strong>Exercise 2.3:</strong> Now it’s your turn! Sketch graphical models for the first two examples in the above table (measurement of gravitational acceleration and radioactivity).</p>
+</section>
+<section id="2.4.-An-example:-the-period-luminosity-relation-of-Cepheid-variable-stars">
+<h2>2.4. An example: the period-luminosity relation of Cepheid variable stars<a class="headerlink" href="#2.4.-An-example:-the-period-luminosity-relation-of-Cepheid-variable-stars" title="Permalink to this headline">¶</a></h2>
+<p>Cepheid variables are a type of star that pulsates in observed flux, such that the apparent magnitude of the star varies in time with a well-defined period and amplitude. This behaviour is interesting in its own right, but also because it has been observed that there is a strong correlation between this period and the intrinsic luminosity of these stars. This <strong>period-luminosity</strong> relation has the form</p>
+<div class="math notranslate nohighlight">
+\[M = \alpha + \beta \log_{10} \bigg( \frac{P}{\mathrm{days}} \bigg),\]</div>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> is the absolute magnitude, related to the apparent magnitude, <span class="math notranslate nohighlight">\(m\)</span>, by the luminosity distance, <span class="math notranslate nohighlight">\(d_L(z)\)</span></p>
+<div class="math notranslate nohighlight">
+\[m = M + 5 \log_{10} \bigg( \frac{d_L(z)}{\mathrm{Mpc}} \bigg) + 25.\]</div>
+<p><img alt="Cepheid variables and the period-luminosity relation" class="no-scaled-link" src="../_images/cepheid_intro.pdf" style="width: 600px;" /></p>
+<p>In astronomy, it is common to work with magnitudes instead of flux and luminosity, so the above expression is basically the equivalent of <span class="math notranslate nohighlight">\(F = L / 4 \pi d_L^2(z)\)</span>. The magnitude is related to the logarithm of flux/luminosity and it is important to remember that magnitude <em>decreases</em> with increasing brightness, although we typically invert the y-axis when plotting magnitude for easier interpretation. So, <strong>intrinsically brighter Cepheids have longer periods</strong>.</p>
+<p>We know this because we can measure the distance to nearby Cepheids using <em>parallax</em>. By determining the period-luminosity relation, we can then measure the distance to Cepheids that are further away, extending the <a class="reference external" href="https://en.wikipedia.org/wiki/Cosmic_distance_ladder">cosmic distance ladder</a>. Measuring distances to far away objects allows us to compare their luminosity distance and redshift, giving us an estimate of the <a class="reference external" href="https://en.wikipedia.org/wiki/Hubble%27s_law">Hubble constant</a>.</p>
+<p>In the coming notebooks, we will explore a series of scientific questions related to Cepheid variable observations:</p>
+<ol class="arabic simple">
+<li><p>What is the nature of the period-luminosity relation?</p></li>
+<li><p>Is the relationship universal? (i.e. the same in different galaxies)</p></li>
+<li><p>What is the value of the Hubble constant?</p></li>
+</ol>
+</section>
+<section id="2.5.-Generative-modelling">
+<h2>2.5. Generative modelling<a class="headerlink" href="#2.5.-Generative-modelling" title="Permalink to this headline">¶</a></h2>
+<p>Using what we know about Cepheid variables and the period-luminosity relation, we can start to build a simple initial model for what we think could be the data-generating process.</p>
+<p>Towards an initial model</p>
+<p>Measuring the period of a Cepheid is relatively straightforward from studying its lightcurve, and so to start with we can assume that the period is a known quantity. However, the observed characteristic apparent magnitude, <span class="math notranslate nohighlight">\(\hat{m}\)</span>, of a Cepheid can be more tricky to reconstruct exactly, so let’s say that it is reported with some fixed uncertainty, <span class="math notranslate nohighlight">\(\sigma_m\)</span>, that is the same for all Cepheids. We can assume that</p>
+<div class="math notranslate nohighlight">
+\[\hat{m} \sim \mathrm{Normal}(m, \sigma_m),\]</div>
+<p>where <span class="math notranslate nohighlight">\(m\)</span> is the true apparent magnitude that is not observed. Knowing that our measured Cepheids are going to be pretty nearby (<span class="math notranslate nohighlight">\(z &lt; 0.01\)</span>), we can approximate the luminosity distance as</p>
+<div class="math notranslate nohighlight">
+\[d_L(z) = \frac{cz}{H_0},\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> is the speed of light, and <span class="math notranslate nohighlight">\(H_0\)</span> is the Hubble constant. Again, for simplicity, let’s assume that for now we just look at <span class="math notranslate nohighlight">\(N_c\)</span> Cepheids in a single galaxy with a known redshift, <span class="math notranslate nohighlight">\(z\)</span>.</p>
+<p><strong>Exercise 2.5.1:</strong> With these simplifying assumptions in mind, sketch the corresponding graphical model for our initial Cepheid variable model. The parameters and known quantities are summarised below, just arrange them into a graph.</p>
+<p><img alt="Blobs for the simple Cepheid graphical model" class="no-scaled-link" src="../_images/cepheid_graph_bits.pdf" style="width: 750px;" /></p>
+<p><strong>Exercise 2.5.2:</strong> Using the parameter and fixed quantity values given below, as well as your graphical model, write a simulation for the observed apparent magnitudes, <span class="math notranslate nohighlight">\(m_i\)</span>. Plot your results in <span class="math notranslate nohighlight">\(\log_{10}(P/\mathrm{days})\)</span>-<span class="math notranslate nohighlight">\(m\)</span> space, comparing with the true period-luminosity relation.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import numpy as np
+from matplotlib import pyplot as plt
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># known quantities
+c = 3.0e5 # km/s
+H0 = 70 # km/s/Mpc
+z = 0.005
+
+Nc = 10
+P = [71.5, 45.0, 19.9, 30.6, 8.8, 75.2, 21.5, 22.0, 34.5, 87.4] # days
+sigma_m = 0.5
+
+# high-level parameter values
+alpha = -2
+beta = -4
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># define some useful functions
+def luminosity_distance(z):
+    # To be completed...
+    pass
+
+def absolute_magnitude(m, z):
+    # To be completed...
+    pass
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># simulate the observed apparent magnitudes
+# M_true = ...
+# m_true = ...
+# m_obs = ...
+# M_obs = ...
+pass
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># plot the true and observed apparent magnitudes
+log10_P_grid = np.linspace(0, 3)
+fig, ax = plt.subplots()
+#ax.scatter(log10_P, m_true, label=&quot;m_obs&quot;)
+#ax.scatter(log10_P, m_obs, label=&quot;m_obs&quot;)
+ax.invert_yaxis() # so brighter as y-axis increases
+ax.legend()
+ax.set_xlabel(&quot;log10(P/days)&quot;)
+ax.set_ylabel(&quot;m&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+No handles with labels found to put in legend.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;m&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_model_building_10_2.png" src="../_images/notebooks_model_building_10_2.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># plot the true and observed absolute magnitudes, compare with true P-L relation
+log10_P_grid = np.linspace(0, 3)
+fig, ax = plt.subplots()
+#ax.scatter(log10_P, M_true, label=&quot;M_true&quot;)
+#ax.scatter(log10_P, M_obs, label=&quot;M_obs&quot;)
+ax.plot(log10_P_grid, alpha + beta * log10_P_grid)
+ax.invert_yaxis() # so brighter as y-axis increases
+ax.legend()
+ax.set_xlabel(&quot;log10(P/days)&quot;)
+ax.set_ylabel(&quot;M&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+No handles with labels found to put in legend.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;M&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_model_building_11_2.png" src="../_images/notebooks_model_building_11_2.png" />
+</div>
+</div>
+<p>In the above plots, you may have been tempted to use <code class="docutils literal notranslate"><span class="pre">ax.errorbar()</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.errorbar()</span></code> to show the data, <code class="docutils literal notranslate"><span class="pre">m</span></code> or <code class="docutils literal notranslate"><span class="pre">M</span></code> together with the uncertainty, <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code>.</p>
+<blockquote>
+<div><p>Note: The uncertainties on <code class="docutils literal notranslate"><span class="pre">M</span></code> and <code class="docutils literal notranslate"><span class="pre">m</span></code> are equivalent, due to the additive relationship between the two.</p>
+</div></blockquote>
+<p>This can be a helpful visualisation, and you are free to do so if you wish! However, it is important to remember that in the Bayesian way of thinking, data <strong>do not</strong> have errors, rather, <strong>the model has uncertainty</strong>. So the <em>observed</em> magnitude is not uncertain, we saw it! What is really uncertain is what it implies for the <em>true</em> magnitude, that we cannot see.</p>
+<p>To get a feel for this, let’s re-run our simulation multiple times, and add the distribution of the true magnitudes to the above plot:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>fig, ax = plt.subplots()
+N_sims = 250
+for i in range(N_sims):
+    # to be completed...
+    # run simulation
+    # ax.scatter(log10_P, M_true, color=&quot;r&quot;, alpha=0.01)
+    pass
+#ax.scatter(log10_P, M_obs, label=&quot;M_obs&quot;, color=&quot;g&quot;) # will not change per sim
+ax.plot(log10_P_grid, alpha + beta * log10_P_grid, color=&quot;k&quot;, alpha=0.5)
+ax.invert_yaxis() # so brighter as y-axis increases
+ax.legend()
+ax.set_xlabel(&quot;log10(P/days)&quot;)
+ax.set_ylabel(&quot;M&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+No handles with labels found to put in legend.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;M&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_model_building_13_2.png" src="../_images/notebooks_model_building_13_2.png" />
+</div>
+</div>
+<p>Now you should see a nice distribution of possible <code class="docutils literal notranslate"><span class="pre">M_true</span></code> values for each known <code class="docutils literal notranslate"><span class="pre">M_obs</span></code>. If we do want to plot errorbars, we can think of them as marking out the standard deviation of these <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> distributions.</p>
+</section>
+<section id="2.6.-Exploratory-data-analysis">
+<h2>2.6. Exploratory data analysis<a class="headerlink" href="#2.6.-Exploratory-data-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have some feeling for the generative model, let’s take a look at some Cepheid variable data. You can find two files in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory: 1. galaxies.dat 2. cepheids.dat</p>
+<p>The first contains information on the host galaxies, and the second contains information on the individual Cepheids studied in each host galaxy.</p>
+<p>The right time in a workflow for exploratory data analysis can be difficult to define. In general, we want to be aware of how our data looks when designing a model for it, but also not too influenced such that we get carried away and design a model that <em>overfits</em> the data we have and is uncapable of generalising to unseen data. Here, we want to see how our first effort at a generative model stacks up, and also think about directions for improving our model.</p>
+<p><strong>Exercise 2.6:</strong> Complete the following exploratory data analysis.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># read in the files
+
+# columns: gal z
+galaxy_info = np.loadtxt(&quot;data/galaxies.dat&quot;)
+
+# columns: gal m_obs sigma_m P[days] delta_logO_H
+cepheid_info = np.loadtxt(&quot;data/cepheids.dat&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># reorganise the data into a dictionary indexed by the galaxy number
+galaxies = [int(ngc_no) for ngc_no in galaxy_info[:, 0]]
+data = {int(x[0]):{&quot;z&quot;:x[1]} for x in galaxy_info}
+
+for g in galaxies:
+    j = np.where(cepheid_info[:, 0] == g)[0]
+    data[g][&quot;gal&quot;] = np.array([int(i) for i in cepheid_info[j, 0]])
+    data[g][&quot;Nc&quot;] = len(data[g][&quot;gal&quot;])
+    data[g][&quot;m_obs&quot;] = cepheid_info[j, 1]
+    data[g][&quot;sigma_m&quot;] = cepheid_info[j, 2]
+    data[g][&quot;P&quot;] = cepheid_info[j, 3]
+    data[g][&quot;delta_logO_H&quot;] = cepheid_info[j, 4]
+    data[g][&quot;log10P&quot;] = np.log10(data[g][&quot;P&quot;])
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># have a look at the data structure for the first galaxy
+data[galaxies[0]]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;z&#39;: 0.007125,
+ &#39;gal&#39;: array([1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309,
+        1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309,
+        1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309,
+        1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309,
+        1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309,
+        1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309,
+        1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309,
+        1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309,
+        1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309, 1309,
+        1309, 1309, 1309, 1309, 1309]),
+ &#39;Nc&#39;: 104,
+ &#39;m_obs&#39;: array([24.81, 26.05, 26.04, 22.8 , 21.86, 23.45, 23.85, 25.68, 24.6 ,
+        24.94, 21.34, 25.51, 23.45, 27.49, 24.16, 25.81, 23.9 , 26.28,
+        22.47, 25.13, 26.4 , 23.37, 24.78, 24.04, 23.86, 23.36, 23.68,
+        22.48, 22.99, 22.  , 26.91, 25.79, 24.11, 23.51, 23.73, 21.48,
+        25.02, 25.08, 26.24, 25.71, 22.85, 21.75, 23.16, 23.74, 28.62,
+        26.46, 24.58, 27.17, 26.19, 24.32, 20.03, 23.12, 25.08, 23.71,
+        21.8 , 28.82, 23.5 , 25.2 , 22.87, 23.52, 25.4 , 23.58, 23.66,
+        23.02, 21.95, 23.83, 26.71, 28.23, 23.38, 23.38, 26.54, 23.67,
+        23.03, 24.22, 24.77, 24.19, 23.63, 24.34, 25.71, 22.09, 22.22,
+        25.38, 24.78, 25.57, 24.74, 23.65, 23.87, 22.16, 27.46, 22.85,
+        27.57, 28.2 , 24.14, 24.53, 23.56, 23.59, 22.15, 25.75, 21.87,
+        19.88, 24.36, 24.4 , 25.17, 26.11]),
+ &#39;sigma_m&#39;: array([0.3465, 0.4568, 0.53  , 0.3921, 0.2858, 0.4465, 0.365 , 0.3158,
+        0.2928, 0.2249, 0.3708, 0.3951, 0.6394, 0.5376, 0.5621, 0.3253,
+        0.3062, 0.493 , 0.5266, 0.1681, 0.1798, 0.3736, 0.1958, 0.677 ,
+        0.6026, 0.4121, 0.231 , 0.181 , 0.6874, 0.5242, 0.616 , 0.3323,
+        0.2505, 0.2797, 0.6141, 0.3838, 0.498 , 0.5834, 0.2518, 0.1477,
+        0.5397, 0.6768, 0.6723, 0.3943, 0.4793, 0.5398, 0.6414, 0.1973,
+        0.3435, 0.3503, 0.5174, 0.3549, 0.6149, 0.6082, 0.1421, 0.2811,
+        0.6878, 0.1214, 0.3954, 0.6714, 0.5863, 0.2766, 0.4577, 0.3587,
+        0.4554, 0.6363, 0.4324, 0.3957, 0.2916, 0.258 , 0.4254, 0.1494,
+        0.4814, 0.5778, 0.6728, 0.5108, 0.393 , 0.3912, 0.68  , 0.2268,
+        0.347 , 0.6938, 0.117 , 0.5208, 0.1151, 0.2925, 0.1441, 0.1365,
+        0.1668, 0.2016, 0.4766, 0.363 , 0.5985, 0.2439, 0.214 , 0.5271,
+        0.615 , 0.4354, 0.5227, 0.4631, 0.4355, 0.6162, 0.6519, 0.6098]),
+ &#39;P&#39;: array([ 40.4  ,  18.37 ,  26.94 ,  36.51 ,  60.36 ,  35.8  ,  21.23 ,
+         21.88 ,  27.06 ,  25.44 ,  42.35 ,  23.35 ,  22.37 ,  10.06 ,
+         15.77 ,  22.25 ,  54.26 ,  20.12 ,  32.54 ,  27.51 ,  17.33 ,
+         37.04 ,  23.86 ,  29.43 ,  93.36 ,  44.58 ,  70.27 , 112.6  ,
+         91.35 ,  37.71 ,  17.65 ,  16.04 ,  25.6  ,  56.44 ,   9.834,
+         70.04 ,  15.53 ,  22.22 ,   6.193,  33.97 , 105.1  ,  74.57 ,
+         34.65 ,  47.13 ,  10.65 ,  12.95 ,  20.05 ,  17.29 ,  19.64 ,
+         21.85 ,  90.86 ,  49.45 ,  19.81 ,  26.33 ,  52.95 ,   3.637,
+         32.95 ,  17.28 ,  65.99 ,  21.28 ,  18.16 ,  67.28 ,  49.59 ,
+        140.7  ,  20.34 ,  25.11 ,  23.37 ,   8.477,  13.53 ,  54.76 ,
+         14.19 ,  46.11 ,  70.63 ,  49.85 ,  45.41 ,  79.09 ,  68.2  ,
+         15.05 ,  40.09 ,  62.46 ,  52.6  ,   7.514,  25.73 ,   9.577,
+         31.7  , 120.3  ,  36.75 , 110.5  ,   5.435,  27.44 ,  31.83 ,
+          6.819,  17.39 ,  29.19 ,  34.22 ,  30.37 ,  48.6  ,  10.2  ,
+         38.98 , 132.8  ,  13.25 ,  39.69 ,  13.71 ,  23.32 ]),
+ &#39;delta_logO_H&#39;: array([ 0.3795  , -0.2468  ,  1.159   , -0.3276  , -0.896   , -0.2532  ,
+        -0.7035  ,  0.5588  ,  0.2014  ,  0.2183  , -1.65    ,  0.366   ,
+        -0.7328  ,  0.1837  , -0.4942  ,  0.5304  ,  0.1846  ,  0.22    ,
+        -0.7342  ,  0.1816  ,  0.678   , -0.5568  , -0.0891  , -0.2413  ,
+         0.1106  ,  0.3603  ,  0.4864  ,  0.1157  ,  0.06798 , -0.9633  ,
+         0.9988  , -0.01389 , -0.2523  ,  0.3159  , -1.385   , -1.108   ,
+        -0.4778  ,  0.6161  , -0.4173  ,  1.155   , -0.2238  , -0.2596  ,
+         0.6923  , -0.4224  ,  1.27    ,  0.4487  , -0.1107  ,  1.237   ,
+         0.7325  , -0.2851  , -1.354   , -0.3475  ,  0.1892  , -0.4236  ,
+        -0.7808  ,  0.5495  , -0.4174  ,  0.1361  , -0.0877  , -0.8897  ,
+         0.3616  ,  0.2815  ,  0.1661  ,  1.011   , -1.969   , -0.9261  ,
+         1.118   ,  1.114   , -1.365   ,  0.03091 ,  0.5538  ,  0.0539  ,
+        -0.05804 ,  0.2621  ,  0.3747  ,  0.8287  ,  0.4081  , -0.347   ,
+         0.6551  , -0.5     , -0.797   ,  0.01028 ,  0.09176 ,  0.1988  ,
+         0.3133  ,  1.305   ,  0.02101 , -0.005696,  0.3532  , -1.119   ,
+         2.016   ,  0.4762  , -0.7656  ,  0.3582  , -0.4937  , -0.3202  ,
+        -0.5463  , -0.2144  , -1.008   , -1.058   , -0.8279  ,  0.536   ,
+        -0.4936  ,  0.1985  ]),
+ &#39;log10P&#39;: array([1.60638137, 1.26410916, 1.43039759, 1.56241183, 1.78074923,
+        1.55388303, 1.32694999, 1.34004732, 1.43232779, 1.40551711,
+        1.62685341, 1.36828688, 1.34966598, 1.00259798, 1.19783169,
+        1.34733002, 1.73447979, 1.30362798, 1.51241755, 1.43949059,
+        1.23879856, 1.56867098, 1.37767044, 1.46879026, 1.97016084,
+        1.64914006, 1.84676995, 2.05153839, 1.96070855, 1.57645653,
+        1.24674471, 1.20520436, 1.40823997, 1.75158701, 0.9927302 ,
+        1.84534614, 1.19117146, 1.34674405, 0.79190108, 1.53109555,
+        2.02160272, 1.87256414, 1.53970324, 1.67329744, 1.02734961,
+        1.11226977, 1.30211438, 1.23779499, 1.29314148, 1.33945144,
+        1.95837273, 1.6941663 , 1.29688448, 1.42045086, 1.72386596,
+        0.5607433 , 1.51785542, 1.23754374, 1.81947813, 1.32797162,
+        1.25911584, 1.82788598, 1.69539411, 2.1482941 , 1.30835095,
+        1.39984671, 1.36865871, 0.92824218, 1.1312978 , 1.73846344,
+        1.1519824 , 1.66379512, 1.84898921, 1.69766516, 1.6571515 ,
+        1.89812158, 1.83378437, 1.1775365 , 1.60303606, 1.79560198,
+        1.72098574, 0.87587119, 1.41043979, 0.98122949, 1.50105926,
+        2.08026563, 1.56525734, 2.04336228, 0.73519955, 1.43838411,
+        1.50283664, 0.83372069, 1.24029958, 1.46523409, 1.53428001,
+        1.48244479, 1.68663627, 1.00860017, 1.59084183, 2.12319808,
+        1.12221588, 1.5986811 , 1.13703745, 1.36772855])}
+</pre></div></div>
+</div>
+<p>Let’s plot the period vs. the apparent magnitude for a single galaxy. How does it compare to the simulated data?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>fig, ax = plt.subplots()
+g = galaxies[0]
+ax.errorbar(data[g][&quot;log10P&quot;], data[g][&quot;m_obs&quot;], yerr=data[g][&quot;sigma_m&quot;], fmt=&quot;.&quot;)
+ax.invert_yaxis()
+ax.set_xlabel(&quot;log10(P/days)&quot;)
+ax.set_ylabel(&quot;m&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;m&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_model_building_20_1.png" src="../_images/notebooks_model_building_20_1.png" />
+</div>
+</div>
+<p>We can immediately see that here there are individual <span class="math notranslate nohighlight">\(\sigma_m\)</span> for each Cepheid, and a somewhat visible linear relationship. Now for all the galaxies…</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>fig, ax = plt.subplots()
+fig.set_size_inches((10, 7))
+for g in galaxies:
+    ax.errorbar(data[g][&quot;log10P&quot;], data[g][&quot;m_obs&quot;], yerr=data[g][&quot;sigma_m&quot;], fmt=&quot;.&quot;,
+                label=&quot;NGC %s&quot; % g)
+ax.invert_yaxis()
+ax.set_xlabel(&quot;log10(P/days)&quot;)
+ax.set_ylabel(&quot;m&quot;)
+ax.legend()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x123e6f4c0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_model_building_22_1.png" src="../_images/notebooks_model_building_22_1.png" />
+</div>
+</div>
+<p>We can see rough linear relationships for each galaxy, but not a universal one. To better assess this, we should convert to absolute magnitude.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># add absolute magnitude to the data
+for g in galaxies:
+    # to be completed...
+    # data[g][&quot;M_obs&quot;] = absolute_magnitude(...)
+    pass
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># plot for absolute magnitude this time
+fig, ax = plt.subplots()
+for g in galaxies:
+    # to be completed...
+    pass
+ax.invert_yaxis()
+ax.set_xlabel(&quot;log10(P/days)&quot;)
+ax.set_ylabel(&quot;M&quot;)
+ax.legend()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+No handles with labels found to put in legend.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x12406c910&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_model_building_25_2.png" src="../_images/notebooks_model_building_25_2.png" />
+</div>
+</div>
+<p>We should now see a stronger global relation, but still with considerable intrinsic scatter and potential differences between galaxies.</p>
+<p>We can see other quantities in the provided files, such as a measure of the metallicity of each star, <code class="docutils literal notranslate"><span class="pre">log(O/H)</span></code>. What do the distributions of <code class="docutils literal notranslate"><span class="pre">log(O/H)</span></code> look like for different galaxies? Is there any relationship between <code class="docutils literal notranslate"><span class="pre">log(O/H)</span></code> and <code class="docutils literal notranslate"><span class="pre">M_obs</span></code>?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p>How about the distributions of <code class="docutils literal notranslate"><span class="pre">P</span></code> in different galaxies? Why are some values of <code class="docutils literal notranslate"><span class="pre">P</span></code> more frequently observed than others?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p>In light of the data, what are some ways in which we may want to expand our model one day??</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed... make some bullet points
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Further-reading">
+<h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline">¶</a></h2>
+<p>The dataset prepared for this course is based on that reported in <a class="reference external" href="https://iopscience.iop.org/article/10.1088/0004-637X/730/2/119">Reiss et al. 2011</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="model_checking.html" class="btn btn-neutral float-right" title="3. Model checking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Bayesian workflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Francesca Capel.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

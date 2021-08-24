@@ -1,0 +1,260 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "1be47306",
+   "metadata": {},
+   "source": [
+    "## 5. Model comparison \n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "So far we have focussed on using a Bayesian workflow to design and develop a single model to describe our data. Much of the time, this will be enough to answer the scientific questions that we come across in our research. By using [model checking](model_checking.ipynb) to develop a model and verify that it is capable of representing the data, we are implicity using *predictive performance* to compare models, in a process of continuous model expansion.  \n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "However, there may be cases where it makes sense to compare two or more distinct models in a more discrete way. E.g. Models for the **presence or absence** of an effect, or **signal over background** models. Consider the following questions:\n",
+    "> What signal shape best describes my data?\n",
+    "\n",
+    "vs. \n",
+    "\n",
+    "> Is there signal in my data?\n",
+    "\n",
+    "<img src=\"figures/model_comparison.pdf\" alt=\"What kind of question are you asking?\" width=\"600\"/>\n",
+    "\n",
+    "As we will discuss further, there are several different approaches to model comparison. The right one for the job will depend largely on **what question you are trying to answer and what you know about the models that you are comparing**.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e73daaad",
+   "metadata": {},
+   "source": [
+    "### 5.1. The $\\mathcal{M}$-universe\n",
+    "\n",
+    "<br>\n",
+    "\n",
+    ">\"All models are wrong but some are useful\" - George Box\n",
+    "\n",
+    "To get started in our model comparison journey, we should think about the set of models that we are trying to compare. We can group these into 3 different scenarios, as summarised below.\n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "**$\\mathcal{M}$-closed:** It is reasonable to assume that the true model is part of the set of models under consideration. You can assign prior probabilities to each model in the set.\n",
+    "* This is the simplest case and is true of most textbook statistics problems.\n",
+    "\n",
+    "**$\\mathcal{M}$-open:** The data generating process is so complex, that we cannot imagine how the true model might be. In a way, there is no true model.\n",
+    "* This is the worst-case scenario! Imagine trying to design a model to predict human behaviour, or one that is capable of generating the work of a famous author. One can look for patterns, but it doesn't make sense to try and write down the mind of a person as a model.\n",
+    "\n",
+    "**$\\mathcal{M}$-complete:** It is reasonable to assume that a true model exists, but it is impossible to come up with a complete list of possible candidate models. \n",
+    "* In practice, this is the case in which we find ourselves most of the time. M-closed problems tend to be too simple to be really interesting, whereas M-open ones are too complex to even attempt with these kind of methods.\n",
+    "\n",
+    "In the M-complete view, it makes sense to work towards a *good enough* model that can represent our observations and anser our questions, as we have been doing so far in this workflow. However, one could also think about selecting between a finite set of models, that act as a proxy for a complete list of possible models.\n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "It is important to note that many of the more standard and widely used methods for Bayesian model comparison that rely on the **model marginal likelihood**, $p(\\mathrm{data}|\\mathrm{model})$, and/or **model priors**, $p(\\mathrm{model})$, assume that we are in the M-closed regime. As soon as we are not sure that we are in this regime, we should be very careful about interpreting the results of such approaches, and the further away we go, the worse it gets..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "171145a5",
+   "metadata": {},
+   "source": [
+    "### 5.2. Computing the model marginal likelihood\n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "Recall Bayes' theorem\n",
+    "\n",
+    "$$\n",
+    "p(\\theta| d) = \\frac{p(d|\\theta)p(\\theta)}{p(d)} = \\frac{p(\\theta | d, M)p(\\theta|M)}{p(d|M)},\n",
+    "$$\n",
+    "where we have expanded the expression to show the implicit conditioning on an underlying model, $M$.\n",
+    "\n",
+    "The model marginal likelihood, often also referred to as the *Bayesian evidence* is the term in the denominator\n",
+    "\n",
+    "$$\n",
+    "p(d|M) = \\int \\mathrm{d}\\theta~p(\\theta|M) p(d | \\theta, M),\n",
+    "$$\n",
+    "which normalises the posterior.\n",
+    "\n",
+    "In our work with Stan and Hamiltonian Monte Carlo so far, we have been happily ignoring this term. We didn't need our posterior to be normalised, we just cared about it's shape for parameter estimation purposes. \n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "So, if we are in the M-closed scenario and want to compute the marginal likelihood, it is *non-trivial* to re-use any results based on MCMC methods, although possibilities do exist...\n",
+    "\n",
+    "The marginal likelihood is a natural byproduct of *nested sampling* methods, which has contributed to their popularity. We will discuss the use of nested sampling further in the next section of the course."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cc0aa162",
+   "metadata": {},
+   "source": [
+    "### 5.3. Model comparison as parameter estimation\n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "If all of this has put you off model comparison, you'll be relieved to find out that a lot of model comparison problems can similarly be expressed as parameter estimation problems. Here, we will explore a simple illustrative example\n",
+    "in Stan.\n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "Consider a uniform background model and a normal signal model for some data, $x$:\n",
+    "\n",
+    "$$\n",
+    "x \\sim \\mathcal{U}(0, 1) \n",
+    "$$\n",
+    "\n",
+    "or \n",
+    "\n",
+    "$$\n",
+    "x \\sim \\mathcal{N}(0.5, 0.2)\n",
+    "$$\n",
+    "\n",
+    "Let's say we have $N$ independent observations, $x_i$. We do not know if these observations are from the signal or background component, and we are interested in possibly identifying a signal component. We can build a **mixture model** likelihood for our observations, such that \n",
+    "\n",
+    "$$\n",
+    "p(x | f) = \\prod_{i=1}^N \\Big[ f p(x_i | \\mathrm{signal}) + (1-f) p(x_i | \\mathrm{background})\\Big],\n",
+    "$$\n",
+    "where $f$ is the unknown weight of the mixture model, or the fraction of data that can be associated with the signal component. As we don't know $f$ a priori, we can assume a uniform prior over it between 0 and 1. \n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "**Exercise 5.3.1:** Use this information to be a generative model for this simple problem. Simulate 10 observations of x, with an associated fraction of only 0.2. Histogram the resulting x observations.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "71d62fe3",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2021-08-24T18:34:07.777473Z",
+     "start_time": "2021-08-24T18:34:06.965603Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "from matplotlib import pyplot as plt\n",
+    "from cmdstanpy import CmdStanModel\n",
+    "import arviz as av"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "91c2a771",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2021-08-24T18:34:07.783224Z",
+     "start_time": "2021-08-24T18:34:07.780082Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "N = 10\n",
+    "f = 0.2\n",
+    "# to be completed..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8aead9c0",
+   "metadata": {},
+   "source": [
+    "**Exercise 5.3.2:** Write the Stan code for this model and display it. Then fit the model to your simulated data for $f$. Plot the marginal posterior for f.\n",
+    "\n",
+    ">**Hint:** See [this page](https://mc-stan.org/docs/2_27/stan-users-guide/summing-out-the-responsibility-parameter.html) in the Stan manual for some tips."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "cd3cc8b1",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2021-08-24T18:34:08.935707Z",
+     "start_time": "2021-08-24T18:34:08.933028Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# to be completed..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "67d8146a",
+   "metadata": {},
+   "source": [
+    "**Exercise 5.3.3:** Now repeat your simulation a few times, steadily increasing the number of observations. Visualise the effect this has on the resulting $f$ distribution."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "8caa0caf",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2021-08-24T18:34:10.025069Z",
+     "start_time": "2021-08-24T18:34:10.022389Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# to be completed..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "27bac92a",
+   "metadata": {},
+   "source": [
+    "**Exercise 5.3.4:** Let's know assume that the signal position, $\\mu$ is unknown. Expand your model to also fit for the signal position. Repeat the above experiment for increasing the sample size, this time visualising the results in terms of the joint posterior for $f$ and $\\mu$. For completeness, also simulate and fit the case of zero signal observations to add to this plot.\n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "Some points to note:\n",
+    "* If we wanted to make a decision about the presence of signal in this dataset, we could consider how \"far away\" the marginal distribution for $f$ is away from zero, or how inconsistent $f=0$ is with our results. This could be quantified if necessary.\n",
+    "* By including $\\mu$ as a free parameter, our results for $f$ also include our uncertainty in it's value."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3f0dae0f",
+   "metadata": {},
+   "source": [
+    "### Further reading\n",
+    "\n",
+    "* Chapter 7 of [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/) by Gelman et al.\n",
+    "* Vehtari, A. & Ojanen, J. A survey of Bayesian predictive methods for model assessment, selection and comparison. Statistics Surveys 6, 142–228 (2012).\n",
+    "  "
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "bayesian_workflow",
+   "language": "python",
+   "name": "bayesian_workflow"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
