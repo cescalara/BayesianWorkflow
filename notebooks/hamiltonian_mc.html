@@ -459,9 +459,9 @@ div.rendered_html tbody tr:hover {
 <p>Given that we want to compute expectations, an obvious way for our sampler to be inefficient is to <strong>waste time evaluating :math:`pi(q)` in regions of parameter space that have negligible contribution to the expectation.</strong></p>
 <p>So we should just focus on regions with large density, <span class="math notranslate nohighlight">\(\pi(q)\)</span>, right? <em>Not exactly</em>. The expectation is an <em>integral</em> of this density of the <em>volume</em>, <span class="math notranslate nohighlight">\(\mathrm{d}q\)</span>. While the density will be largest at the mode, there is relatively little volume here, especially in high dimensions. Recall the curse of dimensionality as illustrated in the figure below. The relative weight of a partition containing a point of interest decreases from <span class="math notranslate nohighlight">\(1/3\)</span> to <span class="math notranslate nohighlight">\(1/9\)</span> and <span class="math notranslate nohighlight">\(1/27\)</span> as we
 scale from 1 to 3 dimensions.</p>
-<p><img alt="The curse of dimensionality" class="no-scaled-link" src="notebooks/figures/hmc1.png" style="width: 800px;" /></p>
+<p><img alt="The curse of dimensionality" class="no-scaled-link" src="../_images/hmc1.png" style="width: 800px;" /></p>
 <p>Actually, volume will be largest in the tails of the distribution, away from the mode. If we have <span class="math notranslate nohighlight">\(\pi(q)\)</span> largest at the mode, and <span class="math notranslate nohighlight">\(\mathrm{d}q\)</span> largest in the tails, the region of interest is somewhere between the two. Let’s refer to this region as the <strong>typical set</strong>.</p>
-<p><img alt="The typical set" class="no-scaled-link" src="notebooks/figures/hmc2.png" style="width: 500px;" /></p>
+<p><img alt="The typical set" class="no-scaled-link" src="../_images/hmc2.png" style="width: 500px;" /></p>
 <p>So we have understood that we want to focus all our computational resources on exploring this typical set. As we discussed above, standard MCMC algorithms, such as the Metropolis-Hastings algorithm, will eventually explore the typical set, as long as the Markov transition <em>preserves</em> the target distribution.</p>
 <p>Given sufficient time, samples from the Markov chain can be used to approximate our desired expectations:</p>
 <div class="math notranslate nohighlight">
@@ -474,7 +474,7 @@ scale from 1 to 3 dimensions.</p>
 <h2>The basics of HMC<a class="headerlink" href="#The-basics-of-HMC" title="Permalink to this headline">¶</a></h2>
 <p>So how can we explore the typical set more efficiently than with just randomly walking? We can exploit information about the <em>geometry</em> of the typical set, and use this to move through it. Imagine that we knew the <em>vector field</em> of the typical set, we could just follow it, like a ball rolling along a slope.</p>
 <p>Great! But how can we find this vector field using only information about our target density? The <em>gradient</em> of the density will give us a vector field that points towards the mode, but we want to move around the mode in the typical set. We can imagine this as a physical system, like a satellite (our trajectory) in orbit around the Earth (the mode):</p>
-<p><img alt="Exploring the typical set" class="no-scaled-link" src="notebooks/figures/hmc3.png" style="width: 900px;" /></p>
+<p><img alt="Exploring the typical set" class="no-scaled-link" src="../_images/hmc3.png" style="width: 900px;" /></p>
 <p>We too can avoid “crashing into the mode” by giving our “satellite” enough momentum. But we don’t want to add too much or too little momentum either. Let’s start by expanding our parameter space by introducing auxiliary momentum parameters, <span class="math notranslate nohighlight">\(p\)</span></p>
 <div class="math notranslate nohighlight">
 \[q \rightarrow (q, p).\]</div>
@@ -531,7 +531,7 @@ scale from 1 to 3 dimensions.</p>
 <section id="Implementation">
 <h2>Implementation<a class="headerlink" href="#Implementation" title="Permalink to this headline">¶</a></h2>
 <p>In practice, we have to solve Hamilton’s equations <em>numerically</em>. This leads to inaccuracies that add with integration time and scale with the number of dimensions. The geometry of the problem motivates the choice of <strong>Symplectic integrators</strong> for which the errors at least oscillate around the true values. Another aspect of their performance is that in regions of extreme curvature, the numerical trajectories diverge to infinity.</p>
-<p><img alt="Divergent transitions" class="no-scaled-link" src="notebooks/figures/hmc4.pdf" style="width: 900px;" /></p>
+<p><img alt="Divergent transitions" class="no-scaled-link" src="../_images/hmc4.pdf" style="width: 900px;" /></p>
 <p>While this may seem like a bad thing, the existence and location of <strong>divergent transitions</strong> is actually a very helpful diagnostic when implementing HMC in practice.</p>
 <p>We can also correct for the error induced by integration by defining a <strong>reversible transition</strong> (positive and negative momentum) and introducing an <strong>accept/reject Metropolis step</strong>, as the acceptance probability can be calculated exactly from the Hamiltonian.</p>
 <p>As we integrate numerically, the integration time becomes defined by a <strong>step size</strong> and <strong>number of steps</strong>. The step size can be optimised during the warmup phase, by defining a target metropolis acceptance rate (typically around 0.8). The number of steps, or trajectory length, is optimised dynamically during sampling via the No-U-Turn criterion mentioned above.</p>
