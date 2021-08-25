@@ -448,7 +448,7 @@ div.rendered_html tbody tr:hover {
 <h1>Hamiltonian Monte Carlo<a class="headerlink" href="#Hamiltonian-Monte-Carlo" title="Permalink to this headline">¶</a></h1>
 <p>The MCMC samplers that we have discussed so far can be thought of as a guided random walk towards regions of high posterior density. This random walk behaviour is inherently <strong>inefficient</strong>. Model reparametrisation and other tricks can help to improve the situation, but the inefficiency remains, <strong>especially in high-dimensional problems</strong>.</p>
 <p><strong>Hamiltonian Monte Carlo (HMC)</strong> is a dramatically more efficient way to draw samples from the target posterior distribution, thanks to its departure from the random walk approach. Instead, HMC uses concepts from Hamiltonian mechanics to direct the Markov transitions and avoid diffusive behaviour.</p>
-<p>An excellent introduction to HMC that is suitable for researchers in the physical sciences can be found in <a href="#id1"><span class="problematic" id="id2">`this paper &lt;&gt;`__</span></a> by Michael Betancourt. Here, I will try to summarise the main concepts, borrowing notation, figures and explanations from this work.</p>
+<p>An excellent introduction to HMC that is suitable for researchers in the physical sciences can be found in <a class="reference external" href="https://arxiv.org/pdf/1701.02434.pdf">this paper</a> by Michael Betancourt. Here, I will try to summarise the main concepts, borrowing notation, figures and explanations from this work.</p>
 <section id="Computing-expectations-with-MCMC">
 <h2>Computing expectations with MCMC<a class="headerlink" href="#Computing-expectations-with-MCMC" title="Permalink to this headline">¶</a></h2>
 <p>The goal in the implementation of any MCMC algorithm is the computation of expectation values. Consider a target sample space <span class="math notranslate nohighlight">\(Q\)</span>, of which any point <span class="math notranslate nohighlight">\(q \in Q\)</span> can be parametrised by real numbers, in <span class="math notranslate nohighlight">\(D\)</span> dimensions. In this parameter space, let our target distribution be a smooth density function, <span class="math notranslate nohighlight">\(\pi(q)\)</span>.</p>
@@ -708,7 +708,7 @@ av.plot_pair(fit_a, var_names=[&quot;theta&quot;, &quot;tau&quot;, &quot;mu&quot
 </div>
 <p>We see that the divergent transitions are clustered around small tau values before an abrupt stop. This indicates a funnel geometry that the sampler is not able to penetrate.</p>
 <p>This is a well-known problem for models of this type. We can try to reparametrise our model using a <a class="reference external" href="https://mc-stan.org/docs/2_18/stan-users-guide/reparameterization-section.html">non-centred parametrisation</a>.</p>
-<p><strong>Exercise/demo:</strong> Implement a non-centred version of the eight schools model and verify that that all diagnostic checks can now pass.</p>
+<p><strong>Live demo:</strong> Implement a non-centred version of the eight schools model and verify that that all diagnostic checks can now pass.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
