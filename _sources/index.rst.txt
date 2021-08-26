@@ -12,4 +12,3 @@ Bayesian Workflow
    notebooks/model_development.ipynb
    notebooks/model_comparison.ipynb
    notebooks/experiment_design.ipynb
-   notebooks/hamiltonian_mc.ipynb
