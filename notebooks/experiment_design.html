@@ -640,7 +640,7 @@ Text(0, 0.5, &#39;Width of mu distribution&#39;)
 <p>So we can see that we would probably need something like &gt; 900 observations to constrain the standard deviation of the <span class="math notranslate nohighlight">\(\mu\)</span> posterior to &lt; 1.</p>
 <p>A few notes on implementing this in practice: * We skipped our usual sampler checks when running the fit many times, of course we should still include this, and find a way to automate it. * We can see that the above plot fluctuates depending on the exact simulated realisation at any <span class="math notranslate nohighlight">\(N\)</span> value. We could repeat an experiment a number of times at each <span class="math notranslate nohighlight">\(N\)</span> to account for this. * For posteriors that may have non-standard shapes, the highest density interval (HDI) is a better measure of
 the width of a distribution.</p>
-<p><strong>Exercise 1:</strong> Consider the simple mixture model example from the <a class="reference external" href="model_comparison.ipynb">model comparison</a> notebook. We decide that we can conclude signal is present if the tail probability of the marginal posterior, <span class="math notranslate nohighlight">\(p(f&lt;0.1)\)</span>, is less than 0.01. How many observations are required to achieve this if the true <span class="math notranslate nohighlight">\(f=0.5\)</span>?</p>
+<p><strong>Exercise 1 (10 points):</strong> Consider the simple mixture model example from the <a class="reference external" href="model_comparison.ipynb">model comparison</a> notebook. We decide that we can conclude signal is present if the tail probability of the marginal posterior, <span class="math notranslate nohighlight">\(p(f&lt;0.1)\)</span>, is less than 0.01. How many observations are required to achieve this if the true <span class="math notranslate nohighlight">\(f=0.5\)</span>?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -650,7 +650,7 @@ the width of a distribution.</p>
 </pre></div>
 </div>
 </div>
-<p><strong>Homework exercise 1:</strong> Return to the Cepheid variable example and the Hubble constant estimate completed in the <a class="reference internal" href="model_development.html"><span class="doc">model development</span></a> notebook. Investigate what changes could be made to our Cepheid observations to better constrain the Hubble constant. How could we reach a 90% HDI region of &lt; 10? Make some plots to summarise your results.</p>
+<p><strong>Homework exercise 1 (40 points):</strong> Return to the Cepheid variable example and the Hubble constant estimate completed in the <a class="reference internal" href="model_development.html"><span class="doc">model development</span></a> notebook. Investigate what changes could be made to our Cepheid observations to better constrain the Hubble constant. How could we reach a 90% HDI region of &lt; 10? Make some plots to summarise your results.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>

@@ -467,7 +467,7 @@ div.rendered_html tbody tr:hover {
 </section>
 <section id="A-joint-hierarchical-fit-of-all-galaxies">
 <h2>A joint hierarchical fit of all galaxies<a class="headerlink" href="#A-joint-hierarchical-fit-of-all-galaxies" title="Permalink to this headline">¶</a></h2>
-<p><strong>Exercise 1:</strong> Sketch the graphical model for our hierarchical model for Cepheids over all galaxies</p>
+<p><strong>Exercise 1 (10 points):</strong> Sketch the graphical model for our hierarchical model for Cepheids over all galaxies</p>
 <p>A simplified Stan model for the full hierarchy can be found in <code class="docutils literal notranslate"><span class="pre">cepheid_v3.stan</span></code>. Note that this is based on <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code>, and you should also incorporate the changes that you made during the exercises in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> in order to achieve a good fit to the data. I will use <code class="docutils literal notranslate"><span class="pre">cepheid_v3.stan</span></code> here to demonstrate a few important points about hierarchical modelling.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -936,7 +936,7 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 </div>
 <p>The geometry of a hierarchical model with its many latent parameters is much more complex than that of a single model, and divergent transitions can occur. Fortunately, these can be used to help us understand and fix our model.</p>
 <p>Here, we can see that the misspecification of the magnitude uncertainty causes problems, although these issues become less servere if we add data from more galaxies, as I’ll now demonstrate. It is important to remember that <strong>the geometry the sampler sees depends on both the model and the data</strong>.</p>
-<p><strong>Exercise 2:</strong> Update the above Stan code with your improvements from the single galaxy case that you carried out in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> and display the code. Verify that you can run the above demo with no divergent transitions.</p>
+<p><strong>Exercise 2 (5 points):</strong> Update the above Stan code with your improvements from the single galaxy case that you carried out in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> and display the code. Verify that you can run the above demo with no divergent transitions.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
@@ -946,7 +946,7 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 3:</strong> Perform a joint fit of all the galaxies using your improved model, and visualise the posterior predictive distribution of your fit. Can you fit the data well?</p>
+<p><strong>Exercise 3 (10 points):</strong> Perform a joint fit of all the galaxies using your improved model, and visualise the posterior predictive distribution of your fit. Can you fit the data well?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -956,7 +956,7 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 </pre></div>
 </div>
 </div>
-<p><strong>Homework exercise 1:</strong> Compare the galaxy-level <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> distributions to those found from individual fits that you completed as part of the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a>. What differences can you see?</p>
+<p><strong>Homework exercise 1 (10 points):</strong> Compare the galaxy-level <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> distributions to those found from individual fits that you completed as part of the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a>. What differences can you see?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -966,7 +966,7 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 </pre></div>
 </div>
 </div>
-<p><strong>Homework exercise 2:</strong> Make a plot to show how the constraints on the parent distributions for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> change depending on the number of galaxies used in the sample. What happens when we only use one or two galaxies?</p>
+<p><strong>Homework exercise 2 (20 points):</strong> Make a plot to show how the constraints on the parent distributions for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> change depending on the number of galaxies used in the sample. What happens when we only use one or two galaxies?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -980,7 +980,7 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 <section id="Estimation-of-the-Hubble-constant">
 <h2>Estimation of the Hubble constant<a class="headerlink" href="#Estimation-of-the-Hubble-constant" title="Permalink to this headline">¶</a></h2>
 <p>So far we have assumed a value for <code class="docutils literal notranslate"><span class="pre">H0</span></code> in our fits in order to convert between apparent and absolute magnitude. This is necessary to fit for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Let’s think about how we can extend the model to make an estimate of <code class="docutils literal notranslate"><span class="pre">H0</span></code>, rather than assuming it.</p>
-<p><strong>Exercise 4:</strong> What happens if we simply leave <code class="docutils literal notranslate"><span class="pre">H0</span></code> as a free parameter in our existing hierarchical model? Why is this?</p>
+<p><strong>Exercise 4 (5 points):</strong> What happens if we simply leave <code class="docutils literal notranslate"><span class="pre">H0</span></code> as a free parameter in our existing hierarchical model? Why is this?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -990,7 +990,7 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 5:</strong> What happens if we change the value of <code class="docutils literal notranslate"><span class="pre">H0</span></code> assumed in our analysis? Which results change, and which stay the same?</p>
+<p><strong>Exercise 5 (5 points):</strong> What happens if we change the value of <code class="docutils literal notranslate"><span class="pre">H0</span></code> assumed in our analysis? Which results change, and which stay the same?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -1015,7 +1015,7 @@ P = mw_cepheids.T[2] # period in days
 </pre></div>
 </div>
 </div>
-<p><strong>Homework exercise 3:</strong> Use this new data set to make an independent estimate of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, without assuming <code class="docutils literal notranslate"><span class="pre">H0</span></code>, what do you find?</p>
+<p><strong>Homework exercise 3 (20 points):</strong> Use this new data set to make an independent estimate of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, without assuming <code class="docutils literal notranslate"><span class="pre">H0</span></code>, what do you find?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -1025,11 +1025,11 @@ P = mw_cepheids.T[2] # period in days
 </pre></div>
 </div>
 </div>
-<p><strong>Homework exercise 4:</strong> Update the hierarchical model that you have to include key information from the calibration data into your joint fit. If done correctly, this should allow you to break the degeneracy in the model and directly estimate the Hubble constant. Try to include all relevant uncertainties.</p>
+<p><strong>Homework exercise 4 (20 points):</strong> Update the hierarchical model that you have to include key information from the calibration data into your joint fit. If done correctly, this should allow you to break the degeneracy in the model and directly estimate the Hubble constant. Try to include all relevant uncertainties.</p>
 <blockquote>
 <div><p><strong>Hint</strong>: Assume that <code class="docutils literal notranslate"><span class="pre">alpha</span></code> from the Milky Way dataset is a fair representaion of <code class="docutils literal notranslate"><span class="pre">mu_alpha</span></code></p>
 </div></blockquote>
-<p><strong>Homework exercise 5:</strong> What factors affect the uncertainties in your estimate? How could you get a more constrained result?</p>
+<p><strong>Homework exercise 5 (20 points):</strong> What factors affect the uncertainties in your estimate? How could you get a more constrained result?</p>
 </section>
 <section id="Further-reading">
 <h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline">¶</a></h2>

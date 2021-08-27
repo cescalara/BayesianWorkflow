@@ -497,7 +497,7 @@ ax.axvline(mu, color=&quot;k&quot;, linestyle=&quot;:&quot;)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.lines.Line2D at 0x102be4880&gt;
+&lt;matplotlib.lines.Line2D at 0x142039a00&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -587,8 +587,8 @@ INFO:cmdstanpy:start chain 1
 INFO:cmdstanpy:start chain 2
 INFO:cmdstanpy:start chain 3
 INFO:cmdstanpy:start chain 4
-INFO:cmdstanpy:finish chain 1
 INFO:cmdstanpy:finish chain 2
+INFO:cmdstanpy:finish chain 1
 INFO:cmdstanpy:finish chain 3
 INFO:cmdstanpy:finish chain 4
 </pre></div></div>
@@ -642,38 +642,38 @@ INFO:cmdstanpy:finish chain 4
   <tbody>
     <tr>
       <th>lp__</th>
-      <td>-80.0</td>
-      <td>0.0290</td>
+      <td>-87.0</td>
+      <td>0.0270</td>
       <td>1.10</td>
-      <td>-83.0</td>
-      <td>-80.0</td>
-      <td>-79.0</td>
-      <td>1400.0</td>
-      <td>17000.0</td>
+      <td>-89.0</td>
+      <td>-86.0</td>
+      <td>-86.0</td>
+      <td>1600.0</td>
+      <td>23000.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>mu</th>
+      <td>4.5</td>
+      <td>0.0089</td>
+      <td>0.49</td>
+      <td>3.7</td>
+      <td>4.5</td>
       <td>5.2</td>
-      <td>0.0085</td>
-      <td>0.45</td>
-      <td>4.4</td>
-      <td>5.2</td>
-      <td>5.9</td>
-      <td>2800.0</td>
-      <td>34000.0</td>
+      <td>3000.0</td>
+      <td>44000.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td>3.1</td>
-      <td>0.0065</td>
-      <td>0.33</td>
-      <td>2.6</td>
-      <td>3.1</td>
-      <td>3.7</td>
-      <td>2500.0</td>
-      <td>30000.0</td>
+      <td>3.5</td>
+      <td>0.0072</td>
+      <td>0.37</td>
+      <td>2.9</td>
+      <td>3.5</td>
+      <td>4.1</td>
+      <td>2600.0</td>
+      <td>37000.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -695,7 +695,7 @@ fit.diagnose();
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpvovcr_xr/normal-202108270958-1-q9gcu5mk.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpvovcr_xr/normal-202108270958-2-yih8w275.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpvovcr_xr/normal-202108270958-3-3u6b_1bb.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpvovcr_xr/normal-202108270958-4-oyayt5my.csv
+INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpcxu82mzt/normal-202108271540-1-2zsk09lm.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpcxu82mzt/normal-202108271540-2-zp2wwq_y.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpcxu82mzt/normal-202108271540-3-_p_rvi8b.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpcxu82mzt/normal-202108271540-4-yjeqr2al.csv
 
 Checking sampler transitions treedepth.
 Treedepth satisfactory for all transitions.
@@ -740,7 +740,7 @@ av.plot_pair(fit, marginals=True);
 </div>
 </div>
 <p>Ok, so it looks like everything is up and running. You can try changing the input data and see how the results change accordingly. Let’s investigate a few specific cases in the exercise below.</p>
-<p><strong>Exercise 1</strong></p>
+<p><strong>Exercise 1 (5 points):</strong></p>
 <p>What happens to the shape of the marginal distributions in the following cases: * Very little data (small <code class="docutils literal notranslate"><span class="pre">N</span></code>) * Large amounts of data (large <code class="docutils literal notranslate"><span class="pre">N</span></code>) * Narrow priors on <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code> Make plots to summarise the comparison with the original case.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -768,10 +768,10 @@ used to <strong>draw conclusions</strong> via <strong>inference</strong>. With t
 <p>In this short course, we will <em>not</em> learn about <strong>frequentist</strong> statistical methods or <strong>machine learning</strong> approaches, which are both things you have probably heard of and may be interested in using in your research. While I might make fun of them a bit below, there are certainly cases where these could be more appropriate than what we will focus on.</p>
 <p>So, before jumping into the Bayesian workflow, I’ll try to <em>briefly</em> highlight some similarities and differences between these topics, from the Bayesian perspective.</p>
 <p>Let’s start by recalling Bayes’ theorem with data, <span class="math notranslate nohighlight">\(x\)</span>, and model parameters <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
-<p><img alt="292bf007cc0b47d0bc39baca0e24d6db" class="no-scaled-link" src="../_images/bayes_theorem.pdf" style="width: 700px;" /></p>
+<p><img alt="222059e914be4e919edb2cbd788eaec4" class="no-scaled-link" src="../_images/bayes_theorem.pdf" style="width: 700px;" /></p>
 <p>Frequentist methods</p>
 <p>We can start to think about some differences between Bayesian and frequentist statistical views by studying the following xkcd comic:</p>
-<p><img alt="3715c8c5e2d743668cc6b9f610638221" class="no-scaled-link" src="https://imgs.xkcd.com/comics/frequentists_vs_bayesians.png" style="width: 350px;" /></p>
+<p><img alt="a7acdefb6975482d91ee271580804d26" class="no-scaled-link" src="https://imgs.xkcd.com/comics/frequentists_vs_bayesians.png" style="width: 350px;" /></p>
 <p>Both approaches involve a likelihood - <span class="math notranslate nohighlight">\(p(\mathrm{answer}~|~\mathrm{sun~status})\)</span>. For this problem, the probability of the machine saying “yes” given the sun has <em>not</em> exploded is equal to the probablity of rolling two sixes, i.e.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}p(\mathrm{yes}~|~\mathrm{sun~ok}) = 1/36, \\
@@ -784,10 +784,10 @@ p(\mathrm{yes}~|~\mathrm{sun~exploded}) = 35/36.\end{split}\]</div>
 <p>So is frequentist statistics just Bayesian statistics without priors? Unfortunately, it is not so simple. Sure, we can think about the cases where they might seem equivalent. In frequentist approaches it is typical to find the <em>maximum likelihood estimate</em> of a parameter based on data. Could this be the same as the <em>maximum a posterior</em> value of a parameter for a uniform prior?</p>
 <p>However, it is important to keep in mind the different definitions of probability that the two views are based on: probability as a <em>degree of belief</em> vs. probability as a <em>frequency in the limit of infinte observations</em>. This also comes into the treatment of uncertainty. In the Bayesian view, <strong>the data are fixed and parameters are uncertain</strong>, whereas in the frequentist case, <strong>the true parameters are fixed, and we estimate them imperfectly due to uncertainty present in the data from finite
 sampling</strong>.</p>
-<p><img alt="13631f5a4fd345d198125cef47c6ed32" class="no-scaled-link" src="../_images/bayes_vs_freq.png" style="width: 800px;" /></p>
+<p><img alt="22179949409342309df502a31edeef6c" class="no-scaled-link" src="../_images/bayes_vs_freq.png" style="width: 800px;" /></p>
 <p>Machine learning</p>
 <p>Machine learning is used to describe basically anything these days, but here I am referring to methods based on neural networks.</p>
-<p><img alt="ef6722c39813437f9afb3f839d7c5659" class="no-scaled-link" src="https://imgs.xkcd.com/comics/machine_learning.png" style="width: 350px;" /></p>
+<p><img alt="69d327e964524cda998dfc3c6217cb27" class="no-scaled-link" src="https://imgs.xkcd.com/comics/machine_learning.png" style="width: 350px;" /></p>
 <p>We can think about standard machine learning approaches as similar to maximum likliehood estimation. If we don’t know what the likelihood looks like, or cannot come up with a functional form for it, we can choose to represent it as a matrix of unknown weights.</p>
 <p>We can then <em>train</em> a neural network with simulated or labelled data in order to <em>learn</em> the appropriate weights, an optimisation process that can be thought of as maximising the likelihood. Once trained, the resulting matrix of weights can be used like an operator to return the maximum likelihood estimate for new input data.</p>
 <p>A key difference in this approach is that the likelihood itself is now a <em>black box</em>, and so <strong>it is not so clear how we should interpret our model or the resulting inferences</strong>. <strong>The quantification of uncertainty is also not straightforward</strong>. This is fine if you just want to make classifications or predictions, without asking why. That said, there is plenty of work being done on ways to interpret neural networks and methods exist to bring more Bayesian thinking in and allow uncertainty
@@ -802,7 +802,7 @@ quantification.</p>
 <div class="math notranslate nohighlight">
 \[\hat{y} \sim \mathcal{N}(y, \sigma),\]</div>
 <p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is a known quantity that is constant for all observations.</p>
-<p><strong>Exercise 2:</strong> Write a Stan model for the above model, considering the dataset introduced below. Verify that it compiles.</p>
+<p><strong>Exercise 2 (5 points):</strong> Write a Stan model for the above model, considering the dataset introduced below. Verify that it compiles.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -850,9 +850,9 @@ Text(0, 0.5, &#39;y&#39;)
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 3:</strong> Build a dictionary to pass the data to Stan and fit the model. Visualise your results for <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<p><strong>Exercise 3 (5 points):</strong> Build a dictionary to pass the data to Stan and fit the model. Visualise your results for <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(c\)</span>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -860,12 +860,12 @@ Text(0, 0.5, &#39;y&#39;)
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 4:</strong> We now learn that the <span class="math notranslate nohighlight">\(x\)</span> observations also have an associated uncertainty, <span class="math notranslate nohighlight">\(\tau\)</span>, such that</p>
+<p><strong>Exercise 4 (5 points):</strong> We now learn that the <span class="math notranslate nohighlight">\(x\)</span> observations also have an associated uncertainty, <span class="math notranslate nohighlight">\(\tau\)</span>, such that</p>
 <div class="math notranslate nohighlight">
 \[\hat{x} \sim \mathcal{N}(x, \tau)\]</div>
 <p>We are told that <span class="math notranslate nohighlight">\(\tau = 1\)</span>. Update your Stan model to include this information and repeat the fit to data. How does this affect our results for the line fit?</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -873,13 +873,13 @@ Text(0, 0.5, &#39;y&#39;)
 </pre></div>
 </div>
 </div>
-<p><strong>Homework exercise 1:</strong> Find a coin and flip it 5 times, recording the answer as 0 for tails, and 1 for heads. * Write a Stan model for your observations. * Use it to determine the probability, <span class="math notranslate nohighlight">\(p\)</span>, that a coin flip gives heads, given your observations. * Make another 5 observations of coin flips and add these to your original sample. How does this affect the result for <span class="math notranslate nohighlight">\(p\)</span>?</p>
+<p><strong>Homework exercise 1 (20 points):</strong> Find a coin and flip it 5 times, recording the answer as 0 for tails, and 1 for heads. * Write a Stan model for your observations. * Use it to determine the probability, <span class="math notranslate nohighlight">\(p\)</span>, that a coin flip gives heads, given your observations. * Make another 5 observations of coin flips and add these to your original sample. How does this affect the result for <span class="math notranslate nohighlight">\(p\)</span>?</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<span></span>#to be completed...
 </pre></div>
 </div>
 </div>

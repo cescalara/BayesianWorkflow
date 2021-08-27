@@ -890,7 +890,7 @@ av.plot_trace(fit, var_names=[&quot;alpha&quot;, &quot;beta&quot;, &quot;m_true&
 </div>
 </div>
 <p>So by including <code class="docutils literal notranslate"><span class="pre">m_true</span></code> in the <code class="docutils literal notranslate"><span class="pre">transformed</span> <span class="pre">parameters</span></code> block, we also get the marginal distributions ready-made for free. Different chains have different linestyles and different Cepheids have different colours in this plot.</p>
-<p><strong>Exercise 1:</strong> Looking closely, it seems that the <code class="docutils literal notranslate"><span class="pre">m_true</span></code> distributions vary from star to star, with medium <code class="docutils literal notranslate"><span class="pre">m_true</span></code> values having narrower distributions. We know <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> is fixed, so why might this be?</p>
+<p><strong>Exercise 1 (5 points):</strong> Looking closely, it seems that the <code class="docutils literal notranslate"><span class="pre">m_true</span></code> distributions vary from star to star, with medium <code class="docutils literal notranslate"><span class="pre">m_true</span></code> values having narrower distributions. We know <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> is fixed, so why might this be?</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -921,7 +921,7 @@ ax[1,0].axhline(beta_true, color=&quot;r&quot;)
 </div>
 </div>
 <p>We can see that we are able to recover the true result, although <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> are quite correlated. Going back to the fit summary, we see that the number of effective samples is quite low - only ~500 for 4x1000 iterations! This fit is very fast and so we could just run it longer, but a common reparametrisation for slopes and intercepts could make the sampling much more efficient.</p>
-<p><strong>Exercise 2:</strong> Try using the following reparametrisation for the period-luminosity relation:</p>
+<p><strong>Exercise 2 (5 points):</strong> Try using the following reparametrisation for the period-luminosity relation:</p>
 <div class="math notranslate nohighlight">
 \[y = \alpha + \beta x \rightarrow y = \alpha^\prime + \beta (x - x_0)\]</div>
 <p>where <span class="math notranslate nohighlight">\(x_0\)</span> is roughly the mean value of <span class="math notranslate nohighlight">\(x\)</span>, typically called the <em>pivot</em>. Compare the number of effective samples with the previous version. Additionally, compare the joint posterior for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> with that for <code class="docutils literal notranslate"><span class="pre">alpha_prime</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Why is this parametrisation so much more efficient?</p>
@@ -1006,7 +1006,7 @@ consider <code class="docutils literal notranslate"><span class="pre">alpha</spa
 <p>It is rarely the case that we have zero prior knowledge on the value of our model parameters. At the same time, we don’t want to bias our results by introduing too much information with so-called <em>informative priors</em>. After all, we are trying to find out what the values of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> are.</p>
 <p>Like many things in life, there is a happy medium between these two extremes that we can use in practice. <em>Weakly informative priors</em> are wide enough to reflect our ignorance, but narrow enough to constrain the parameter space to sensible values. The exact shape of a weakly informative prior should have negligible impact on the fit results.</p>
 <p>To help us choose sensible informative priors, we can use <strong>prior predictive checks</strong>. This just means sampling from the prior distribution in your generative model, and comparing the resulting data with your actual data. The idea is that the prior predictive data should cover a wide enough region to cover all reasonable data values, and visualising priors this way in the “data-space” can be helpful in prior selection.</p>
-<p><strong>Exercise 3:</strong> Expand your generative model to sample from the prior distributions for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Plot the resulting data (<code class="docutils literal notranslate"><span class="pre">m_obs</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code>) for a few different choices of prior distributions.</p>
+<p><strong>Exercise 3 (5 points):</strong> Expand your generative model to sample from the prior distributions for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Plot the resulting data (<code class="docutils literal notranslate"><span class="pre">m_obs</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code>) for a few different choices of prior distributions.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1198,7 +1198,7 @@ ax.legend()
 </div>
 </div>
 <p>We see that the prior choice has negligible impact on the results.</p>
-<p><strong>Exercise 4:</strong> Experiment with stronger priors and/or weaker data to see how this affects the inferred relation. Make some plots to visualise your results.</p>
+<p><strong>Exercise 4 (5 points):</strong> Experiment with stronger priors and/or weaker data to see how this affects the inferred relation. Make some plots to visualise your results.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
@@ -1217,7 +1217,7 @@ ax.legend()
 \[p(\hat{m}_\mathrm{rep} | \hat{m}) = \int \mathrm{d}\alpha \int \mathrm{d}\beta~p(\hat{m}_\mathrm{rep}| \alpha, \beta) p(\alpha, \beta | \hat{m}),\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{m}_\mathrm{rep}\)</span> is the <em>replicated</em> data predicted by our fitted model. We can think of this as the data our model predicts we should see in future.</p>
 <p>In practice, we can easily compute this integral using the Markov chains that we get from Stan. All we have to do is use the posterior samples for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> to forward simulate data from our likelihood, or generative model.</p>
-<p><strong>Exercise 5:</strong> Let’s compute the posterior predictive distribution for our fit to simulated data…</p>
+<p><strong>Exercise 5 (5 points):</strong> Let’s compute the posterior predictive distribution for our fit to simulated data…</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
@@ -1246,8 +1246,8 @@ for i in range(Nreps):
 </section>
 <section id="Application-to-actual-data">
 <h2>Application to actual data<a class="headerlink" href="#Application-to-actual-data" title="Permalink to this headline">¶</a></h2>
-<p><strong>Homework exercise 1:</strong> Now, let’s use our <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code> model to fit the actual data introduced in the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>. Here we have a model for one galaxy only, so let’s pick one at random to start with. Complete the following steps: * Note that the actual data have individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this. * Fit the data. Make a plot summarising the
-posterior of the line fit and compare it to the <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> data values. * Complete a posterior predictive check for this fit. * Repeat steps 2 and 3 for a few other galaxies to compare. Comment on the overall results.</p>
+<p><strong>Homework exercise 1 (20 points):</strong> Now, let’s use our <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code> model to fit the actual data introduced in the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>. Here we have a model for one galaxy only, so let’s pick one at random to start with. Complete the following steps: * Note that the actual data have individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this. * Fit the data. Make a plot
+summarising the posterior of the line fit and compare it to the <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> data values. * Complete a posterior predictive check for this fit. * Repeat steps 2 and 3 for a few other galaxies to compare. Comment on the overall results.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -1259,7 +1259,7 @@ posterior of the line fit and compare it to the <code class="docutils literal no
 </div>
 <p>The above exercise should leave us feeling unsatisfied with out model. We seek out an expert to discuss with, and learn the following information: * The metallicity of a Cepheid has a systematic effect on its intrinsic brightness, shifting it by a factor of <span class="math notranslate nohighlight">\(\gamma=1.5\)</span> * We don’t know the uncertainty in the observed period values - it is likely small, but maybe it is not measured perfectly. * The frequency or “cadence” of astronomical observations means that it is only possible to
 measure certain periods.</p>
-<p><strong>Homework exercise 2:</strong> Use the above information together with the completed posterior predictive checks to improve your Stan model. Some changes may be more useful than others, so it can be good to test each in isolation. Once you are satisfied with your single galaxy model, save it as <code class="docutils literal notranslate"><span class="pre">cepheid_v2.stan</span></code>, and make some plots arguing your case.</p>
+<p><strong>Homework exercise 2 (30 points):</strong> Use the above information together with the completed posterior predictive checks to improve your Stan model. Some changes may be more useful than others, so it can be good to test each in isolation. Once you are satisfied with your single galaxy model, save it as <code class="docutils literal notranslate"><span class="pre">cepheid_v2.stan</span></code>, and make some plots arguing your case.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -1269,7 +1269,7 @@ measure certain periods.</p>
 </pre></div>
 </div>
 </div>
-<p><strong>Homework exercise 3:</strong> Use your improved model, <code class="docutils literal notranslate"><span class="pre">cepheid_v2.stan</span></code> to fit the data from each galaxy independently. Make some plots showing the resulting <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> marginal posteriors for the different galaxies (e.g. ridgeline plots can be a nice way to show this). What can you conclude about the universailty of the period-luminosity relation?</p>
+<p><strong>Homework exercise 3 (30 points):</strong> Use your improved model, <code class="docutils literal notranslate"><span class="pre">cepheid_v2.stan</span></code> to fit the data from each galaxy independently. Make some plots showing the resulting <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> marginal posteriors for the different galaxies (e.g. ridgeline plots can be a nice way to show this). What can you conclude about the universailty of the period-luminosity relation?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>

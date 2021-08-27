@@ -469,7 +469,7 @@ div.rendered_html tbody tr:hover {
 <p>The model-building problem then comes down to <strong>defining a connection between your parameters and data</strong> (the likelihood/observational model) and <strong>incorporating relevant domain expertise</strong> (the prior model).</p>
 <p>To get a feel for how this can work, consider the following examples:</p>
 <p><img alt="Going from a scientific question to a statistical model" class="no-scaled-link" src="../_images/science_stats.pdf" style="width: 750px;" /></p>
-<p><strong>Exercise 1:</strong> Fill out this table for some more complicated examples such as * What is the value of the Hubble constant? * What is the mass of the Higgs boson? * An example from your own field/interests Below are some relevant plots of data used to make such measurements.</p>
+<p><strong>Exercise 1 (10 points):</strong> Fill out this table for some more complicated examples such as * What is the value of the Hubble constant? * What is the mass of the Higgs boson? * An example from your own field/interests Below are some relevant plots of data used to make such measurements.</p>
 <p>The original Hubble diagram from <a class="reference external" href="https://www.pnas.org/content/15/3/168">this paper</a>:</p>
 <p><img alt="The original Hubble diagram" class="no-scaled-link" src="../_images/hubble.jpg" style="width: 600px;" /></p>
 <p>First presentation of ATLAS Higgs to <span class="math notranslate nohighlight">\(\gamma\gamma\)</span> results on 4th July 2012:</p>
@@ -481,7 +481,7 @@ div.rendered_html tbody tr:hover {
 down or implement, but in doing this, we give can identify important steps and give context to the simpler models we will later go on to create.</p>
 <p>Taking the first example in the table above, consider what other effects may be important…</p>
 <p><img alt="Thinking about more complete models" class="no-scaled-link" src="../_images/ball_drop.pdf" style="width: 750px;" /></p>
-<p><strong>Exercise 2:</strong> Can you expand the complexity for one of the other models that we discussed? List possible factors.</p>
+<p><strong>Exercise 2 (5 points):</strong> Can you expand the complexity for one of the other models that we discussed? List possible factors.</p>
 </section>
 <section id="Probabilistic-graphical-models">
 <h2>Probabilistic graphical models<a class="headerlink" href="#Probabilistic-graphical-models" title="Permalink to this headline">¶</a></h2>
@@ -489,7 +489,7 @@ down or implement, but in doing this, we give can identify important steps and g
 <p>Here is a trivial example for that of data sampled from a normal distribution, such as what we looked at when introducing Stan in the <em>Are you ready?</em> section of the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>. The normal distribution is defined by two parameters, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. <span class="math notranslate nohighlight">\(N\)</span> independent samples from this distribution are then taken, shown by <span class="math notranslate nohighlight">\(x_i\)</span>. The box around <span class="math notranslate nohighlight">\(x_i\)</span> shows that there are a number of repeated samples, that we can think of as
 observations or measurements.</p>
 <p><img alt="A simple DAG or PGM for normally-distributed data" class="no-scaled-link" src="../_images/simple_dag.pdf" style="width: 200px;" /></p>
-<p><strong>Exercise 3:</strong> Now it’s your turn! Sketch graphical models for the first two examples in the above table (measurement of gravitational acceleration and radioactivity).</p>
+<p><strong>Exercise 3 (5 points):</strong> Now it’s your turn! Sketch graphical models for the first two examples in the above table (measurement of gravitational acceleration and radioactivity).</p>
 </section>
 <section id="An-example:-the-period-luminosity-relation-of-Cepheid-variable-stars">
 <h2>An example: the period-luminosity relation of Cepheid variable stars<a class="headerlink" href="#An-example:-the-period-luminosity-relation-of-Cepheid-variable-stars" title="Permalink to this headline">¶</a></h2>
@@ -520,11 +520,11 @@ observations or measurements.</p>
 <div class="math notranslate nohighlight">
 \[d_L(z) = \frac{cz}{H_0},\]</div>
 <p>where <span class="math notranslate nohighlight">\(c\)</span> is the speed of light, and <span class="math notranslate nohighlight">\(H_0\)</span> is the Hubble constant. Again, for simplicity, let’s assume that for now we just look at <span class="math notranslate nohighlight">\(N_c\)</span> Cepheids in a single galaxy with a known redshift, <span class="math notranslate nohighlight">\(z\)</span>.</p>
-<p><strong>Exercise 4:</strong> With these simplifying assumptions in mind, sketch the corresponding graphical model for our initial Cepheid variable model. The parameters and known quantities are summarised below, just arrange them into a graph.</p>
+<p><strong>Exercise 4 (5 points):</strong> With these simplifying assumptions in mind, sketch the corresponding graphical model for our initial Cepheid variable model. The parameters and known quantities are summarised below, just arrange them into a graph.</p>
 <p><img alt="Blobs for the simple Cepheid graphical model" class="no-scaled-link" src="../_images/cepheid_graph_bits.pdf" style="width: 750px;" /></p>
-<p><strong>Exercise 5:</strong> Using the parameter and fixed quantity values given below, as well as your graphical model, write a simulation for the observed apparent magnitudes, <span class="math notranslate nohighlight">\(m_i\)</span>. Plot your results in <span class="math notranslate nohighlight">\(\log_{10}(P/\mathrm{days})\)</span>-<span class="math notranslate nohighlight">\(m\)</span> space, comparing with the true period-luminosity relation.</p>
+<p><strong>Exercise 5 (10 points):</strong> Using the parameter and fixed quantity values given below, as well as your graphical model, write a simulation for the observed apparent magnitudes, <span class="math notranslate nohighlight">\(m_i\)</span>. Plot your results in <span class="math notranslate nohighlight">\(\log_{10}(P/\mathrm{days})\)</span>-<span class="math notranslate nohighlight">\(m\)</span> space, comparing with the true period-luminosity relation.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -724,7 +724,7 @@ Text(0, 0.5, &#39;M&#39;)
 <p>Now that we have some feeling for the generative model, let’s take a look at some Cepheid variable data. You can find two files in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory: 1. galaxies.dat 2. cepheids.dat</p>
 <p>The first contains information on the host galaxies, and the second contains information on the individual Cepheids studied in each host galaxy.</p>
 <p>The right time in a workflow for exploratory data analysis can be difficult to define. In general, we want to be aware of how our data looks when designing a model for it, but also not too influenced such that we get carried away and design a model that <em>overfits</em> the data we have and is uncapable of generalising to unseen data. Here, we want to see how our first effort at a generative model stacks up, and also think about directions for improving our model.</p>
-<p><strong>Homework exercise 1:</strong> Complete the following exploratory data analysis.</p>
+<p><strong>Homework exercise 1 (30 points):</strong> Complete the following exploratory data analysis.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
