@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>6. Model comparison (Part II) &mdash; Bayesian workflow  documentation</title>
@@ -448,10 +447,10 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="6.-Model-comparison-(Part-II)">
+<div class="section" id="6.-Model-comparison-(Part-II)">
 <h1>6. Model comparison (Part II)<a class="headerlink" href="#6.-Model-comparison-(Part-II)" title="Permalink to this headline">¶</a></h1>
 <p>See <a class="reference external" href="model_comparison_part2_slides.pdf">these slides</a> for the lecture part.</p>
-<section id="Model">
+<div class="section" id="Model">
 <h2>Model<a class="headerlink" href="#Model" title="Permalink to this headline">¶</a></h2>
 <p>We again consider the sine model with gaussian measurement errors.</p>
 <div class="math notranslate nohighlight">
@@ -481,8 +480,8 @@ def sine_model0(t, B):
 <li><p>the period <span class="math notranslate nohighlight">\(P\)</span></p></li>
 <li><p>the time offset <span class="math notranslate nohighlight">\(t_0\)</span></p></li>
 </ul>
-</section>
-<section id="Generating-data">
+</div>
+<div class="section" id="Generating-data">
 <h2>Generating data<a class="headerlink" href="#Generating-data" title="Permalink to this headline">¶</a></h2>
 <p>Lets generate some data following this model:</p>
 <div class="nbinput nblast docutils container">
@@ -502,8 +501,8 @@ y = np.random.normal(sine_model1(t, B=1.0, A1=0.9, P1=3, t1=0), yerr)
 </pre></div>
 </div>
 </div>
-</section>
-<section id="Visualise-the-data">
+</div>
+<div class="section" id="Visualise-the-data">
 <h2>Visualise the data<a class="headerlink" href="#Visualise-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Lets plot the data first to see what is going on:</p>
 <div class="nbinput docutils container">
@@ -715,8 +714,8 @@ insert order U test : converged: True correlation: inf iterations
     B                   1.15 +- 0.14
 </pre></div></div>
 </div>
-</section>
-<section id="Plot-the-parameter-posterior-probability-distribution">
+</div>
+<div class="section" id="Plot-the-parameter-posterior-probability-distribution">
 <h2>Plot the parameter posterior probability distribution<a class="headerlink" href="#Plot-the-parameter-posterior-probability-distribution" title="Permalink to this headline">¶</a></h2>
 <p>A classic corner plot of the parameter pairs and the marginal distributions:</p>
 <div class="nbinput docutils container">
@@ -854,8 +853,8 @@ df.describe()
 </table>
 </div></div>
 </div>
-</section>
-<section id="Plot-the-fit:">
+</div>
+<div class="section" id="Plot-the-fit:">
 <h2>Plot the fit:<a class="headerlink" href="#Plot-the-fit:" title="Permalink to this headline">¶</a></h2>
 <p>To evaluate whether the results make any sense, we want to look whether the fitted function goes through the data points.</p>
 <div class="nbinput docutils container">
@@ -907,8 +906,8 @@ band.shade(q=0.49, color=&#39;gray&#39;, alpha=0.2)
 <img alt="../_images/notebooks_model_comparison_part2_22_1.png" src="../_images/notebooks_model_comparison_part2_22_1.png" />
 </div>
 </div>
-</section>
-<section id="Model-comparison-methods">
+</div>
+<div class="section" id="Model-comparison-methods">
 <h2>Model comparison methods<a class="headerlink" href="#Model-comparison-methods" title="Permalink to this headline">¶</a></h2>
 <p>We now want to know:</p>
 <p><strong>Is the model with 2 components better than the model with one component?</strong></p>
@@ -918,8 +917,8 @@ band.shade(q=0.49, color=&#39;gray&#39;, alpha=0.2)
 <li><p>Which model is more probably the true one, given this data, these models, and their parameter spaces?</p></li>
 <li><p>Which model is simplest, but complex enough to capture the information complexity of the data?</p></li>
 </ol>
-</section>
-<section id="Bayesian-model-comparison">
+</div>
+<div class="section" id="Bayesian-model-comparison">
 <h2>Bayesian model comparison<a class="headerlink" href="#Bayesian-model-comparison" title="Permalink to this headline">¶</a></h2>
 <p>Here we will focus on b, and apply Bayesian model comparison.</p>
 <p>For simplicity, we will assume equal a-prior model probabilities.</p>
@@ -948,8 +947,8 @@ assuming the models are equally probable a priori.
 </div>
 <p>N.B.: Bayes factors are influenced by parameter and model priors. It is a good idea to vary them and see how sensitive the result is.</p>
 <p>For making decisions, thresholds are needed. They can be calibrated to desired low false decisions rates with simulations (generate data under the simpler model, look at K distribution).</p>
-</section>
-<section id="Calibrating-Bayes-factor-thresholds">
+</div>
+<div class="section" id="Calibrating-Bayes-factor-thresholds">
 <h2>Calibrating Bayes factor thresholds<a class="headerlink" href="#Calibrating-Bayes-factor-thresholds" title="Permalink to this headline">¶</a></h2>
 <p>Lets generate some data sets under the null hypothesis (noise-only model) and see how often we would get a large Bayes factor. For this, we need to fit with both models.</p>
 <div class="nbinput nblast docutils container">
@@ -1016,8 +1015,8 @@ for B in sampler0.results[&#39;samples&#39;][:10]:
 </pre></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

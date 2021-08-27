@@ -4,11 +4,10 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Bayesian Workflow &mdash; Bayesian workflow  documentation</title>
+  <title>Bayesian workflow &mdash; Bayesian workflow  documentation</title>
   
 
   
@@ -146,7 +145,7 @@
     
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Bayesian Workflow</li>
+      <li>Bayesian workflow</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -189,8 +188,41 @@
     text-align: unset;
 }
 </style>
-<section id="bayesian-workflow">
-<h1>Bayesian Workflow<a class="headerlink" href="#bayesian-workflow" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bayesian-workflow">
+<h1>Bayesian workflow<a class="headerlink" href="#bayesian-workflow" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the Bayesian workflow course. Here, you can browse and search the course notebooks.</p>
+<p>This course is part of the ORIGINS Data Science Laboratory’s Block courses. Please see the <a class="reference external" href="https://indico.ph.tum.de/event/6875/">main course page</a> for more information.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To run the course notebooks, you have a few different options. I recommend to follow the standard install, and use docker or binder if there are problems.</p>
+<ul class="simple">
+<li><p><strong>Standard install:</strong> Fork/clone/download material from this <a class="reference external" href="https://github.com/cescalara/BayesianWorkflow">GitHub repository</a></p>
+<ul>
+<li><p>Everything you need is in <code class="docutils literal notranslate"><span class="pre">src/notebooks</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">numpy</span> <span class="pre">scipy</span> <span class="pre">matplotlib</span> <span class="pre">cython==0.29.24</span> <span class="pre">cmdstanpy==0.9.76</span> <span class="pre">arviz==0.11.2</span> <span class="pre">ultranest==3.3.0</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">install_cmdstan</span></code> as described in the <a class="reference external" href="https://cmdstanpy.readthedocs.io/en/v0.9.76/installation.html">cmdstanpy docs</a></p></li>
+</ul>
+</li>
+<li><p><strong>Binder:</strong> Click <a class="reference external" href="https://mybinder.org/v2/gh/cescalara/BayesianWorkflow/HEAD">here</a> to launch a working environment via binder, all notebooks are in <code class="docutils literal notranslate"><span class="pre">work/</span></code></p>
+<ul>
+<li><p>Using binder you will automatically time out of sessions if you are inactive</p></li>
+<li><p>It is possible to download notebooks edited here, but not trivial to upload them</p></li>
+</ul>
+</li>
+<li><p><strong>Docker:</strong> Use the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> provided in the <a class="reference external" href="https://github.com/cescalara/BayesianWorkflow">GitHub repository</a> to set up a docker environment</p>
+<ul>
+<li><p>Install <a class="reference external" href="https://www.docker.com">docker</a> on your computer</p></li>
+<li><p>In the same directory as the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>, run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">--rm</span> <span class="pre">-t</span> <span class="pre">jupyter/my-datascience-notebook</span> <span class="pre">.</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-p</span> <span class="pre">8888:8888</span> <span class="pre">-v</span> <span class="pre">&quot;${PWD}&quot;:/home/jovyan/work</span> <span class="pre">jupyter/my-datascience-notebook</span> <span class="pre">jupyter</span> <span class="pre">lab</span> <span class="pre">--ip=0.0.0.0</span> <span class="pre">--allow-root</span></code></p></li>
+<li><p>Open the given url <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8888/lab?token=....</span></code> in your browser</p></li>
+<li><p>The current directory will be mounted to the docker and the jupyter server has the enviroment needed to run the notebooks</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
+<p>I would like to highlight the <a class="reference external" href="https://betanalpha.github.io/writing/">many resources</a> of Michael Betancourt and the <a class="reference external" href="https://kipac.github.io/StatisticalMethods/">KIPAC Statistical Methods course</a> as providing inspiration for the course structure and content.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -204,7 +236,8 @@
 <li class="toctree-l1"><a class="reference internal" href="notebooks/homework_project.html">8. Homework project</a></li>
 </ul>
 </div>
-</section>
+</div>
+</div>
 
 
            </div>

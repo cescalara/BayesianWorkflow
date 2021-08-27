@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>4. Model development &mdash; Bayesian workflow  documentation</title>
@@ -444,12 +443,12 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="4.-Model-development">
+<div class="section" id="4.-Model-development">
 <h1>4. Model development<a class="headerlink" href="#4.-Model-development" title="Permalink to this headline">¶</a></h1>
 <p>Last time we used simulations as well as prior and posterior predictive checks to check and improve upon our model for Cepheids in a single galaxy. We then found the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> posteriors for each galaxy independently.</p>
 <p>In order to use the period luminosity relation to extend the cosmic distance ladder, and eventually estimate the Hubble constant, the relation needs be <em>universal</em>, i.e. the same <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> should hold for all galaxies, within uncertainties.</p>
 <p>From our studies of individual galaxies, we should be able to see the similarities and differences between the results. But, how do we combine these results properly, and keep track of the uncertainties or correlations between parameters?</p>
-<section id="Hierarchical-models">
+<div class="section" id="Hierarchical-models">
 <h2>Hierarchical models<a class="headerlink" href="#Hierarchical-models" title="Permalink to this headline">¶</a></h2>
 <p>A natural way to combine the inidividual galaxy results is to build a <strong>hierarchical model</strong> for all galaxies that we have data for. To understand how to do this, we can start with a simpler example of a simple normal model, like the one we used to understand Stan in the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>.</p>
 <p><img alt="Going from a single-level normal model to an hierarchical normal model" class="no-scaled-link" src="../_images/hierarchical_model.pdf" style="width: 600px;" /></p>
@@ -465,8 +464,8 @@ div.rendered_html tbody tr:hover {
 <blockquote>
 <div><p>Note: Even though the models we were working with so far often had multiple levels, the relationship between parameters across these levels was purely deterministic (e.g. between m and M). In a true hierarchical model, parameters in the hierarchy have probabilistic relationships.</p>
 </div></blockquote>
-</section>
-<section id="A-joint-hierarchical-fit-of-all-galaxies">
+</div>
+<div class="section" id="A-joint-hierarchical-fit-of-all-galaxies">
 <h2>A joint hierarchical fit of all galaxies<a class="headerlink" href="#A-joint-hierarchical-fit-of-all-galaxies" title="Permalink to this headline">¶</a></h2>
 <p><strong>Exercise 1 (10 points):</strong> Sketch the graphical model for our hierarchical model for Cepheids over all galaxies</p>
 <p>A simplified Stan model for the full hierarchy can be found in <code class="docutils literal notranslate"><span class="pre">cepheid_v3.stan</span></code>. Note that this is based on <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code>, and you should also incorporate the changes that you made during the exercises in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> in order to achieve a good fit to the data. I will use <code class="docutils literal notranslate"><span class="pre">cepheid_v3.stan</span></code> here to demonstrate a few important points about hierarchical modelling.</p>
@@ -977,8 +976,8 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 </pre></div>
 </div>
 </div>
-</section>
-<section id="Estimation-of-the-Hubble-constant">
+</div>
+<div class="section" id="Estimation-of-the-Hubble-constant">
 <h2>Estimation of the Hubble constant<a class="headerlink" href="#Estimation-of-the-Hubble-constant" title="Permalink to this headline">¶</a></h2>
 <p>So far we have assumed a value for <code class="docutils literal notranslate"><span class="pre">H0</span></code> in our fits in order to convert between apparent and absolute magnitude. This is necessary to fit for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Let’s think about how we can extend the model to make an estimate of <code class="docutils literal notranslate"><span class="pre">H0</span></code>, rather than assuming it.</p>
 <p><strong>Exercise 4 (5 points):</strong> What happens if we simply leave <code class="docutils literal notranslate"><span class="pre">H0</span></code> as a free parameter in our existing hierarchical model? Why is this?</p>
@@ -1031,8 +1030,8 @@ P = mw_cepheids.T[2] # period in days
 <div><p><strong>Hint</strong>: Assume that <code class="docutils literal notranslate"><span class="pre">alpha</span></code> from the Milky Way dataset is a fair representaion of <code class="docutils literal notranslate"><span class="pre">mu_alpha</span></code></p>
 </div></blockquote>
 <p><strong>Homework exercise 5 (20 points):</strong> What factors affect the uncertainties in your estimate? How could you get a more constrained result?</p>
-</section>
-<section id="Further-reading">
+</div>
+<div class="section" id="Further-reading">
 <h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline">¶</a></h2>
 <p>Hierarchical models: Chapter 5 in <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian data analysis</a> by Gelman et al.</p>
 <div class="nbinput nblast docutils container">
@@ -1044,8 +1043,8 @@ P = mw_cepheids.T[2] # period in days
 </pre></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

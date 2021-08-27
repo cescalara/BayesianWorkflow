@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>3. Model checking &mdash; Bayesian workflow  documentation</title>
@@ -445,10 +444,10 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="3.-Model-checking">
+<div class="section" id="3.-Model-checking">
 <h1>3. Model checking<a class="headerlink" href="#3.-Model-checking" title="Permalink to this headline">¶</a></h1>
 <p>Last time we focussed on building a simple initial model for the Cepheid variable data. In this notebook, we explore the next steps in the workflow, <strong>model implementation</strong> and <strong>model checking</strong>. Along the way, we’ll also introduce <strong>prior predictive checks</strong> and <strong>posterior predictive checks</strong>.</p>
-<section id="Implementation-in-Stan">
+<div class="section" id="Implementation-in-Stan">
 <h2>Implementation in Stan<a class="headerlink" href="#Implementation-in-Stan" title="Permalink to this headline">¶</a></h2>
 <p>In the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>, we developed a simple model to fit the period-luminosity relation of Cepheid variable stars. We can now implement this model in Stan and use it to infer the parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> that describe the relation.</p>
 <p>As we’ve seen before in the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>, Stan files consist of different blocks that divide information into <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">parameters</span></code> and <code class="docutils literal notranslate"><span class="pre">model</span></code>. You can find more detailed information on how to write models in Stan code <a class="reference external" href="https://mc-stan.org/docs/2_27/reference-manual/index.html#overview">here</a>, but for now we can just take a look at this model: <code class="docutils literal notranslate"><span class="pre">stan/cepheid_v0.stan</span></code>.</p>
@@ -569,8 +568,8 @@ INFO:cmdstanpy:found newer exe file, not recompiling
 INFO:cmdstanpy:compiled model file: /Users/fran/projects/BayesianWorkflow/src/notebooks/stan/cepheid_v0
 </pre></div></div>
 </div>
-</section>
-<section id="The-first-check:-fitting-simulated-data">
+</div>
+<div class="section" id="The-first-check:-fitting-simulated-data">
 <h2>The first check: fitting simulated data<a class="headerlink" href="#The-first-check:-fitting-simulated-data" title="Permalink to this headline">¶</a></h2>
 <p>While we developed our initial generative and statistical models with the goal to fit <em>real</em> data, in doing so we now have a simple simulation program that contains exactly the same information as is included in our model. We can use this to generate <em>simulated</em> data where we <em>know</em> the values of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, and can verify that our fit gives us reasonable results.</p>
 <p><img alt="Fitting simulated data" class="no-scaled-link" src="../_images/sim_fit.pdf" style="width: 300px;" /></p>
@@ -999,8 +998,8 @@ ax.legend()
 <img alt="../_images/notebooks_model_checking_20_1.png" src="../_images/notebooks_model_checking_20_1.png" />
 </div>
 </div>
-</section>
-<section id="Prior-selection-and-prior-predictive-checks">
+</div>
+<div class="section" id="Prior-selection-and-prior-predictive-checks">
 <h2>Prior selection and prior predictive checks<a class="headerlink" href="#Prior-selection-and-prior-predictive-checks" title="Permalink to this headline">¶</a></h2>
 <p>As discussed in Section 3.1, we left our priors for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> to be uniform over all real numbers. In the end, this didn’t seem to be a major problem and the data were informative enough to constrain the posterior. However, we should be wary of these kind of <em>uninformative priors</em>. The first motivation is common sense - from studying the data and literature, we have a fairly good idea of what the period-luminosity relationship looks like. Additionally, our sampler currently has to
 consider <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> values from <em>negative to positive infinity</em>.</p>
@@ -1209,8 +1208,8 @@ ax.legend()
 </pre></div>
 </div>
 </div>
-</section>
-<section id="Posterior-predictive-checks">
+</div>
+<div class="section" id="Posterior-predictive-checks">
 <h2>Posterior predictive checks<a class="headerlink" href="#Posterior-predictive-checks" title="Permalink to this headline">¶</a></h2>
 <p>If our model fits the data well, then data generated by the model should look similar to observed data. To test if this is true, we can perform a <strong>posterior predictive check</strong>.</p>
 <p>If we have observed data <span class="math notranslate nohighlight">\(\hat{m}\)</span> and model parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>, we can express the joint posterior predictive distribution as</p>
@@ -1244,8 +1243,8 @@ for i in range(Nreps):
 <p>Your results should look something like the following:</p>
 <p><img alt="Prior predictive checks" class="no-scaled-link" src="../_images/posterior_predictive.pdf" style="width: 500px;" /></p>
 <p>There are a number of ways to study and quantify the posterior predictive distribution in order to use it to assess the “goodness of fit” of a model. Here, we only consider graphical checks, but more information can be found in Section 6.3 of <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis</a> by Gelman et al.</p>
-</section>
-<section id="Application-to-actual-data">
+</div>
+<div class="section" id="Application-to-actual-data">
 <h2>Application to actual data<a class="headerlink" href="#Application-to-actual-data" title="Permalink to this headline">¶</a></h2>
 <p><strong>Homework exercise 1 (20 points):</strong> Now, let’s use our <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code> model to fit the actual data introduced in the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>. Here we have a model for one galaxy only, so let’s pick one at random to start with. Complete the following steps: * Note that the actual data have individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this. * Fit the data. Make a plot
 summarising the posterior of the line fit and compare it to the <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> data values. * Complete a posterior predictive check for this fit. * Repeat steps 2 and 3 for a few other galaxies to compare. Comment on the overall results.</p>
@@ -1280,8 +1279,8 @@ measure certain periods.</p>
 </pre></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
