@@ -459,9 +459,18 @@ div.rendered_html tbody tr:hover {
 <div><p>“All models are wrong but some are useful” - George Box</p>
 </div></blockquote>
 <p>To get started in our model comparison journey, we should think about the set of models that we are trying to compare. We can group these into 3 different scenarios, as summarised below.</p>
-<p><strong>:math:`mathcal{M}`-closed:</strong> It is reasonable to assume that the true model is part of the set of models under consideration. You can assign prior probabilities to each model in the set. * This is the simplest case and is true of most textbook statistics problems.</p>
-<p><strong>:math:`mathcal{M}`-open:</strong> The data generating process is so complex, that we cannot imagine how the true model might be. In a way, there is no true model. * This is the worst-case scenario! Imagine trying to design a model to predict human behaviour, or one that is capable of generating the work of a famous author. One can look for patterns, but it doesn’t make sense to try and write down the mind of a person as a model.</p>
-<p><strong>:math:`mathcal{M}`-complete:</strong> It is reasonable to assume that a true model exists, but it is impossible to come up with a complete list of possible candidate models. * In practice, this is the case in which we find ourselves most of the time. M-closed problems tend to be too simple to be really interesting, whereas M-open ones are too complex to even attempt with these kind of methods.</p>
+<p><strong>:math:`mathcal{M}`-closed:</strong> It is reasonable to assume that the true model is part of the set of models under consideration. You can assign prior probabilities to each model in the set.</p>
+<ul class="simple">
+<li><p>This is the simplest case and is true of most textbook statistics problems.</p></li>
+</ul>
+<p><strong>:math:`mathcal{M}`-open:</strong> The data generating process is so complex, that we cannot imagine how the true model might be. In a way, there is no true model.</p>
+<ul class="simple">
+<li><p>This is the worst-case scenario! Imagine trying to design a model to predict human behaviour, or one that is capable of generating the work of a famous author. One can look for patterns, but it doesn’t make sense to try and write down the mind of a person as a model.</p></li>
+</ul>
+<p><strong>:math:`mathcal{M}`-complete:</strong> It is reasonable to assume that a true model exists, but it is impossible to come up with a complete list of possible candidate models.</p>
+<ul class="simple">
+<li><p>In practice, this is the case in which we find ourselves most of the time. M-closed problems tend to be too simple to be really interesting, whereas M-open ones are too complex to even attempt with these kind of methods.</p></li>
+</ul>
 <p>In the M-complete view, it makes sense to work towards a <em>good enough</em> model that can represent our observations and anser our questions, as we have been doing so far in this workflow. However, one could also think about selecting between a finite set of models, that act as a proxy for a complete list of possible models.</p>
 <p>It is important to note that many of the more standard and widely used methods for Bayesian model comparison that rely on the <strong>model marginal likelihood</strong>, <span class="math notranslate nohighlight">\(p(\mathrm{data}|\mathrm{model})\)</span>, and/or <strong>model priors</strong>, <span class="math notranslate nohighlight">\(p(\mathrm{model})\)</span>, assume that we are in the M-closed regime. As soon as we are not sure that we are in this regime, we should be very careful about interpreting the results of such approaches, and the further away we go, the worse it gets…</p>
 </div>
@@ -540,7 +549,11 @@ f = 0.2
 </div>
 </div>
 <p><strong>Homework exercise 1 (20 points):</strong> Let’s now assume that the signal position, <span class="math notranslate nohighlight">\(\mu\)</span> is unknown. Expand your model to also fit for the signal position. Repeat the above experiment for increasing the sample size, this time visualising the results in terms of the joint posterior for <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span>. For completeness, also simulate and fit the case of zero signal observations to add to this plot.</p>
-<p>Some points to note: * If we wanted to make a decision about the presence of signal in this dataset, we could consider how “far away” the marginal distribution for <span class="math notranslate nohighlight">\(f\)</span> is away from zero, or how inconsistent <span class="math notranslate nohighlight">\(f=0\)</span> is with our results. This could be quantified if necessary. * By including <span class="math notranslate nohighlight">\(\mu\)</span> as a free parameter, our results for <span class="math notranslate nohighlight">\(f\)</span> also include our uncertainty in it’s value.</p>
+<p>Some points to note:</p>
+<ul class="simple">
+<li><p>If we wanted to make a decision about the presence of signal in this dataset, we could consider how “far away” the marginal distribution for <span class="math notranslate nohighlight">\(f\)</span> is away from zero, or how inconsistent <span class="math notranslate nohighlight">\(f=0\)</span> is with our results. This could be quantified if necessary.</p></li>
+<li><p>By including <span class="math notranslate nohighlight">\(\mu\)</span> as a free parameter, our results for <span class="math notranslate nohighlight">\(f\)</span> also include our uncertainty in it’s value.</p></li>
+</ul>
 </div>
 <div class="section" id="Further-reading">
 <h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline">¶</a></h2>
@@ -548,6 +561,15 @@ f = 0.2
 <li><p>Chapter 7 of <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis</a> by Gelman et al.</p></li>
 <li><p>Vehtari, A. &amp; Ojanen, J. A survey of Bayesian predictive methods for model assessment, selection and comparison. Statistics Surveys 6, 142–228 (2012).</p></li>
 </ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 

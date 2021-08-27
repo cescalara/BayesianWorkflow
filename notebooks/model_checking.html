@@ -532,8 +532,12 @@ generated quantities {
 }
 </pre></div></div>
 </div>
-<p>A few things to note: * We could have left the <code class="docutils literal notranslate"><span class="pre">M</span></code> &lt;-&gt; <code class="docutils literal notranslate"><span class="pre">m</span></code> conversion outside of Stan for a more compact program, but it is quite easy to have it inside, meaning that our work in this notebook is simplified. * We could cut out the <code class="docutils literal notranslate"><span class="pre">transformed</span> <span class="pre">parameters</span></code> block and replace <code class="docutils literal notranslate"><span class="pre">m_true</span></code> with a long expression in the <code class="docutils literal notranslate"><span class="pre">model</span></code> block, but this is easy to read and gives us direct access to the <code class="docutils literal notranslate"><span class="pre">M_true</span></code> and <code class="docutils literal notranslate"><span class="pre">m_true</span></code> distributions, as we will see later. * The <code class="docutils literal notranslate"><span class="pre">generated</span> <span class="pre">quantities</span></code> block
-is not part of the statistical model, but is run once for every iteration of the sampler. This can be useful for generating simple outputs, again as we will see later.</p>
+<p>A few things to note:</p>
+<ul class="simple">
+<li><p>We could have left the <code class="docutils literal notranslate"><span class="pre">M</span></code> &lt;-&gt; <code class="docutils literal notranslate"><span class="pre">m</span></code> conversion outside of Stan for a more compact program, but it is quite easy to have it inside, meaning that our work in this notebook is simplified.</p></li>
+<li><p>We could cut out the <code class="docutils literal notranslate"><span class="pre">transformed</span> <span class="pre">parameters</span></code> block and replace <code class="docutils literal notranslate"><span class="pre">m_true</span></code> with a long expression in the <code class="docutils literal notranslate"><span class="pre">model</span></code> block, but this is easy to read and gives us direct access to the <code class="docutils literal notranslate"><span class="pre">M_true</span></code> and <code class="docutils literal notranslate"><span class="pre">m_true</span></code> distributions, as we will see later.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">generated</span> <span class="pre">quantities</span></code> block is not part of the statistical model, but is run once for every iteration of the sampler. This can be useful for generating simple outputs, again as we will see later.</p></li>
+</ul>
 <p>What about priors??</p>
 <p>The more awake amongst you may notice that we have explicitly specified data, parameters and a likelihood in the Stan code, but no prior. A Bayesian analysis requires specification of the priors, so what is going on? By default, Stan will assume a uniform prior over the range of the parameters that you specified. Here, we specify <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> with no bounds, and so our prior is implicitly uniform over all the real numbers. Does this sound reasonable? In any case, we will run with it
 for now, and talk about priors more later in this notebook.</p>
@@ -1246,8 +1250,13 @@ for i in range(Nreps):
 </div>
 <div class="section" id="Application-to-actual-data">
 <h2>Application to actual data<a class="headerlink" href="#Application-to-actual-data" title="Permalink to this headline">¶</a></h2>
-<p><strong>Homework exercise 1 (20 points):</strong> Now, let’s use our <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code> model to fit the actual data introduced in the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>. Here we have a model for one galaxy only, so let’s pick one at random to start with. Complete the following steps: * Note that the actual data have individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this. * Fit the data. Make a plot
-summarising the posterior of the line fit and compare it to the <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> data values. * Complete a posterior predictive check for this fit. * Repeat steps 2 and 3 for a few other galaxies to compare. Comment on the overall results.</p>
+<p><strong>Homework exercise 1 (20 points):</strong> Now, let’s use our <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code> model to fit the actual data introduced in the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>. Here we have a model for one galaxy only, so let’s pick one at random to start with. Complete the following steps:</p>
+<ul class="simple">
+<li><p>Note that the actual data have individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this.</p></li>
+<li><p>Fit the data. Make a plot summarising the posterior of the line fit and compare it to the <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> data values.</p></li>
+<li><p>Complete a posterior predictive check for this fit.</p></li>
+<li><p>Repeat steps 2 and 3 for a few other galaxies to compare. Comment on the overall results.</p></li>
+</ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>

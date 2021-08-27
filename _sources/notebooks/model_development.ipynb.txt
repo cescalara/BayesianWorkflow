@@ -183,6 +183,7 @@
    "metadata": {},
    "source": [
     "A few things worth noting:\n",
+    "\n",
     "* The easiest way to deal with a ragged array structure (different number of Cepheids in each galaxy) in Stan is to flatten the array, and pass a vector with the galaxy IDs.\n",
     "* We introduce `mu` and `tau` parameters for `alpha` and `beta`, with sensible priors.\n",
     "* We assume the parent `alpha` and `beta` distributions are independent, as a starting point.\n",

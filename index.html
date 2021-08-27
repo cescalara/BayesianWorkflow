@@ -199,7 +199,7 @@
 <li><p><strong>Standard install:</strong> Fork/clone/download material from this <a class="reference external" href="https://github.com/cescalara/BayesianWorkflow">GitHub repository</a></p>
 <ul>
 <li><p>Everything you need is in <code class="docutils literal notranslate"><span class="pre">src/notebooks</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">numpy</span> <span class="pre">scipy</span> <span class="pre">matplotlib</span> <span class="pre">cython==0.29.24</span> <span class="pre">cmdstanpy==0.9.76</span> <span class="pre">arviz==0.11.2</span> <span class="pre">ultranest==3.3.0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">scipy</span> <span class="pre">cython==0.29.24</span> <span class="pre">cmdstanpy==0.9.76</span> <span class="pre">arviz==0.11.2</span> <span class="pre">ultranest==3.3.0</span></code></p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">install_cmdstan</span></code> as described in the <a class="reference external" href="https://cmdstanpy.readthedocs.io/en/v0.9.76/installation.html">cmdstanpy docs</a></p></li>
 </ul>
 </li>
@@ -213,7 +213,7 @@
 <ul>
 <li><p>Install <a class="reference external" href="https://www.docker.com">docker</a> on your computer</p></li>
 <li><p>In the same directory as the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>, run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">--rm</span> <span class="pre">-t</span> <span class="pre">jupyter/my-datascience-notebook</span> <span class="pre">.</span></code></p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-p</span> <span class="pre">8888:8888</span> <span class="pre">-v</span> <span class="pre">&quot;${PWD}&quot;:/home/jovyan/work</span> <span class="pre">jupyter/my-datascience-notebook</span> <span class="pre">jupyter</span> <span class="pre">lab</span> <span class="pre">--ip=0.0.0.0</span> <span class="pre">--allow-root</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-p</span> <span class="pre">8888:8888</span> <span class="pre">-v</span> <span class="pre">&quot;${PWD}&quot;:/home/jovyan/work</span> <span class="pre">jupyter/my-datascience-notebook</span> <span class="pre">jupyter</span> <span class="pre">lab</span></code></p></li>
 <li><p>Open the given url <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8888/lab?token=....</span></code> in your browser</p></li>
 <li><p>The current directory will be mounted to the docker and the jupyter server has the enviroment needed to run the notebooks</p></li>
 </ul>

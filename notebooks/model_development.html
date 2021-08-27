@@ -560,8 +560,13 @@ model {
 
 </pre></div></div>
 </div>
-<p>A few things worth noting: * The easiest way to deal with a ragged array structure (different number of Cepheids in each galaxy) in Stan is to flatten the array, and pass a vector with the galaxy IDs. * We introduce <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">tau</span></code> parameters for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, with sensible priors. * We assume the parent <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> distributions are independent, as a starting point. * In a hierarchical model, it is not so clear how to separate the priors and likelihood, the model is
-more a series of conditional steps.</p>
+<p>A few things worth noting:</p>
+<ul class="simple">
+<li><p>The easiest way to deal with a ragged array structure (different number of Cepheids in each galaxy) in Stan is to flatten the array, and pass a vector with the galaxy IDs.</p></li>
+<li><p>We introduce <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">tau</span></code> parameters for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, with sensible priors.</p></li>
+<li><p>We assume the parent <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> distributions are independent, as a starting point.</p></li>
+<li><p>In a hierarchical model, it is not so clear how to separate the priors and likelihood, the model is more a series of conditional steps.</p></li>
+</ul>
 <p>Now, let’s see how the model performs when fitting out dataset.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:

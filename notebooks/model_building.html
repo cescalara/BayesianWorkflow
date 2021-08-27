@@ -469,7 +469,12 @@ div.rendered_html tbody tr:hover {
 <p>The model-building problem then comes down to <strong>defining a connection between your parameters and data</strong> (the likelihood/observational model) and <strong>incorporating relevant domain expertise</strong> (the prior model).</p>
 <p>To get a feel for how this can work, consider the following examples:</p>
 <p><img alt="Going from a scientific question to a statistical model" class="no-scaled-link" src="../_images/science_stats.pdf" style="width: 750px;" /></p>
-<p><strong>Exercise 1 (10 points):</strong> Fill out this table for some more complicated examples such as * What is the value of the Hubble constant? * What is the mass of the Higgs boson? * An example from your own field/interests Below are some relevant plots of data used to make such measurements.</p>
+<p><strong>Exercise 1 (10 points):</strong> Fill out this table for some more complicated examples such as:</p>
+<ul class="simple">
+<li><p>What is the value of the Hubble constant?</p></li>
+<li><p>What is the mass of the Higgs boson?</p></li>
+<li><p>An example from your own field/interests Below are some relevant plots of data used to make such measurements.</p></li>
+</ul>
 <p>The original Hubble diagram from <a class="reference external" href="https://www.pnas.org/content/15/3/168">this paper</a>:</p>
 <p><img alt="The original Hubble diagram" class="no-scaled-link" src="../_images/hubble.jpg" style="width: 600px;" /></p>
 <p>First presentation of ATLAS Higgs to <span class="math notranslate nohighlight">\(\gamma\gamma\)</span> results on 4th July 2012:</p>
@@ -524,7 +529,7 @@ observations or measurements.</p>
 <p><img alt="Blobs for the simple Cepheid graphical model" class="no-scaled-link" src="../_images/cepheid_graph_bits.pdf" style="width: 750px;" /></p>
 <p><strong>Exercise 5 (10 points):</strong> Using the parameter and fixed quantity values given below, as well as your graphical model, write a simulation for the observed apparent magnitudes, <span class="math notranslate nohighlight">\(m_i\)</span>. Plot your results in <span class="math notranslate nohighlight">\(\log_{10}(P/\mathrm{days})\)</span>-<span class="math notranslate nohighlight">\(m\)</span> space, comparing with the true period-luminosity relation.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -721,7 +726,11 @@ Text(0, 0.5, &#39;M&#39;)
 </div>
 <div class="section" id="Exploratory-data-analysis">
 <h2>Exploratory data analysis<a class="headerlink" href="#Exploratory-data-analysis" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have some feeling for the generative model, let’s take a look at some Cepheid variable data. You can find two files in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory: 1. galaxies.dat 2. cepheids.dat</p>
+<p>Now that we have some feeling for the generative model, let’s take a look at some Cepheid variable data. You can find two files in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory:</p>
+<ol class="arabic simple">
+<li><p>galaxies.dat</p></li>
+<li><p>cepheids.dat</p></li>
+</ol>
 <p>The first contains information on the host galaxies, and the second contains information on the individual Cepheids studied in each host galaxy.</p>
 <p>The right time in a workflow for exploratory data analysis can be difficult to define. In general, we want to be aware of how our data looks when designing a model for it, but also not too influenced such that we get carried away and design a model that <em>overfits</em> the data we have and is uncapable of generalising to unseen data. Here, we want to see how our first effort at a generative model stacks up, and also think about directions for improving our model.</p>
 <p><strong>Homework exercise 1 (30 points):</strong> Complete the following exploratory data analysis.</p>
@@ -991,7 +1000,10 @@ No handles with labels found to put in legend.
 </div>
 </div>
 <p>We should now see a stronger global relation, but still with considerable intrinsic scatter and potential differences between galaxies.</p>
-<p>We can see other quantities in the provided files, such as a measure of the metallicity of each star, <code class="docutils literal notranslate"><span class="pre">delta_log_O_H</span></code>. * What do the distributions of <code class="docutils literal notranslate"><span class="pre">delta_logO_H</span></code> look like for different galaxies? Is there any relationship between <code class="docutils literal notranslate"><span class="pre">delta_log_O_H</span></code> and <code class="docutils literal notranslate"><span class="pre">M_obs</span></code>?</p>
+<p>We can see other quantities in the provided files, such as a measure of the metallicity of each star, <code class="docutils literal notranslate"><span class="pre">delta_log_O_H</span></code>.</p>
+<ul class="simple">
+<li><p>What do the distributions of <code class="docutils literal notranslate"><span class="pre">delta_logO_H</span></code> look like for different galaxies? Is there any relationship between <code class="docutils literal notranslate"><span class="pre">delta_log_O_H</span></code> and <code class="docutils literal notranslate"><span class="pre">M_obs</span></code>?</p></li>
+</ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -1028,7 +1040,17 @@ No handles with labels found to put in legend.
 </div>
 <div class="section" id="Further-reading">
 <h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline">¶</a></h2>
-<p>The dataset prepared for this course is based on that reported in <a class="reference external" href="https://iopscience.iop.org/article/10.1088/0004-637X/730/2/119">Reiss et al. 2011</a>.</p>
+<p>Model building: <a class="reference external" href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html">Towards a principled Bayesian workflow</a> and <a class="reference external" href="https://betanalpha.github.io/assets/case_studies/falling.html">Falling (in love with principled modeling)</a> by Michael Betancourt</p>
+<p>The dataset prepared for this course is based on that reported in <a class="reference external" href="https://iopscience.iop.org/article/10.1088/0004-637X/730/2/119">Reiss et al. 2011</a> and used in <a class="reference external" href="https://kipac.github.io/StatisticalMethods/tutorials/cepheids.html">this example</a> of the KIPAC Statistical Methods course.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 

@@ -325,6 +325,7 @@
     "<br>\n",
     "\n",
     "A few notes on implementing this in practice:\n",
+    "\n",
     "* We skipped our usual sampler checks when running the fit many times, of course we should still include this, and find a way to automate it.\n",
     "* We can see that the above plot fluctuates depending on the exact simulated realisation at any $N$ value. We could repeat an experiment a number of times at each $N$ to account for this.\n",
     "* For posteriors that may have non-standard shapes, the highest density interval (HDI) is a  better measure of the width of a distribution."
