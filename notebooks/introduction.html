@@ -106,6 +106,7 @@
 <li class="toctree-l1"><a class="reference internal" href="model_comparison_part1.html">5. Model comparison (Part I)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_comparison_part2.html">6. Model comparison (Part II)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="experiment_design.html">7. Experiment design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework_project.html">8. Homework project</a></li>
 </ul>
 
             
@@ -768,10 +769,10 @@ used to <strong>draw conclusions</strong> via <strong>inference</strong>. With t
 <p>In this short course, we will <em>not</em> learn about <strong>frequentist</strong> statistical methods or <strong>machine learning</strong> approaches, which are both things you have probably heard of and may be interested in using in your research. While I might make fun of them a bit below, there are certainly cases where these could be more appropriate than what we will focus on.</p>
 <p>So, before jumping into the Bayesian workflow, I’ll try to <em>briefly</em> highlight some similarities and differences between these topics, from the Bayesian perspective.</p>
 <p>Let’s start by recalling Bayes’ theorem with data, <span class="math notranslate nohighlight">\(x\)</span>, and model parameters <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
-<p><img alt="222059e914be4e919edb2cbd788eaec4" class="no-scaled-link" src="../_images/bayes_theorem.pdf" style="width: 700px;" /></p>
+<p><img alt="1b5a7f436ca349529dc62936e210688e" class="no-scaled-link" src="../_images/bayes_theorem.pdf" style="width: 700px;" /></p>
 <p>Frequentist methods</p>
 <p>We can start to think about some differences between Bayesian and frequentist statistical views by studying the following xkcd comic:</p>
-<p><img alt="a7acdefb6975482d91ee271580804d26" class="no-scaled-link" src="https://imgs.xkcd.com/comics/frequentists_vs_bayesians.png" style="width: 350px;" /></p>
+<p><img alt="7d04df1183cb4aaaaf7007da942ba36e" class="no-scaled-link" src="https://imgs.xkcd.com/comics/frequentists_vs_bayesians.png" style="width: 350px;" /></p>
 <p>Both approaches involve a likelihood - <span class="math notranslate nohighlight">\(p(\mathrm{answer}~|~\mathrm{sun~status})\)</span>. For this problem, the probability of the machine saying “yes” given the sun has <em>not</em> exploded is equal to the probablity of rolling two sixes, i.e.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}p(\mathrm{yes}~|~\mathrm{sun~ok}) = 1/36, \\
@@ -784,10 +785,10 @@ p(\mathrm{yes}~|~\mathrm{sun~exploded}) = 35/36.\end{split}\]</div>
 <p>So is frequentist statistics just Bayesian statistics without priors? Unfortunately, it is not so simple. Sure, we can think about the cases where they might seem equivalent. In frequentist approaches it is typical to find the <em>maximum likelihood estimate</em> of a parameter based on data. Could this be the same as the <em>maximum a posterior</em> value of a parameter for a uniform prior?</p>
 <p>However, it is important to keep in mind the different definitions of probability that the two views are based on: probability as a <em>degree of belief</em> vs. probability as a <em>frequency in the limit of infinte observations</em>. This also comes into the treatment of uncertainty. In the Bayesian view, <strong>the data are fixed and parameters are uncertain</strong>, whereas in the frequentist case, <strong>the true parameters are fixed, and we estimate them imperfectly due to uncertainty present in the data from finite
 sampling</strong>.</p>
-<p><img alt="22179949409342309df502a31edeef6c" class="no-scaled-link" src="../_images/bayes_vs_freq.png" style="width: 800px;" /></p>
+<p><img alt="d9a0e4cc589c4acebd921b43786deaed" class="no-scaled-link" src="../_images/bayes_vs_freq.png" style="width: 800px;" /></p>
 <p>Machine learning</p>
 <p>Machine learning is used to describe basically anything these days, but here I am referring to methods based on neural networks.</p>
-<p><img alt="69d327e964524cda998dfc3c6217cb27" class="no-scaled-link" src="https://imgs.xkcd.com/comics/machine_learning.png" style="width: 350px;" /></p>
+<p><img alt="33cbd4f0321a48fda5e57352e5a30230" class="no-scaled-link" src="https://imgs.xkcd.com/comics/machine_learning.png" style="width: 350px;" /></p>
 <p>We can think about standard machine learning approaches as similar to maximum likliehood estimation. If we don’t know what the likelihood looks like, or cannot come up with a functional form for it, we can choose to represent it as a matrix of unknown weights.</p>
 <p>We can then <em>train</em> a neural network with simulated or labelled data in order to <em>learn</em> the appropriate weights, an optimisation process that can be thought of as maximising the likelihood. Once trained, the resulting matrix of weights can be used like an operator to return the maximum likelihood estimate for new input data.</p>
 <p>A key difference in this approach is that the likelihood itself is now a <em>black box</em>, and so <strong>it is not so clear how we should interpret our model or the resulting inferences</strong>. <strong>The quantification of uncertainty is also not straightforward</strong>. This is fine if you just want to make classifications or predictions, without asking why. That said, there is plenty of work being done on ways to interpret neural networks and methods exist to bring more Bayesian thinking in and allow uncertainty
