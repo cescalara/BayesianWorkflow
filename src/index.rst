@@ -13,7 +13,7 @@ To run the course notebooks, you have a few different options. I recommend to fo
 * **Standard install:** Fork/clone/download material from this `GitHub repository <https://github.com/cescalara/BayesianWorkflow>`_
 
   * Everything you need is in ``src/notebooks``
-  * ``pip install numpy scipy matplotlib cython==0.29.24 cmdstanpy==0.9.76 arviz==0.11.2 ultranest==3.3.0``
+  * ``pip install scipy cython==0.29.24 cmdstanpy==0.9.76 arviz==0.11.2 ultranest==3.3.0``
   * Run ``install_cmdstan`` as described in the `cmdstanpy docs <https://cmdstanpy.readthedocs.io/en/v0.9.76/installation.html>`_
 
 * **Binder:** Click `here <https://mybinder.org/v2/gh/cescalara/BayesianWorkflow/HEAD>`_ to launch a working environment via binder, all notebooks are in ``work/``
@@ -25,7 +25,7 @@ To run the course notebooks, you have a few different options. I recommend to fo
 
   * Install `docker <https://www.docker.com>`_ on your computer
   * In the same directory as the ``Dockerfile``, run ``docker build --rm -t jupyter/my-datascience-notebook .``
-  * Run ``docker run -p 8888:8888 -v "${PWD}":/home/jovyan/work jupyter/my-datascience-notebook jupyter lab --ip=0.0.0.0 --allow-root``
+  * Run ``docker run -p 8888:8888 -v "${PWD}":/home/jovyan/work jupyter/my-datascience-notebook jupyter lab``
   * Open the given url ``http://127.0.0.1:8888/lab?token=....`` in your browser
   * The current directory will be mounted to the docker and the jupyter server has the enviroment needed to run the notebooks
 
