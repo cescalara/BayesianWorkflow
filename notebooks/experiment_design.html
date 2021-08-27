@@ -45,7 +45,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="5. Model comparison" href="model_comparison.html" /> 
+    <link rel="prev" title="4. Model development" href="model_development.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -96,7 +96,6 @@
 <li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_development.html">4. Model development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model_comparison.html">5. Model comparison</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">6. Experiment design</a></li>
 </ul>
 
@@ -623,7 +622,7 @@ ax.set_ylabel(&quot;Width of mu distribution&quot;)
 <p>So we can see that we would probably need something like &gt; 900 observations to constrain the standard deviation of the <span class="math notranslate nohighlight">\(\mu\)</span> posterior to &lt; 1.</p>
 <p>A few notes on implementing this in practice: * We skipped our usual sampler checks when running the fit many times, of course we should still include this, and find a way to automate it. * We can see that the above plot fluctuates depending on the exact simulated realisation at any <span class="math notranslate nohighlight">\(N\)</span> value. We could repeat an experiment a number of times at each <span class="math notranslate nohighlight">\(N\)</span> to account for this. * For posteriors that may have non-standard shapes, the highest density interval (HDI) is a better measure of
 the width of a distribution.</p>
-<p><strong>Exercise 6.1:</strong> Consider the simple mixture model example from the <a class="reference internal" href="model_comparison.html"><span class="doc">model comparison</span></a> notebook. We decide that we can conclude signal is present if the tail probability of the marginal posterior, <span class="math notranslate nohighlight">\(p(f&lt;0.1)\)</span>, is less than 0.01. How many observations are required to achieve this if the true <span class="math notranslate nohighlight">\(f=0.5\)</span>?</p>
+<p><strong>Exercise 6.1:</strong> Consider the simple mixture model example from the <a class="reference external" href="model_comparison.ipynb">model comparison</a> notebook. We decide that we can conclude signal is present if the tail probability of the marginal posterior, <span class="math notranslate nohighlight">\(p(f&lt;0.1)\)</span>, is less than 0.01. How many observations are required to achieve this if the true <span class="math notranslate nohighlight">\(f=0.5\)</span>?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -651,7 +650,7 @@ the width of a distribution.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="model_comparison.html" class="btn btn-neutral float-left" title="5. Model comparison" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="model_development.html" class="btn btn-neutral float-left" title="4. Model development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
