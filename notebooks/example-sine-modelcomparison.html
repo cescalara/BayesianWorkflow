@@ -1,0 +1,1043 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Model comparison &mdash; Bayesian workflow  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Bayesian workflow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_development.html">4. Model development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="model_comparison.html">5. Model comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">6. Experiment design</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Bayesian workflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Model comparison</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/notebooks/example-sine-modelcomparison.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="Model-comparison">
+<h1>Model comparison<a class="headerlink" href="#Model-comparison" title="Permalink to this headline">¶</a></h1>
+<section id="Model">
+<h2>Model<a class="headerlink" href="#Model" title="Permalink to this headline">¶</a></h2>
+<p>We again consider the sine model with gaussian measurement errors.</p>
+<div class="math notranslate nohighlight">
+\[y = A_1 \sin\left(2 \pi \left(\frac{t}{P_1} + t_1\right)\right) + B + \epsilon\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon \sim \mathrm{Normal}(0, \sigma)\)</span></p>
+<p>We want to test if this is preferred over pure noise.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import numpy as np
+from numpy import pi, sin
+
+def sine_model1(t, B, A1, P1, t1):
+    return A1 * sin((t / P1 + t1) * 2 * pi) + B
+
+def sine_model0(t, B):
+    return B + t*0
+</pre></div>
+</div>
+</div>
+<p>The model has four unknown parameters per component:</p>
+<ul class="simple">
+<li><p>the signal offset <span class="math notranslate nohighlight">\(B\)</span></p></li>
+<li><p>the amplitude <span class="math notranslate nohighlight">\(A\)</span></p></li>
+<li><p>the period <span class="math notranslate nohighlight">\(P\)</span></p></li>
+<li><p>the time offset <span class="math notranslate nohighlight">\(t_0\)</span></p></li>
+</ul>
+</section>
+<section id="Generating-data">
+<h2>Generating data<a class="headerlink" href="#Generating-data" title="Permalink to this headline">¶</a></h2>
+<p>Lets generate some data following this model:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>np.random.seed(42)
+
+n_data = 50
+
+# time of observations
+t = np.random.uniform(0, 5, size=n_data)
+# measurement values
+yerr = 1.0
+y = np.random.normal(sine_model1(t, B=1.0, A1=0.9, P1=3, t1=0), yerr)
+
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Visualise-the-data">
+<h2>Visualise the data<a class="headerlink" href="#Visualise-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Lets plot the data first to see what is going on:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>%matplotlib inline
+import matplotlib.pyplot as plt
+
+plt.figure()
+plt.xlabel(&#39;x&#39;)
+plt.ylabel(&#39;y&#39;)
+plt.errorbar(x=t, y=y, yerr=yerr,
+             marker=&#39;o&#39;, ls=&#39; &#39;, color=&#39;orange&#39;)
+t_range = np.linspace(0, 5, 1000)
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_example-sine-modelcomparison_6_0.png" src="../_images/notebooks_example-sine-modelcomparison_6_0.png" />
+</div>
+</div>
+<p>A beautiful noisy data set, with some hints of a modulation.</p>
+<p>Now the question is: what model parameters are allowed under these data?</p>
+<p>First, we need to define the parameter ranges through a prior:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>parameters1 = [&#39;B&#39;, &#39;A1&#39;, &#39;P1&#39;, &#39;t1&#39;]
+
+def prior_transform1(cube):
+    # the argument, cube, consists of values from 0 to 1
+    # we have to convert them to physical scales
+
+    params = cube.copy()
+    # let background level go from -10 to +10
+    params[0] = cube[0] * 20 - 10
+    # let amplitude go from 0.1 to 100
+    params[1] = 10**(cube[1] * 3 - 1)
+    # let period go from 0.3 to 30
+    params[2] = 10**(cube[2] * 2)
+    # let time go from 0 to 1
+    params[3] = cube[3]
+    return params
+
+parameters0 = [&#39;B&#39;]
+
+def prior_transform0(cube):
+    # the argument, cube, consists of values from 0 to 1
+    # we have to convert them to physical scales
+
+    params = cube.copy()
+    # let background level go from -10 to +10
+    params[0] = cube[0] * 20 - 10
+    return params
+
+</pre></div>
+</div>
+</div>
+<p>Define the likelihood, which measures how far the data are from the model predictions. More precisely, how often the parameters would arise under the given parameters. We assume gaussian measurement errors of known size (yerr).</p>
+<div class="math notranslate nohighlight">
+\[\chi^2 = \sum\left(\frac{m_i-y_i}{\sigma}\right)^2\]</div>
+<div class="math notranslate nohighlight">
+\[\log \cal{L} = -\chi^2 / 2\]</div>
+<p>where the model is the sine_model function from above at time <span class="math notranslate nohighlight">\(t_i\)</span>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>def log_likelihood1(params):
+    # unpack the current parameters:
+    B, A1, P1, t1 = params
+
+    # compute for each x point, where it should lie in y
+    y_model = sine_model1(t, B=B, A1=A1, P1=P1, t1=t1)
+    # compute likelihood
+    loglike = -0.5 * (((y_model - y) / yerr)**2).sum()
+
+    return loglike
+
+def log_likelihood0(params):
+    B, = params
+
+    y_model = sine_model0(t, B=B)
+    # compute likelihood
+    loglike = -0.5 * (((y_model - y) / yerr)**2).sum()
+
+    return loglike
+</pre></div>
+</div>
+</div>
+<p>Solve the problem:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import ultranest
+
+sampler1 = ultranest.ReactiveNestedSampler(parameters1, log_likelihood1, prior_transform1)
+
+sampler0 = ultranest.ReactiveNestedSampler(parameters0, log_likelihood0, prior_transform0)
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>result1 = sampler1.run(min_num_live_points=400)
+sampler1.print_results()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[ultranest] Sampling 400 live points from prior ...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3eed086340604e6bb03d7fa9eab00461", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[ultranest] Explored until L=-2e+01   [-20.7186..-20.7186]*| it/evals=6660/177951 eff=3.7510% N=400    00
+[ultranest] Likelihood function evaluations: 177973
+[ultranest]   logZ = -32.7 +- 0.1201
+[ultranest] Effective samples strategy satisfied (ESS = 2385.8, need &gt;400)
+[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.05 nat, need &lt;0.50 nat)
+[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.24, need &lt;0.5)
+[ultranest]   logZ error budget: single: 0.16 bs:0.12 tail:0.01 total:0.12 required:&lt;0.50
+[ultranest] done iterating.
+
+logZ = -32.722 +- 0.238
+  single instance: logZ = -32.722 +- 0.156
+  bootstrapped   : logZ = -32.698 +- 0.238
+  tail           : logZ = +- 0.010
+insert order U test : converged: True correlation: inf iterations
+
+    B                   1.02 +- 0.26
+    A1                  0.89 +- 0.31
+    P1                  3.7 +- 6.1
+    t1                  0.48 +- 0.45
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>result0 = sampler0.run(min_num_live_points=400)
+sampler0.print_results()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[ultranest] Sampling 400 live points from prior ...
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "417bb527fab84df1a64186ec2e6e02ed", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[ultranest] Explored until L=-3e+01   [-31.7136..-31.7136]*| it/evals=2960/3465 eff=96.5742% N=400   0
+[ultranest] Likelihood function evaluations: 3470
+[ultranest]   logZ = -35.87 +- 0.07029
+[ultranest] Effective samples strategy satisfied (ESS = 1243.0, need &gt;400)
+[ultranest] Posterior uncertainty strategy is satisfied (KL: 0.46+-0.07 nat, need &lt;0.50 nat)
+[ultranest] Evidency uncertainty strategy is satisfied (dlogz=0.16, need &lt;0.5)
+[ultranest]   logZ error budget: single: 0.10 bs:0.07 tail:0.04 total:0.08 required:&lt;0.50
+[ultranest] done iterating.
+
+logZ = -35.885 +- 0.162
+  single instance: logZ = -35.885 +- 0.096
+  bootstrapped   : logZ = -35.868 +- 0.157
+  tail           : logZ = +- 0.038
+insert order U test : converged: True correlation: inf iterations
+
+    B                   1.15 +- 0.14
+</pre></div></div>
+</div>
+</section>
+<section id="Plot-the-parameter-posterior-probability-distribution">
+<h2>Plot the parameter posterior probability distribution<a class="headerlink" href="#Plot-the-parameter-posterior-probability-distribution" title="Permalink to this headline">¶</a></h2>
+<p>A classic corner plot of the parameter pairs and the marginal distributions:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from ultranest.plot import cornerplot
+cornerplot(result1)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_example-sine-modelcomparison_16_0.png" src="../_images/notebooks_example-sine-modelcomparison_16_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>cornerplot(result0)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_example-sine-modelcomparison_17_0.png" src="../_images/notebooks_example-sine-modelcomparison_17_0.png" />
+</div>
+</div>
+<p>If you want, you can also play with the posterior as a pandas frame:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import pandas as pd
+df = pd.DataFrame(data=result1[&#39;samples&#39;], columns=result1[&#39;paramnames&#39;])
+df.describe()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B</th>
+      <th>A1</th>
+      <th>P1</th>
+      <th>t1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>7065.000000</td>
+      <td>7065.000000</td>
+      <td>7065.000000</td>
+      <td>7065.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>1.016814</td>
+      <td>0.892815</td>
+      <td>3.734001</td>
+      <td>0.475235</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.260352</td>
+      <td>0.309381</td>
+      <td>6.088507</td>
+      <td>0.445044</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-3.337517</td>
+      <td>0.101084</td>
+      <td>1.010937</td>
+      <td>0.000062</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>0.901084</td>
+      <td>0.730872</td>
+      <td>2.899282</td>
+      <td>0.042637</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1.008328</td>
+      <td>0.885560</td>
+      <td>3.032814</td>
+      <td>0.151977</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>1.114300</td>
+      <td>1.051549</td>
+      <td>3.175849</td>
+      <td>0.957797</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>7.390607</td>
+      <td>6.467284</td>
+      <td>98.302179</td>
+      <td>0.999996</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Plot-the-fit:">
+<h2>Plot the fit:<a class="headerlink" href="#Plot-the-fit:" title="Permalink to this headline">¶</a></h2>
+<p>To evaluate whether the results make any sense, we want to look whether the fitted function goes through the data points.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>plt.figure()
+plt.title(&quot;1-sine fit&quot;)
+plt.xlabel(&#39;x&#39;)
+plt.ylabel(&#39;y&#39;)
+plt.errorbar(x=t, y=y, yerr=yerr,
+             marker=&#39;o&#39;, ls=&#39; &#39;, color=&#39;orange&#39;)
+
+
+t_grid = np.linspace(0, 5, 400)
+
+from ultranest.plot import PredictionBand
+band = PredictionBand(t_grid)
+
+# go through the solutions
+for B, A1, P1, t1 in sampler1.results[&#39;samples&#39;]:
+    # compute for each time the y value
+    band.add(sine_model1(t_grid, B=B, A1=A1, P1=P1, t1=t1))
+
+band.line(color=&#39;k&#39;)
+# add 1 sigma quantile
+band.shade(color=&#39;k&#39;, alpha=0.3)
+# add wider quantile (0.01 .. 0.99)
+band.shade(q=0.49, color=&#39;gray&#39;, alpha=0.2)
+
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.collections.PolyCollection at 0x7f820ffcdf70&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_example-sine-modelcomparison_22_1.png" src="../_images/notebooks_example-sine-modelcomparison_22_1.png" />
+</div>
+</div>
+</section>
+<section id="Model-comparison-methods">
+<h2>Model comparison methods<a class="headerlink" href="#Model-comparison-methods" title="Permalink to this headline">¶</a></h2>
+<p>We now want to know:</p>
+<p><strong>Is the model with 2 components better than the model with one component?</strong></p>
+<p>What do we mean by “better” (“it fits better”, “the component is significant”)?</p>
+<ol class="loweralpha simple">
+<li><p>Which model is better at predicting data it has not seen yet?</p></li>
+<li><p>Which model is more probably the true one, given this data, these models, and their parameter spaces?</p></li>
+<li><p>Which model is simplest, but complex enough to capture the information complexity of the data?</p></li>
+</ol>
+</section>
+<section id="Bayesian-model-comparison">
+<h2>Bayesian model comparison<a class="headerlink" href="#Bayesian-model-comparison" title="Permalink to this headline">¶</a></h2>
+<p>Here we will focus on b, and apply Bayesian model comparison.</p>
+<p>For simplicity, we will assume equal a-prior model probabilities.</p>
+<p>The Bayes factor is:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>K = np.exp(result1[&#39;logz&#39;] - result0[&#39;logz&#39;])
+print(&quot;K = %.2f&quot; % K)
+print(&quot;The 1-sine model is %.2f times more probable than the no-signal model&quot; % K)
+print(&quot;assuming the models are equally probable a priori.&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+K = 23.66
+The 1-sine model is 23.66 times more probable than the no-signal model
+assuming the models are equally probable a priori.
+</pre></div></div>
+</div>
+<p>N.B.: Bayes factors are influenced by parameter and model priors. It is a good idea to vary them and see how sensitive the result is.</p>
+<p>For making decisions, thresholds are needed. They can be calibrated to desired low false decisions rates with simulations (generate data under the simpler model, look at K distribution).</p>
+</section>
+<section id="Calibrating-Bayes-factor-thresholds">
+<h2>Calibrating Bayes factor thresholds<a class="headerlink" href="#Calibrating-Bayes-factor-thresholds" title="Permalink to this headline">¶</a></h2>
+<p>Lets generate some data sets under the null hypothesis (noise-only model) and see how often we would get a large Bayes factor. For this, we need to fit with both models.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import logging
+logging.getLogger(&#39;ultranest&#39;).setLevel(logging.FATAL)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>K_simulated = []
+
+import logging
+logging.getLogger(&#39;ultranest&#39;).handlers[-1].setLevel(logging.FATAL)
+
+# go through 100 plausible parameters
+for B in sampler0.results[&#39;samples&#39;][:10]:
+    # generate new data
+    y = np.random.normal(sine_model0(t, B=1.0), yerr)
+
+    # analyse with sine model
+    sampler1 = ultranest.ReactiveNestedSampler(parameters1, log_likelihood1, prior_transform1)
+    lnZ1 = sampler1.run(viz_callback=False)[&#39;logz&#39;]
+
+    # analyse with noise-only model
+    sampler0 = ultranest.ReactiveNestedSampler(parameters0, log_likelihood0, prior_transform0)
+    lnZ0 = sampler0.run(viz_callback=False)[&#39;logz&#39;]
+
+    # store Bayes factor to K_simulated
+    #    the difference of the lnZ values is the ln of the Bayes factor
+    print()
+    print(&quot;Bayes factor: %.2f&quot; % ...) # TODO by you:
+
+    K_simulated.append(  ... ... )  # TODO by you:
+
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Exercise-1:">
+<h2>Exercise 1:<a class="headerlink" href="#Exercise-1:" title="Permalink to this headline">¶</a></h2>
+<p>Plot the distribution of Bayes factors.</p>
+<p>How many false positives and false negatives would you have if you applied a threshold of Bayes factor 10?</p>
+<p>Where does the real Bayes factor lie? Do you trust the result?</p>
+</section>
+<section id="Homework-exercise-1:">
+<h2>Homework exercise 1:<a class="headerlink" href="#Homework-exercise-1:" title="Permalink to this headline">¶</a></h2>
+<p>Make a ROC curve, by plotting the false positive vs false negative rates as a function of thresholds.</p>
+<p>Add a ROC curve of likelihood ratios (hint: the highest log-likelihood found is in <code class="docutils literal notranslate"><span class="pre">sampler.results['maximum</span> <span class="pre">likelihood']['logl']</span></code>).</p>
+<p>If you can think of another method to identify a second sine signal, compute its indicator as well, and add a ROC curve.</p>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Francesca Capel.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
