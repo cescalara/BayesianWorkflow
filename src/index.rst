@@ -13,3 +13,4 @@ Bayesian Workflow
    notebooks/model_comparison_part1.ipynb
    notebooks/model_comparison_part2.ipynb
    notebooks/experiment_design.ipynb
+   notebooks/homework_project.ipynb
