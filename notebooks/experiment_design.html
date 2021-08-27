@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>6. Experiment design &mdash; Bayesian workflow  documentation</title>
+  <title>7. Experiment design &mdash; Bayesian workflow  documentation</title>
   
 
   
@@ -96,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_development.html">4. Model development</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Experiment design</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Experiment design</a></li>
 </ul>
 
             
@@ -145,7 +145,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>6. Experiment design</li>
+      <li>7. Experiment design</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -434,8 +434,8 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="6.-Experiment-design">
-<h1>6. Experiment design<a class="headerlink" href="#6.-Experiment-design" title="Permalink to this headline">¶</a></h1>
+<section id="7.-Experiment-design">
+<h1>7. Experiment design<a class="headerlink" href="#7.-Experiment-design" title="Permalink to this headline">¶</a></h1>
 <p>So far in our workflow, we have been working forward from a given experimental design and dataset to build up our model and inferences. However, looking back, we can realise that many steps in our workflow actually do not require the collection and use of actual data. Let’s recall our workflow from the <a class="reference internal" href="introduction.html"><span class="doc">introduction</span></a>:</p>
 <p><img alt="The workflow!" class="no-scaled-link" src="../_images/workflow1.pdf" style="width: 800px;" /></p>
 <p>If we have a particular problem in mind, <em>we don’t even need any data</em> before we can start to utilise a Bayesian workflow. We can build a <strong>generative model</strong> to represent our planned experiment, and use this to produce simulated data, upon which we can <strong>build</strong> and <strong>check</strong> our <strong>statistical model</strong> in a controlled environment.</p>
@@ -481,7 +481,7 @@ ax.axvline(mu, color=&quot;k&quot;, linestyle=&quot;:&quot;)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.lines.Line2D at 0x13d84b3a0&gt;
+&lt;matplotlib.lines.Line2D at 0x13ceb2550&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -513,7 +513,7 @@ fit = stan_model.sample(data=data, iter_sampling=1000, chains=4)
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 INFO:cmdstanpy:found newer exe file, not recompiling
-INFO:cmdstanpy:compiled model file: /Users/fran/projects/bayesian_workflow_prep/stan/normal
+INFO:cmdstanpy:compiled model file: /Users/fran/projects/BayesianWorkflow/src/notebooks/stan/normal
 INFO:cmdstanpy:start chain 1
 INFO:cmdstanpy:start chain 2
 INFO:cmdstanpy:start chain 3
@@ -572,14 +572,14 @@ INFO:cmdstanpy:finish chain 4
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.7706887176946432
+0.8967419754818061
 </pre></div></div>
 </div>
 <p>It seems our current “experimental setup” with <span class="math notranslate nohighlight">\(N=20\)</span> will not be capable of doing this. In this simple demo, there is only really one obvious way we can reduce our uncertainty in the estimate of <span class="math notranslate nohighlight">\(\mu\)</span>: increasing the number of observations.</p>
 <p>We can play around with our simulation to understand roughly how many observations would be needed.</p>
 <p>We could make a plot of the standard deviation of our posterior for <span class="math notranslate nohighlight">\(\mu\)</span> as a function fo <span class="math notranslate nohighlight">\(N\)</span>:</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -606,8 +606,8 @@ for n in N_vals:
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -619,12 +619,28 @@ ax.set_ylabel(&quot;Width of mu distribution&quot;)
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;Width of mu distribution&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_experiment_design_10_1.png" src="../_images/notebooks_experiment_design_10_1.png" />
+</div>
+</div>
 <p>So we can see that we would probably need something like &gt; 900 observations to constrain the standard deviation of the <span class="math notranslate nohighlight">\(\mu\)</span> posterior to &lt; 1.</p>
 <p>A few notes on implementing this in practice: * We skipped our usual sampler checks when running the fit many times, of course we should still include this, and find a way to automate it. * We can see that the above plot fluctuates depending on the exact simulated realisation at any <span class="math notranslate nohighlight">\(N\)</span> value. We could repeat an experiment a number of times at each <span class="math notranslate nohighlight">\(N\)</span> to account for this. * For posteriors that may have non-standard shapes, the highest density interval (HDI) is a better measure of
 the width of a distribution.</p>
-<p><strong>Exercise 6.1:</strong> Consider the simple mixture model example from the <a class="reference external" href="model_comparison.ipynb">model comparison</a> notebook. We decide that we can conclude signal is present if the tail probability of the marginal posterior, <span class="math notranslate nohighlight">\(p(f&lt;0.1)\)</span>, is less than 0.01. How many observations are required to achieve this if the true <span class="math notranslate nohighlight">\(f=0.5\)</span>?</p>
+<p><strong>Exercise 1:</strong> Consider the simple mixture model example from the <a class="reference external" href="model_comparison.ipynb">model comparison</a> notebook. We decide that we can conclude signal is present if the tail probability of the marginal posterior, <span class="math notranslate nohighlight">\(p(f&lt;0.1)\)</span>, is less than 0.01. How many observations are required to achieve this if the true <span class="math notranslate nohighlight">\(f=0.5\)</span>?</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -632,7 +648,7 @@ the width of a distribution.</p>
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 6.2:</strong> Return to the Cepheid variable example and the Hubble constant estimate completed in the <a class="reference internal" href="model_development.html"><span class="doc">model development</span></a> notebook. Investigate what changes could be made to our Cepheid observations to better constrain the Hubble constant. How could we reach a 90% HDI region of &lt; 10? Make some plots to summarise your results.</p>
+<p><strong>Homework exercise 1:</strong> Return to the Cepheid variable example and the Hubble constant estimate completed in the <a class="reference internal" href="model_development.html"><span class="doc">model development</span></a> notebook. Investigate what changes could be made to our Cepheid observations to better constrain the Hubble constant. How could we reach a 90% HDI region of &lt; 10? Make some plots to summarise your results.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>

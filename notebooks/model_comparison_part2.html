@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Model comparison &mdash; Bayesian workflow  documentation</title>
+  <title>6. Model comparison (Part II) &mdash; Bayesian workflow  documentation</title>
   
 
   
@@ -95,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_development.html">4. Model development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">6. Experiment design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">7. Experiment design</a></li>
 </ul>
 
             
@@ -144,7 +144,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Model comparison</li>
+      <li>6. Model comparison (Part II)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -433,8 +433,9 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="Model-comparison">
-<h1>Model comparison<a class="headerlink" href="#Model-comparison" title="Permalink to this headline">¶</a></h1>
+<section id="6.-Model-comparison-(Part-II)">
+<h1>6. Model comparison (Part II)<a class="headerlink" href="#6.-Model-comparison-(Part-II)" title="Permalink to this headline">¶</a></h1>
+<p>See <a class="reference external" href="model_comparison_part2_slides.pdf">these slides</a> for the lecture part.</p>
 <section id="Model">
 <h2>Model<a class="headerlink" href="#Model" title="Permalink to this headline">¶</a></h2>
 <p>We again consider the sine model with gaussian measurement errors.</p>
@@ -483,7 +484,6 @@ t = np.random.uniform(0, 5, size=n_data)
 # measurement values
 yerr = 1.0
 y = np.random.normal(sine_model1(t, B=1.0, A1=0.9, P1=3, t1=0), yerr)
-
 </pre></div>
 </div>
 </div>
@@ -625,7 +625,7 @@ sampler1.print_results()
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3eed086340604e6bb03d7fa9eab00461", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0653d5838d514e5495e0596082b04ba7", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
@@ -675,7 +675,7 @@ sampler0.print_results()
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "417bb527fab84df1a64186ec2e6e02ed", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "4a3b42ad949e4e9296452eb02c347ef8", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
@@ -882,7 +882,7 @@ band.shade(q=0.49, color=&#39;gray&#39;, alpha=0.2)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.collections.PolyCollection at 0x7f820ffcdf70&gt;
+&lt;matplotlib.collections.PolyCollection at 0x13df2f8b0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -973,25 +973,34 @@ for B in sampler0.results[&#39;samples&#39;][:10]:
     # store Bayes factor to K_simulated
     #    the difference of the lnZ values is the ln of the Bayes factor
     print()
-    print(&quot;Bayes factor: %.2f&quot; % ...) # TODO by you:
+    #print(&quot;Bayes factor: %.2f&quot; % ...) # TODO by you:
 
-    K_simulated.append(  ... ... )  # TODO by you:
+    #K_simulated.append(  ... ... )  # TODO by you:
 
 </pre></div>
 </div>
 </div>
-</section>
-<section id="Exercise-1:">
-<h2>Exercise 1:<a class="headerlink" href="#Exercise-1:" title="Permalink to this headline">¶</a></h2>
-<p>Plot the distribution of Bayes factors.</p>
-<p>How many false positives and false negatives would you have if you applied a threshold of Bayes factor 10?</p>
-<p>Where does the real Bayes factor lie? Do you trust the result?</p>
-</section>
-<section id="Homework-exercise-1:">
-<h2>Homework exercise 1:<a class="headerlink" href="#Homework-exercise-1:" title="Permalink to this headline">¶</a></h2>
-<p>Make a ROC curve, by plotting the false positive vs false negative rates as a function of thresholds.</p>
-<p>Add a ROC curve of likelihood ratios (hint: the highest log-likelihood found is in <code class="docutils literal notranslate"><span class="pre">sampler.results['maximum</span> <span class="pre">likelihood']['logl']</span></code>).</p>
-<p>If you can think of another method to identify a second sine signal, compute its indicator as well, and add a ROC curve.</p>
+<p><strong>Exercise 1:</strong></p>
+<ul class="simple">
+<li><p>Plot the distribution of Bayes factors.</p></li>
+<li><p>How many false positives and false negatives would you have if you applied a threshold of Bayes factor 10?</p></li>
+<li><p>Where does the real Bayes factor lie? Do you trust the result?</p></li>
+</ul>
+<p><strong>Homework exercise 1:</strong></p>
+<ul class="simple">
+<li><p>Make a ROC curve, by plotting the false positive vs false negative rates as a function of thresholds.</p></li>
+<li><p>Add a ROC curve of likelihood ratios (hint: the highest log-likelihood found is in <code class="docutils literal notranslate"><span class="pre">sampler.results['maximum</span> <span class="pre">likelihood']['logl']</span></code>).</p></li>
+<li><p>If you can think of another method to identify a second sine signal, compute its indicator as well, and add a ROC curve.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 

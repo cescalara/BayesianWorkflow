@@ -96,15 +96,15 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. Model checking</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#3.1.-Implementation-in-Stan">3.1. Implementation in Stan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#3.2.-The-first-check:-fitting-simulated-data">3.2. The first check: fitting simulated data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#3.3.-Prior-selection-and-prior-predictive-checks">3.3. Prior selection and prior predictive checks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#3.4.-Posterior-predictive-checks">3.4. Posterior predictive checks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#3.6.-Application-to-actual-data">3.6. Application to actual data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Implementation-in-Stan">Implementation in Stan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#The-first-check:-fitting-simulated-data">The first check: fitting simulated data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Prior-selection-and-prior-predictive-checks">Prior selection and prior predictive checks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Posterior-predictive-checks">Posterior predictive checks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Application-to-actual-data">Application to actual data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="model_development.html">4. Model development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">6. Experiment design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">7. Experiment design</a></li>
 </ul>
 
             
@@ -445,8 +445,8 @@ div.rendered_html tbody tr:hover {
 <section id="3.-Model-checking">
 <h1>3. Model checking<a class="headerlink" href="#3.-Model-checking" title="Permalink to this headline">¶</a></h1>
 <p>Last time we focussed on building a simple initial model for the Cepheid variable data. In this notebook, we explore the next steps in the workflow, <strong>model implementation</strong> and <strong>model checking</strong>. Along the way, we’ll also introduce <strong>prior predictive checks</strong> and <strong>posterior predictive checks</strong>.</p>
-<section id="3.1.-Implementation-in-Stan">
-<h2>3.1. Implementation in Stan<a class="headerlink" href="#3.1.-Implementation-in-Stan" title="Permalink to this headline">¶</a></h2>
+<section id="Implementation-in-Stan">
+<h2>Implementation in Stan<a class="headerlink" href="#Implementation-in-Stan" title="Permalink to this headline">¶</a></h2>
 <p>In the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>, we developed a simple model to fit the period-luminosity relation of Cepheid variable stars. We can now implement this model in Stan and use it to infer the parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> that describe the relation.</p>
 <p>As we’ve seen before in the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>, Stan files consist of different blocks that divide information into <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">parameters</span></code> and <code class="docutils literal notranslate"><span class="pre">model</span></code>. You can find more detailed information on how to write models in Stan code <a class="reference external" href="https://mc-stan.org/docs/2_27/reference-manual/index.html#overview">here</a>, but for now we can just take a look at this model: <code class="docutils literal notranslate"><span class="pre">stan/cepheid_v0.stan</span></code>.</p>
 <div class="nbinput docutils container">
@@ -563,12 +563,12 @@ from cmdstanpy import CmdStanModel
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 INFO:cmdstanpy:found newer exe file, not recompiling
-INFO:cmdstanpy:compiled model file: /Users/fran/projects/bayesian_workflow_prep/stan/cepheid_v0
+INFO:cmdstanpy:compiled model file: /Users/fran/projects/BayesianWorkflow/src/notebooks/stan/cepheid_v0
 </pre></div></div>
 </div>
 </section>
-<section id="3.2.-The-first-check:-fitting-simulated-data">
-<h2>3.2. The first check: fitting simulated data<a class="headerlink" href="#3.2.-The-first-check:-fitting-simulated-data" title="Permalink to this headline">¶</a></h2>
+<section id="The-first-check:-fitting-simulated-data">
+<h2>The first check: fitting simulated data<a class="headerlink" href="#The-first-check:-fitting-simulated-data" title="Permalink to this headline">¶</a></h2>
 <p>While we developed our initial generative and statistical models with the goal to fit <em>real</em> data, in doing so we now have a simple simulation program that contains exactly the same information as is included in our model. We can use this to generate <em>simulated</em> data where we <em>know</em> the values of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, and can verify that our fit gives us reasonable results.</p>
 <p><img alt="Fitting simulated data" class="no-scaled-link" src="../_images/sim_fit.pdf" style="width: 300px;" /></p>
 <p>If we are not able to recover the known simulated truth, this means there is some kind of discrepancy between the generative model and the statistical model. This fact can be a <strong>powerful tool for debugging</strong>, especially when working with more complex models, as it allows us to check if our Stan model is doing what we think it should be. <em>Just because it compiles, it doesn’t mean that it is correct!</em></p>
@@ -654,11 +654,11 @@ INFO:cmdstanpy:start chain 1
 INFO:cmdstanpy:start chain 2
 INFO:cmdstanpy:start chain 3
 INFO:cmdstanpy:start chain 4
-INFO:cmdstanpy:finish chain 1
 INFO:cmdstanpy:finish chain 2
+INFO:cmdstanpy:finish chain 1
 INFO:cmdstanpy:finish chain 3
 INFO:cmdstanpy:finish chain 4
-INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpx_75trb2/cepheid_v0-202108241406-1-4zfsff57.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpx_75trb2/cepheid_v0-202108241406-2-ebd3kv14.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpx_75trb2/cepheid_v0-202108241406-3-vo5yd0ku.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpx_75trb2/cepheid_v0-202108241406-4-2usi9rlw.csv
+INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpmlkdxck8/cepheid_v0-202108271019-1-hce0fjz2.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpmlkdxck8/cepheid_v0-202108271019-2-ecyi9p7i.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpmlkdxck8/cepheid_v0-202108271019-3-_xo9pdvk.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpmlkdxck8/cepheid_v0-202108271019-4-j47jnkvj.csv
 
 Checking sampler transitions treedepth.
 Treedepth satisfactory for all transitions.
@@ -726,61 +726,61 @@ Processing complete, no problems detected.
     <tr>
       <th>lp__</th>
       <td>-4.8</td>
-      <td>0.0340</td>
+      <td>0.0320</td>
       <td>1.00</td>
       <td>-6.9</td>
       <td>-4.5</td>
-      <td>-3.80</td>
-      <td>880.0</td>
-      <td>4000.0</td>
+      <td>-3.800</td>
+      <td>1000.0</td>
+      <td>4300.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>alpha</th>
-      <td>-1.2</td>
-      <td>0.0320</td>
-      <td>0.84</td>
-      <td>-2.5</td>
-      <td>-1.2</td>
-      <td>0.23</td>
-      <td>690.0</td>
-      <td>3100.0</td>
+      <td>-1.3</td>
+      <td>0.0340</td>
+      <td>0.83</td>
+      <td>-2.7</td>
+      <td>-1.3</td>
+      <td>0.036</td>
+      <td>590.0</td>
+      <td>2500.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>beta</th>
-      <td>-4.6</td>
-      <td>0.0210</td>
-      <td>0.55</td>
-      <td>-5.5</td>
-      <td>-4.6</td>
-      <td>-3.80</td>
-      <td>690.0</td>
-      <td>3100.0</td>
+      <td>-4.5</td>
+      <td>0.0220</td>
+      <td>0.54</td>
+      <td>-5.4</td>
+      <td>-4.5</td>
+      <td>-3.600</td>
+      <td>580.0</td>
+      <td>2500.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>M_true[1]</th>
-      <td>-9.8</td>
-      <td>0.0068</td>
+      <td>-9.7</td>
+      <td>0.0076</td>
       <td>0.24</td>
       <td>-10.0</td>
       <td>-9.7</td>
-      <td>-9.40</td>
-      <td>1236.0</td>
-      <td>5569.0</td>
+      <td>-9.300</td>
+      <td>1016.0</td>
+      <td>4304.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>M_true[2]</th>
       <td>-8.8</td>
-      <td>0.0034</td>
-      <td>0.17</td>
+      <td>0.0036</td>
+      <td>0.18</td>
       <td>-9.1</td>
       <td>-8.8</td>
-      <td>-8.50</td>
-      <td>2647.0</td>
-      <td>11925.0</td>
+      <td>-8.500</td>
+      <td>2440.0</td>
+      <td>10341.0</td>
       <td>1.0</td>
     </tr>
     <tr>
@@ -798,61 +798,61 @@ Processing complete, no problems detected.
     <tr>
       <th>line[46]</th>
       <td>-14.0</td>
-      <td>0.0250</td>
-      <td>0.69</td>
+      <td>0.0270</td>
+      <td>0.68</td>
       <td>-15.0</td>
       <td>-14.0</td>
-      <td>-13.00</td>
-      <td>757.0</td>
-      <td>3409.0</td>
+      <td>-13.000</td>
+      <td>621.0</td>
+      <td>2633.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>line[47]</th>
       <td>-14.0</td>
-      <td>0.0260</td>
+      <td>0.0290</td>
       <td>0.72</td>
       <td>-15.0</td>
       <td>-14.0</td>
-      <td>-13.00</td>
-      <td>752.0</td>
-      <td>3389.0</td>
+      <td>-13.000</td>
+      <td>618.0</td>
+      <td>2620.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>line[48]</th>
       <td>-14.0</td>
-      <td>0.0280</td>
-      <td>0.76</td>
+      <td>0.0300</td>
+      <td>0.75</td>
       <td>-16.0</td>
       <td>-14.0</td>
-      <td>-13.00</td>
-      <td>748.0</td>
-      <td>3371.0</td>
+      <td>-13.000</td>
+      <td>614.0</td>
+      <td>2603.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>line[49]</th>
       <td>-15.0</td>
-      <td>0.0290</td>
-      <td>0.79</td>
+      <td>0.0320</td>
+      <td>0.78</td>
       <td>-16.0</td>
       <td>-15.0</td>
-      <td>-14.00</td>
-      <td>745.0</td>
-      <td>3355.0</td>
+      <td>-13.000</td>
+      <td>612.0</td>
+      <td>2592.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>line[50]</th>
       <td>-15.0</td>
-      <td>0.0300</td>
-      <td>0.82</td>
+      <td>0.0330</td>
+      <td>0.81</td>
       <td>-16.0</td>
       <td>-15.0</td>
-      <td>-14.00</td>
-      <td>742.0</td>
-      <td>3341.0</td>
+      <td>-14.000</td>
+      <td>609.0</td>
+      <td>2582.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -888,7 +888,7 @@ av.plot_trace(fit, var_names=[&quot;alpha&quot;, &quot;beta&quot;, &quot;m_true&
 </div>
 </div>
 <p>So by including <code class="docutils literal notranslate"><span class="pre">m_true</span></code> in the <code class="docutils literal notranslate"><span class="pre">transformed</span> <span class="pre">parameters</span></code> block, we also get the marginal distributions ready-made for free. Different chains have different linestyles and different Cepheids have different colours in this plot.</p>
-<p><strong>Exercise 3.2.1:</strong> Looking closely, it seems that the <code class="docutils literal notranslate"><span class="pre">m_true</span></code> distributions vary from star to star, with medium <code class="docutils literal notranslate"><span class="pre">m_true</span></code> values having narrower distributions. We know <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> is fixed, so why might this be?</p>
+<p><strong>Exercise 1:</strong> Looking closely, it seems that the <code class="docutils literal notranslate"><span class="pre">m_true</span></code> distributions vary from star to star, with medium <code class="docutils literal notranslate"><span class="pre">m_true</span></code> values having narrower distributions. We know <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> is fixed, so why might this be?</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -908,7 +908,7 @@ ax[1,0].axhline(beta_true, color=&quot;r&quot;)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.lines.Line2D at 0x13c2e7400&gt;
+&lt;matplotlib.lines.Line2D at 0x1467e8d60&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -919,7 +919,7 @@ ax[1,0].axhline(beta_true, color=&quot;r&quot;)
 </div>
 </div>
 <p>We can see that we are able to recover the true result, although <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> are quite correlated. Going back to the fit summary, we see that the number of effective samples is quite low - only ~500 for 4x1000 iterations! This fit is very fast and so we could just run it longer, but a common reparametrisation for slopes and intercepts could make the sampling much more efficient.</p>
-<p><strong>Exercise 3.2.2:</strong> Try using the following reparametrisation for the period-luminosity relation:</p>
+<p><strong>Exercise 2:</strong> Try using the following reparametrisation for the period-luminosity relation:</p>
 <div class="math notranslate nohighlight">
 \[y = \alpha + \beta x \rightarrow y = \alpha^\prime + \beta (x - x_0)\]</div>
 <p>where <span class="math notranslate nohighlight">\(x_0\)</span> is roughly the mean value of <span class="math notranslate nohighlight">\(x\)</span>, typically called the <em>pivot</em>. Compare the number of effective samples with the previous version. Additionally, compare the joint posterior for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> with that for <code class="docutils literal notranslate"><span class="pre">alpha_prime</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Why is this parametrisation so much more efficient?</p>
@@ -986,7 +986,7 @@ ax.legend()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x13c1cc1c0&gt;
+&lt;matplotlib.legend.Legend at 0x1466eadf0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -997,14 +997,14 @@ ax.legend()
 </div>
 </div>
 </section>
-<section id="3.3.-Prior-selection-and-prior-predictive-checks">
-<h2>3.3. Prior selection and prior predictive checks<a class="headerlink" href="#3.3.-Prior-selection-and-prior-predictive-checks" title="Permalink to this headline">¶</a></h2>
+<section id="Prior-selection-and-prior-predictive-checks">
+<h2>Prior selection and prior predictive checks<a class="headerlink" href="#Prior-selection-and-prior-predictive-checks" title="Permalink to this headline">¶</a></h2>
 <p>As discussed in Section 3.1, we left our priors for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> to be uniform over all real numbers. In the end, this didn’t seem to be a major problem and the data were informative enough to constrain the posterior. However, we should be wary of these kind of <em>uninformative priors</em>. The first motivation is common sense - from studying the data and literature, we have a fairly good idea of what the period-luminosity relationship looks like. Additionally, our sampler currently has to
 consider <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> values from <em>negative to positive infinity</em>.</p>
 <p>It is rarely the case that we have zero prior knowledge on the value of our model parameters. At the same time, we don’t want to bias our results by introduing too much information with so-called <em>informative priors</em>. After all, we are trying to find out what the values of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> are.</p>
 <p>Like many things in life, there is a happy medium between these two extremes that we can use in practice. <em>Weakly informative priors</em> are wide enough to reflect our ignorance, but narrow enough to constrain the parameter space to sensible values. The exact shape of a weakly informative prior should have negligible impact on the fit results.</p>
 <p>To help us choose sensible informative priors, we can use <strong>prior predictive checks</strong>. This just means sampling from the prior distribution in your generative model, and comparing the resulting data with your actual data. The idea is that the prior predictive data should cover a wide enough region to cover all reasonable data values, and visualising priors this way in the “data-space” can be helpful in prior selection.</p>
-<p><strong>Exercise 3.3:</strong> Expand your generative model to sample from the prior distributions for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Plot the resulting data (<code class="docutils literal notranslate"><span class="pre">m_obs</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code>) for a few different choices of prior distributions.</p>
+<p><strong>Exercise 3:</strong> Expand your generative model to sample from the prior distributions for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Plot the resulting data (<code class="docutils literal notranslate"><span class="pre">m_obs</span></code> and <code class="docutils literal notranslate"><span class="pre">P</span></code>) for a few different choices of prior distributions.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1139,14 +1139,14 @@ fit = stan_model.sample(data=data, iter_sampling=1000, chains=4)
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 INFO:cmdstanpy:found newer exe file, not recompiling
-INFO:cmdstanpy:compiled model file: /Users/fran/projects/bayesian_workflow_prep/stan/cepheid_v1
+INFO:cmdstanpy:compiled model file: /Users/fran/projects/BayesianWorkflow/src/notebooks/stan/cepheid_v1
 INFO:cmdstanpy:start chain 1
 INFO:cmdstanpy:start chain 2
 INFO:cmdstanpy:start chain 3
 INFO:cmdstanpy:start chain 4
 INFO:cmdstanpy:finish chain 1
-INFO:cmdstanpy:finish chain 3
 INFO:cmdstanpy:finish chain 2
+INFO:cmdstanpy:finish chain 3
 INFO:cmdstanpy:finish chain 4
 </pre></div></div>
 </div>
@@ -1185,7 +1185,7 @@ ax.legend()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x13bed6f10&gt;
+&lt;matplotlib.legend.Legend at 0x1463d2400&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1196,7 +1196,7 @@ ax.legend()
 </div>
 </div>
 <p>We see that the prior choice has negligible impact on the results.</p>
-<p><strong>Exercise 3.3:</strong> Experiment with stronger priors and/or weaker data to see how this affects the inferred relation. Make some plots to visualise your results.</p>
+<p><strong>Exercise 4:</strong> Experiment with stronger priors and/or weaker data to see how this affects the inferred relation. Make some plots to visualise your results.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
@@ -1207,15 +1207,15 @@ ax.legend()
 </div>
 </div>
 </section>
-<section id="3.4.-Posterior-predictive-checks">
-<h2>3.4. Posterior predictive checks<a class="headerlink" href="#3.4.-Posterior-predictive-checks" title="Permalink to this headline">¶</a></h2>
+<section id="Posterior-predictive-checks">
+<h2>Posterior predictive checks<a class="headerlink" href="#Posterior-predictive-checks" title="Permalink to this headline">¶</a></h2>
 <p>If our model fits the data well, then data generated by the model should look similar to observed data. To test if this is true, we can perform a <strong>posterior predictive check</strong>.</p>
 <p>If we have observed data <span class="math notranslate nohighlight">\(\hat{m}\)</span> and model parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>, we can express the joint posterior predictive distribution as</p>
 <div class="math notranslate nohighlight">
 \[p(\hat{m}_\mathrm{rep} | \hat{m}) = \int \mathrm{d}\alpha \int \mathrm{d}\beta~p(\hat{m}_\mathrm{rep}| \alpha, \beta) p(\alpha, \beta | \hat{m}),\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat{m}_\mathrm{rep}\)</span> is the <em>replicated</em> data predicted by our fitted model. We can think of this as the data our model predicts we should see in future.</p>
 <p>In practice, we can easily compute this integral using the Markov chains that we get from Stan. All we have to do is use the posterior samples for <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> to forward simulate data from our likelihood, or generative model.</p>
-<p><strong>Exercise 3.4:</strong> Let’s compute the posterior predictive distribution for our fit to simulated data…</p>
+<p><strong>Exercise 5:</strong> Let’s compute the posterior predictive distribution for our fit to simulated data…</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
@@ -1242,12 +1242,12 @@ for i in range(Nreps):
 <p><img alt="Prior predictive checks" class="no-scaled-link" src="../_images/posterior_predictive.pdf" style="width: 500px;" /></p>
 <p>There are a number of ways to study and quantify the posterior predictive distribution in order to use it to assess the “goodness of fit” of a model. Here, we only consider graphical checks, but more information can be found in Section 6.3 of <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis</a> by Gelman et al.</p>
 </section>
-<section id="3.6.-Application-to-actual-data">
-<h2>3.6. Application to actual data<a class="headerlink" href="#3.6.-Application-to-actual-data" title="Permalink to this headline">¶</a></h2>
-<p><strong>Exercise 3.6.1:</strong> Now, let’s use our <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code> model to fit the actual data introduced in the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>. Here we have a model for one galaxy only, so let’s pick one at random to start with. Complete the following steps: * Note that the actual data have individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this. * Fit the data. Make a plot summarising the posterior
-of the line fit and compare it to the <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> data values. * Complete a posterior predictive check for this fit. * Repeat steps 2 and 3 for a few other galaxies to compare. Comment on the overall results.</p>
+<section id="Application-to-actual-data">
+<h2>Application to actual data<a class="headerlink" href="#Application-to-actual-data" title="Permalink to this headline">¶</a></h2>
+<p><strong>Homework exercise 1:</strong> Now, let’s use our <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code> model to fit the actual data introduced in the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>. Here we have a model for one galaxy only, so let’s pick one at random to start with. Complete the following steps: * Note that the actual data have individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this. * Fit the data. Make a plot summarising the
+posterior of the line fit and compare it to the <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> data values. * Complete a posterior predictive check for this fit. * Repeat steps 2 and 3 for a few other galaxies to compare. Comment on the overall results.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1257,9 +1257,9 @@ of the line fit and compare it to the <code class="docutils literal notranslate"
 </div>
 <p>The above exercise should leave us feeling unsatisfied with out model. We seek out an expert to discuss with, and learn the following information: * The metallicity of a Cepheid has a systematic effect on its intrinsic brightness, shifting it by a factor of <span class="math notranslate nohighlight">\(\gamma=1.5\)</span> * We don’t know the uncertainty in the observed period values - it is likely small, but maybe it is not measured perfectly. * The frequency or “cadence” of astronomical observations means that it is only possible to
 measure certain periods.</p>
-<p><strong>Exercise 3.6.2:</strong> Use the above information together with the completed posterior predictive checks to improve your Stan model. Some changes may be more useful than others, so it can be good to test each in isolation. Once you are satisfied with your single galaxy model, save it as <code class="docutils literal notranslate"><span class="pre">cepheid_v2.stan</span></code>, and make some plots arguing your case.</p>
+<p><strong>Homework exercise 2:</strong> Use the above information together with the completed posterior predictive checks to improve your Stan model. Some changes may be more useful than others, so it can be good to test each in isolation. Once you are satisfied with your single galaxy model, save it as <code class="docutils literal notranslate"><span class="pre">cepheid_v2.stan</span></code>, and make some plots arguing your case.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -1267,9 +1267,9 @@ measure certain periods.</p>
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 3.6.3:</strong> Use your improved model, <code class="docutils literal notranslate"><span class="pre">cepheid_v2.stan</span></code> to fit the data from each galaxy independently. Make some plots showing the resulting <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> marginal posteriors for the different galaxies (e.g. ridgeline plots can be a nice way to show this). What can you conclude about the universailty of the period-luminosity relation?</p>
+<p><strong>Homework exercise 3:</strong> Use your improved model, <code class="docutils literal notranslate"><span class="pre">cepheid_v2.stan</span></code> to fit the data from each galaxy independently. Make some plots showing the resulting <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> marginal posteriors for the different galaxies (e.g. ridgeline plots can be a nice way to show this). What can you conclude about the universailty of the period-luminosity relation?</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>

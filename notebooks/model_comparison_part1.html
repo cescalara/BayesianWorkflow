@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>5. Model comparison &mdash; Bayesian workflow  documentation</title>
+  <title>5. Model comparison (Part I) &mdash; Bayesian workflow  documentation</title>
   
 
   
@@ -95,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_development.html">4. Model development</a></li>
-<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">6. Experiment design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">7. Experiment design</a></li>
 </ul>
 
             
@@ -144,7 +144,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>5. Model comparison</li>
+      <li>5. Model comparison (Part I)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -433,8 +433,8 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="5.-Model-comparison">
-<h1>5. Model comparison<a class="headerlink" href="#5.-Model-comparison" title="Permalink to this headline">¶</a></h1>
+<section id="5.-Model-comparison-(Part-I)">
+<h1>5. Model comparison (Part I)<a class="headerlink" href="#5.-Model-comparison-(Part-I)" title="Permalink to this headline">¶</a></h1>
 <p>So far we have focussed on using a Bayesian workflow to design and develop a single model to describe our data. Much of the time, this will be enough to answer the scientific questions that we come across in our research. By using <a class="reference internal" href="model_checking.html"><span class="doc">model checking</span></a> to develop a model and verify that it is capable of representing the data, we are implicity using <em>predictive performance</em> to compare models, in a process of continuous model expansion.</p>
 <p>However, there may be cases where it makes sense to compare two or more distinct models in a more discrete way. E.g. Models for the <strong>presence or absence</strong> of an effect, or <strong>signal over background</strong> models. Consider the following questions: &gt; What signal shape best describes my data?</p>
 <p>vs.</p>
@@ -443,8 +443,8 @@ div.rendered_html tbody tr:hover {
 </div></blockquote>
 <p><img alt="What kind of question are you asking?" class="no-scaled-link" src="../_images/model_comparison.pdf" style="width: 600px;" /></p>
 <p>As we will discuss further, there are several different approaches to model comparison. The right one for the job will depend largely on <strong>what question you are trying to answer and what you know about the models that you are comparing</strong>.</p>
-<section id="5.1.-The-\mathcal{M}-universe">
-<h2>5.1. The <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>-universe<a class="headerlink" href="#5.1.-The-\mathcal{M}-universe" title="Permalink to this headline">¶</a></h2>
+<section id="The-\mathcal{M}-universe">
+<h2>The <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>-universe<a class="headerlink" href="#The-\mathcal{M}-universe" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><p>“All models are wrong but some are useful” - George Box</p>
 </div></blockquote>
@@ -455,8 +455,8 @@ div.rendered_html tbody tr:hover {
 <p>In the M-complete view, it makes sense to work towards a <em>good enough</em> model that can represent our observations and anser our questions, as we have been doing so far in this workflow. However, one could also think about selecting between a finite set of models, that act as a proxy for a complete list of possible models.</p>
 <p>It is important to note that many of the more standard and widely used methods for Bayesian model comparison that rely on the <strong>model marginal likelihood</strong>, <span class="math notranslate nohighlight">\(p(\mathrm{data}|\mathrm{model})\)</span>, and/or <strong>model priors</strong>, <span class="math notranslate nohighlight">\(p(\mathrm{model})\)</span>, assume that we are in the M-closed regime. As soon as we are not sure that we are in this regime, we should be very careful about interpreting the results of such approaches, and the further away we go, the worse it gets…</p>
 </section>
-<section id="5.2.-Computing-the-model-marginal-likelihood">
-<h2>5.2. Computing the model marginal likelihood<a class="headerlink" href="#5.2.-Computing-the-model-marginal-likelihood" title="Permalink to this headline">¶</a></h2>
+<section id="Computing-the-model-marginal-likelihood">
+<h2>Computing the model marginal likelihood<a class="headerlink" href="#Computing-the-model-marginal-likelihood" title="Permalink to this headline">¶</a></h2>
 <p>Recall Bayes’ theorem</p>
 <div class="math notranslate nohighlight">
 \[p(\theta| d) = \frac{p(d|\theta)p(\theta)}{p(d)} = \frac{p(\theta | d, M)p(\theta|M)}{p(d|M)},\]</div>
@@ -469,8 +469,8 @@ div.rendered_html tbody tr:hover {
 <p>So, if we are in the M-closed scenario and want to compute the marginal likelihood, it is <em>non-trivial</em> to re-use any results based on MCMC methods, although possibilities do exist…</p>
 <p>The marginal likelihood is a natural byproduct of <em>nested sampling</em> methods, which has contributed to their popularity. We will discuss the use of nested sampling further in the next section of the course.</p>
 </section>
-<section id="5.3.-Model-comparison-as-parameter-estimation">
-<h2>5.3. Model comparison as parameter estimation<a class="headerlink" href="#5.3.-Model-comparison-as-parameter-estimation" title="Permalink to this headline">¶</a></h2>
+<section id="Model-comparison-as-parameter-estimation">
+<h2>Model comparison as parameter estimation<a class="headerlink" href="#Model-comparison-as-parameter-estimation" title="Permalink to this headline">¶</a></h2>
 <p>If all of this has put you off model comparison, you’ll be relieved to find out that a lot of model comparison problems can similarly be expressed as parameter estimation problems. Here, we will explore a simple illustrative example in Stan.</p>
 <p>Consider a uniform background model and a normal signal model for some data, <span class="math notranslate nohighlight">\(x\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -482,7 +482,7 @@ div.rendered_html tbody tr:hover {
 <div class="math notranslate nohighlight">
 \[p(x | f) = \prod_{i=1}^N \Big[ f p(x_i | \mathrm{signal}) + (1-f) p(x_i | \mathrm{background})\Big],\]</div>
 <p>where <span class="math notranslate nohighlight">\(f\)</span> is the unknown weight of the mixture model, or the fraction of data that can be associated with the signal component. As we don’t know <span class="math notranslate nohighlight">\(f\)</span> a priori, we can assume a uniform prior over it between 0 and 1.</p>
-<p><strong>Exercise 5.3.1:</strong> Use this information to be a generative model for this simple problem. Simulate 10 observations of x, with an associated fraction of only 0.2. Histogram the resulting x observations.</p>
+<p><strong>Exercise 1:</strong> Use this information to build a generative model for this simple problem. Simulate 10 observations of x, with an associated fraction of only 0.2. Histogram the resulting x observations.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -506,7 +506,7 @@ f = 0.2
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 5.3.2:</strong> Write the Stan code for this model and display it. Then fit the model to your simulated data for <span class="math notranslate nohighlight">\(f\)</span>. Plot the marginal posterior for f.</p>
+<p><strong>Exercise 2:</strong> Write the Stan code for this model and display it. Then fit the model to your simulated data for <span class="math notranslate nohighlight">\(f\)</span>. Plot the marginal posterior for f.</p>
 <blockquote>
 <div><p><strong>Hint:</strong> See <a class="reference external" href="https://mc-stan.org/docs/2_27/stan-users-guide/summing-out-the-responsibility-parameter.html">this page</a> in the Stan manual for some tips.</p>
 </div></blockquote>
@@ -519,7 +519,7 @@ f = 0.2
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 5.3.3:</strong> Now repeat your simulation a few times, steadily increasing the number of observations. Visualise the effect this has on the resulting <span class="math notranslate nohighlight">\(f\)</span> distribution.</p>
+<p><strong>Exercise 3:</strong> Now repeat your simulation a few times, steadily increasing the number of observations. Visualise the effect this has on the resulting <span class="math notranslate nohighlight">\(f\)</span> distribution.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -529,7 +529,7 @@ f = 0.2
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 5.3.4:</strong> Let’s know assume that the signal position, <span class="math notranslate nohighlight">\(\mu\)</span> is unknown. Expand your model to also fit for the signal position. Repeat the above experiment for increasing the sample size, this time visualising the results in terms of the joint posterior for <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span>. For completeness, also simulate and fit the case of zero signal observations to add to this plot.</p>
+<p><strong>Homework exercise 1:</strong> Let’s know assume that the signal position, <span class="math notranslate nohighlight">\(\mu\)</span> is unknown. Expand your model to also fit for the signal position. Repeat the above experiment for increasing the sample size, this time visualising the results in terms of the joint posterior for <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span>. For completeness, also simulate and fit the case of zero signal observations to add to this plot.</p>
 <p>Some points to note: * If we wanted to make a decision about the presence of signal in this dataset, we could consider how “far away” the marginal distribution for <span class="math notranslate nohighlight">\(f\)</span> is away from zero, or how inconsistent <span class="math notranslate nohighlight">\(f=0\)</span> is with our results. This could be quantified if necessary. * By including <span class="math notranslate nohighlight">\(\mu\)</span> as a free parameter, our results for <span class="math notranslate nohighlight">\(f\)</span> also include our uncertainty in it’s value.</p>
 </section>
 <section id="Further-reading">

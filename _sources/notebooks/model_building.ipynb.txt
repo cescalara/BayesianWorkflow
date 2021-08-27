@@ -32,7 +32,7 @@
    "id": "be4cd990",
    "metadata": {},
    "source": [
-    "### 2.1. Going from a scientific question to a statistical model\n",
+    "### Going from a scientific question to a statistical model\n",
     "\n",
     "<br>\n",
     "\n",
@@ -54,9 +54,10 @@
     "\n",
     "<br>\n",
     "\n",
-    "**Exercise 2.1:** Fill out this table for some more complicated examples such as\n",
+    "**Exercise 1:** Fill out this table for some more complicated examples such as\n",
     "* What is the value of the Hubble constant?\n",
     "* What is the mass of the Higgs boson?\n",
+    "* An example from your own field/interests\n",
     "Below are some relevant plots of data used to make such measurements.\n",
     "\n",
     "The original Hubble diagram from [this paper](https://www.pnas.org/content/15/3/168):\n",
@@ -65,9 +66,7 @@
     "\n",
     "First presentation of ATLAS Higgs to $\\gamma\\gamma$ results on 4th July 2012:\n",
     "\n",
-    "<img src=\"figures/higgs.png\" alt=\"https://atlas.cern/updates/feature/higgs-boson\" width=\"500\"/>\n",
-    "\n",
-    "Can you add an example or two from your own field to this list?"
+    "<img src=\"figures/higgs.png\" alt=\"https://atlas.cern/updates/feature/higgs-boson\" width=\"500\"/>"
    ]
   },
   {
@@ -75,7 +74,7 @@
    "id": "00d845ba",
    "metadata": {},
    "source": [
-    "### 2.2. The impossible model\n",
+    "### The impossible model\n",
     "\n",
     "<br>\n",
     "\n",
@@ -89,7 +88,7 @@
     "\n",
     "<br>\n",
     "\n",
-    "**Exercise 2.2:** Can you expand the complexity for one of the other models that we discussed?"
+    "**Exercise 2:** Can you expand the complexity for one of the other models that we discussed? List possible factors."
    ]
   },
   {
@@ -97,7 +96,7 @@
    "id": "b9011f2c",
    "metadata": {},
    "source": [
-    "### 2.3. Probabilistic graphical models\n",
+    "### Probabilistic graphical models\n",
     "\n",
     "<br>\n",
     "\n",
@@ -111,7 +110,7 @@
     "\n",
     "<br>\n",
     "\n",
-    "**Exercise 2.3:** Now it's your turn! Sketch graphical models for the first two examples in the above table (measurement of gravitational acceleration and radioactivity)."
+    "**Exercise 3:** Now it's your turn! Sketch graphical models for the first two examples in the above table (measurement of gravitational acceleration and radioactivity)."
    ]
   },
   {
@@ -119,7 +118,7 @@
    "id": "51d17676",
    "metadata": {},
    "source": [
-    "### 2.4. An example: the period-luminosity relation of Cepheid variable stars\n",
+    "### An example: the period-luminosity relation of Cepheid variable stars\n",
     "\n",
     "<br>\n",
     "\n",
@@ -160,7 +159,7 @@
    "id": "aabba55c",
    "metadata": {},
    "source": [
-    "### 2.5. Generative modelling\n",
+    "### Generative modelling\n",
     "\n",
     "<br>\n",
     "\n",
@@ -182,7 +181,7 @@
     "\n",
     "<br>\n",
     "\n",
-    "**Exercise 2.5.1:** With these simplifying assumptions in mind, sketch the corresponding graphical model for our initial Cepheid variable model. The parameters and known quantities are summarised below, just arrange them into a graph.\n",
+    "**Exercise 4:** With these simplifying assumptions in mind, sketch the corresponding graphical model for our initial Cepheid variable model. The parameters and known quantities are summarised below, just arrange them into a graph.\n",
     "\n",
     "<br>\n",
     "\n",
@@ -190,7 +189,7 @@
     "\n",
     "<br>\n",
     "\n",
-    "**Exercise 2.5.2:** Using the parameter and fixed quantity values given below, as well as your graphical model, write a simulation for the observed apparent magnitudes, $m_i$. Plot your results in $\\log_{10}(P/\\mathrm{days})$-$m$ space, comparing with the true period-luminosity relation. \n",
+    "**Exercise 5:** Using the parameter and fixed quantity values given below, as well as your graphical model, write a simulation for the observed apparent magnitudes, $m_i$. Plot your results in $\\log_{10}(P/\\mathrm{days})$-$m$ space, comparing with the true period-luminosity relation. \n",
     "\n"
    ]
   },
@@ -200,8 +199,8 @@
    "id": "6e061e9d",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:36.964641Z",
-     "start_time": "2021-08-24T12:08:36.730208Z"
+     "end_time": "2021-08-27T08:10:00.371959Z",
+     "start_time": "2021-08-27T08:10:00.108191Z"
     }
    },
    "outputs": [],
@@ -216,8 +215,8 @@
    "id": "98edc7e0",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:37.170136Z",
-     "start_time": "2021-08-24T12:08:37.166330Z"
+     "end_time": "2021-08-27T08:10:00.376866Z",
+     "start_time": "2021-08-27T08:10:00.373975Z"
     }
    },
    "outputs": [],
@@ -242,8 +241,8 @@
    "id": "0e0a6e34",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:37.531765Z",
-     "start_time": "2021-08-24T12:08:37.528771Z"
+     "end_time": "2021-08-27T08:10:00.381314Z",
+     "start_time": "2021-08-27T08:10:00.378766Z"
     }
    },
    "outputs": [],
@@ -264,8 +263,8 @@
    "id": "0668a9e4",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:37.873512Z",
-     "start_time": "2021-08-24T12:08:37.870937Z"
+     "end_time": "2021-08-27T08:10:00.385288Z",
+     "start_time": "2021-08-27T08:10:00.383465Z"
     }
    },
    "outputs": [],
@@ -284,8 +283,8 @@
    "id": "f6a040de",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:38.389313Z",
-     "start_time": "2021-08-24T12:08:38.247620Z"
+     "end_time": "2021-08-27T08:10:00.522227Z",
+     "start_time": "2021-08-27T08:10:00.386627Z"
     }
    },
    "outputs": [
@@ -337,8 +336,8 @@
    "id": "170a06ba",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:38.759554Z",
-     "start_time": "2021-08-24T12:08:38.639954Z"
+     "end_time": "2021-08-27T08:10:00.636387Z",
+     "start_time": "2021-08-27T08:10:00.523595Z"
     }
    },
    "outputs": [
@@ -405,8 +404,8 @@
    "id": "73727627",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:39.565602Z",
-     "start_time": "2021-08-24T12:08:39.445686Z"
+     "end_time": "2021-08-27T08:10:00.746219Z",
+     "start_time": "2021-08-27T08:10:00.637834Z"
     }
    },
    "outputs": [
@@ -469,7 +468,7 @@
    "id": "076b27ec",
    "metadata": {},
    "source": [
-    "### 2.6. Exploratory data analysis\n",
+    "### Exploratory data analysis\n",
     "\n",
     "<br>\n",
     "\n",
@@ -483,7 +482,7 @@
     "\n",
     "The right time in a workflow for exploratory data analysis can be difficult to define. In general, we want to be aware of how our data looks when designing a model for it, but also not too influenced such that we get carried away and design a model that *overfits* the data we have and is uncapable of generalising to unseen data. Here, we want to see how our first effort at a generative model stacks up, and also think about directions for improving our model.\n",
     "\n",
-    "**Exercise 2.6:** Complete the following exploratory data analysis."
+    "**Homework exercise 1:** Complete the following exploratory data analysis."
    ]
   },
   {
@@ -492,8 +491,8 @@
    "id": "b0e75624",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:40.290430Z",
-     "start_time": "2021-08-24T12:08:40.278400Z"
+     "end_time": "2021-08-27T08:10:00.758283Z",
+     "start_time": "2021-08-27T08:10:00.748258Z"
     }
    },
    "outputs": [],
@@ -513,8 +512,8 @@
    "id": "3663050b",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:40.719425Z",
-     "start_time": "2021-08-24T12:08:40.712307Z"
+     "end_time": "2021-08-27T08:10:00.765072Z",
+     "start_time": "2021-08-27T08:10:00.759643Z"
     }
    },
    "outputs": [],
@@ -540,8 +539,8 @@
    "id": "38c198ea",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:41.360763Z",
-     "start_time": "2021-08-24T12:08:41.350759Z"
+     "end_time": "2021-08-27T08:10:00.775903Z",
+     "start_time": "2021-08-27T08:10:00.768008Z"
     }
    },
    "outputs": [
@@ -665,8 +664,8 @@
    "id": "e4ab02b3",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:42.996489Z",
-     "start_time": "2021-08-24T12:08:42.878889Z"
+     "end_time": "2021-08-27T08:10:00.886001Z",
+     "start_time": "2021-08-27T08:10:00.777562Z"
     }
    },
    "outputs": [
@@ -716,15 +715,15 @@
    "id": "39fb8611",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:47.096968Z",
-     "start_time": "2021-08-24T12:08:46.878559Z"
+     "end_time": "2021-08-27T08:10:01.092645Z",
+     "start_time": "2021-08-27T08:10:00.887266Z"
     }
    },
    "outputs": [
     {
      "data": {
       "text/plain": [
-       "<matplotlib.legend.Legend at 0x123e6f4c0>"
+       "<matplotlib.legend.Legend at 0x12ddb7ca0>"
       ]
      },
      "execution_count": 12,
@@ -770,8 +769,8 @@
    "id": "0298d7a4",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:53.952901Z",
-     "start_time": "2021-08-24T12:08:53.950024Z"
+     "end_time": "2021-08-27T08:10:01.098229Z",
+     "start_time": "2021-08-27T08:10:01.096064Z"
     }
    },
    "outputs": [],
@@ -789,8 +788,8 @@
    "id": "fdfb5059",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:55.369262Z",
-     "start_time": "2021-08-24T12:08:55.278269Z"
+     "end_time": "2021-08-27T08:10:01.190313Z",
+     "start_time": "2021-08-27T08:10:01.099937Z"
     }
    },
    "outputs": [
@@ -804,7 +803,7 @@
     {
      "data": {
       "text/plain": [
-       "<matplotlib.legend.Legend at 0x12406c910>"
+       "<matplotlib.legend.Legend at 0x12dfc5970>"
       ]
      },
      "execution_count": 14,
@@ -845,7 +844,8 @@
     "\n",
     "<br>\n",
     "\n",
-    "We can see other quantities in the provided files, such as a measure of the metallicity of each star, `log(O/H)`. What do the distributions of `log(O/H)` look like for different galaxies? Is there any relationship between `log(O/H)` and `M_obs`?"
+    "We can see other quantities in the provided files, such as a measure of the metallicity of each star, `delta_log_O_H`. \n",
+    "* What do the distributions of `delta_logO_H` look like for different galaxies? Is there any relationship between `delta_log_O_H` and `M_obs`?"
    ]
   },
   {
@@ -854,8 +854,8 @@
    "id": "9d63b16e",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:56.265249Z",
-     "start_time": "2021-08-24T12:08:56.262404Z"
+     "end_time": "2021-08-27T08:10:01.194759Z",
+     "start_time": "2021-08-27T08:10:01.191887Z"
     }
    },
    "outputs": [],
@@ -868,7 +868,7 @@
    "id": "1e6a79b0",
    "metadata": {},
    "source": [
-    "How about the distributions of `P` in different galaxies? Why are some values of `P` more frequently observed than others?"
+    "* How about the distributions of `P` in different galaxies? Why are some values of `P` more frequently observed than others?"
    ]
   },
   {
@@ -877,8 +877,8 @@
    "id": "8c874ac6",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:57.025871Z",
-     "start_time": "2021-08-24T12:08:57.023539Z"
+     "end_time": "2021-08-27T08:10:01.199090Z",
+     "start_time": "2021-08-27T08:10:01.196662Z"
     }
    },
    "outputs": [],
@@ -891,7 +891,7 @@
    "id": "d674532f",
    "metadata": {},
    "source": [
-    "In light of the data, what are some ways in which we may want to expand our model one day??"
+    "* In light of the data, what are some ways in which we may want to expand our model one day?"
    ]
   },
   {
@@ -900,8 +900,8 @@
    "id": "336b7f5a",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-24T12:08:57.863310Z",
-     "start_time": "2021-08-24T12:08:57.860717Z"
+     "end_time": "2021-08-27T08:10:01.202102Z",
+     "start_time": "2021-08-27T08:10:01.200347Z"
     }
    },
    "outputs": [],
@@ -918,14 +918,6 @@
     "\n",
     "The dataset prepared for this course is based on that reported in [Reiss et al. 2011](https://iopscience.iop.org/article/10.1088/0004-637X/730/2/119)."
    ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "4edefe0a",
-   "metadata": {},
-   "outputs": [],
-   "source": []
   }
  ],
  "metadata": {

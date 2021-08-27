@@ -45,7 +45,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="6. Experiment design" href="experiment_design.html" />
+    <link rel="next" title="7. Experiment design" href="experiment_design.html" />
     <link rel="prev" title="3. Model checking" href="model_checking.html" /> 
 </head>
 
@@ -97,13 +97,13 @@
 <li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">4. Model development</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#4.1.-Hierarchical-models">4.1. Hierarchical models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#4.2.-A-joint-hierarchical-fit-of-all-galaxies">4.2. A joint hierarchical fit of all galaxies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#4.3.-Estimation-of-the-Hubble-constant">4.3. Estimation of the Hubble constant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Hierarchical-models">Hierarchical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#A-joint-hierarchical-fit-of-all-galaxies">A joint hierarchical fit of all galaxies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Estimation-of-the-Hubble-constant">Estimation of the Hubble constant</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Further-reading">Further reading</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">6. Experiment design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiment_design.html">7. Experiment design</a></li>
 </ul>
 
             
@@ -446,8 +446,8 @@ div.rendered_html tbody tr:hover {
 <p>Last time we used simulations as well as prior and posterior predictive checks to check and improve upon our model for Cepheids in a single galaxy. We then found the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> posteriors for each galaxy independently.</p>
 <p>In order to use the period luminosity relation to extend the cosmic distance ladder, and eventually estimate the Hubble constant, the relation needs be <em>universal</em>, i.e. the same <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> should hold for all galaxies, within uncertainties.</p>
 <p>From our studies of individual galaxies, we should be able to see the similarities and differences between the results. But, how do we combine these results properly, and keep track of the uncertainties or correlations between parameters?</p>
-<section id="4.1.-Hierarchical-models">
-<h2>4.1. Hierarchical models<a class="headerlink" href="#4.1.-Hierarchical-models" title="Permalink to this headline">¶</a></h2>
+<section id="Hierarchical-models">
+<h2>Hierarchical models<a class="headerlink" href="#Hierarchical-models" title="Permalink to this headline">¶</a></h2>
 <p>A natural way to combine the inidividual galaxy results is to build a <strong>hierarchical model</strong> for all galaxies that we have data for. To understand how to do this, we can start with a simpler example of a simple normal model, like the one we used to understand Stan in the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>.</p>
 <p><img alt="Going from a single-level normal model to an hierarchical normal model" class="no-scaled-link" src="../_images/hierarchical_model.pdf" style="width: 600px;" /></p>
 <p>Imagine that <span class="math notranslate nohighlight">\(\mu\)</span> is now sampled from some parent distribution, with mean <span class="math notranslate nohighlight">\(\theta\)</span> and standard deviation <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
@@ -463,9 +463,9 @@ div.rendered_html tbody tr:hover {
 <div><p>Note: Even though the models we were working with so far often had multiple levels, the relationship between parameters across these levels was purely deterministic (e.g. between m and M). In a true hierarchical model, parameters in the hierarchy have probabilistic relationships.</p>
 </div></blockquote>
 </section>
-<section id="4.2.-A-joint-hierarchical-fit-of-all-galaxies">
-<h2>4.2. A joint hierarchical fit of all galaxies<a class="headerlink" href="#4.2.-A-joint-hierarchical-fit-of-all-galaxies" title="Permalink to this headline">¶</a></h2>
-<p><strong>Exercise 4.1:</strong> Sketch the graphical model for our hierarchical model for Cepheids over all galaxies</p>
+<section id="A-joint-hierarchical-fit-of-all-galaxies">
+<h2>A joint hierarchical fit of all galaxies<a class="headerlink" href="#A-joint-hierarchical-fit-of-all-galaxies" title="Permalink to this headline">¶</a></h2>
+<p><strong>Exercise 1:</strong> Sketch the graphical model for our hierarchical model for Cepheids over all galaxies</p>
 <p>A simplified Stan model for the full hierarchy can be found in <code class="docutils literal notranslate"><span class="pre">cepheid_v3.stan</span></code>. Note that this is based on <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code>, and you should also incorporate the changes that you made during the exercises in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> in order to achieve a good fit to the data. I will use <code class="docutils literal notranslate"><span class="pre">cepheid_v3.stan</span></code> here to demonstrate a few important points about hierarchical modelling.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -584,12 +584,17 @@ cepheid_info = np.loadtxt(&quot;data/cepheids.dat&quot;)
 
 # compile data from all galaxies
 galaxies = [int(ngc_no) for ngc_no in galaxy_info[:, 0]]
-data = {int(x[0]):{&#39;z&#39;:x[1]} for x in galaxy_info}
-with h5py.File(&quot;data/my_cepheid_data.h5&quot;, &quot;r&quot;) as f:
-    for g in galaxies:
-        group = f[str(g)]
-        for k in group:
-            data[g][k] = group[k][()]
+data = {int(x[0]):{&quot;z&quot;:x[1]} for x in galaxy_info}
+
+for g in galaxies:
+    j = np.where(cepheid_info[:, 0] == g)[0]
+    data[g][&quot;gal&quot;] = np.array([int(i) for i in cepheid_info[j, 0]])
+    data[g][&quot;Nc&quot;] = len(data[g][&quot;gal&quot;])
+    data[g][&quot;m_obs&quot;] = cepheid_info[j, 1]
+    data[g][&quot;sigma_m&quot;] = cepheid_info[j, 2]
+    data[g][&quot;P&quot;] = cepheid_info[j, 3]
+    data[g][&quot;delta_logO_H&quot;] = cepheid_info[j, 4]
+    data[g][&quot;log10P&quot;] = np.log10(data[g][&quot;P&quot;])
 </pre></div>
 </div>
 </div>
@@ -606,7 +611,7 @@ input_data = {}
 input_data[&quot;Ng&quot;] = len(galaxies[0:sel])
 input_data[&quot;Nt&quot;] = sum([data[g][&quot;Nc&quot;] for g in galaxies[0:sel]])
 input_data[&quot;m_obs&quot;] = np.concatenate([data[g][&quot;m_obs&quot;] for g in galaxies[0:sel]])
-input_data[&quot;log10P&quot;] = np.concatenate([data[g][&quot;log10P_true&quot;] for g in galaxies[0:sel]])
+input_data[&quot;log10P&quot;] = np.concatenate([data[g][&quot;log10P&quot;] for g in galaxies[0:sel]])
 input_data[&quot;gal_id&quot;] = np.concatenate([np.tile(i, data[g][&quot;Nc&quot;])
                                        for i, g in enumerate(galaxies[0:sel])]) + 1
 input_data[&quot;z&quot;] = galaxy_info.T[1][0:sel]
@@ -628,9 +633,8 @@ input_data[&quot;sigma_m&quot;] = 0.5
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO:cmdstanpy:compiling stan program, exe file: /Users/fran/projects/bayesian_workflow_prep/stan/cepheid_v3
-INFO:cmdstanpy:compiler options: stanc_options=None, cpp_options=None
-INFO:cmdstanpy:compiled model file: /Users/fran/projects/bayesian_workflow_prep/stan/cepheid_v3
+INFO:cmdstanpy:found newer exe file, not recompiling
+INFO:cmdstanpy:compiled model file: /Users/fran/projects/BayesianWorkflow/src/notebooks/stan/cepheid_v3
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
@@ -651,10 +655,10 @@ INFO:cmdstanpy:start chain 1
 INFO:cmdstanpy:start chain 2
 INFO:cmdstanpy:start chain 3
 INFO:cmdstanpy:start chain 4
-INFO:cmdstanpy:finish chain 4
 INFO:cmdstanpy:finish chain 3
 INFO:cmdstanpy:finish chain 2
 INFO:cmdstanpy:finish chain 1
+INFO:cmdstanpy:finish chain 4
 </pre></div></div>
 </div>
 <p>We should always check the sampler diagnostics first!</p>
@@ -672,13 +676,13 @@ INFO:cmdstanpy:finish chain 1
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpkrh3070j/cepheid_v3-202108241535-1-siwu8qu5.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpkrh3070j/cepheid_v3-202108241535-2-80wmkq_t.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpkrh3070j/cepheid_v3-202108241535-3-63ca8qiy.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpkrh3070j/cepheid_v3-202108241535-4-rcx1e0t7.csv
+INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpr09dsb_q/cepheid_v3-202108271034-1-wh46aoy8.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpr09dsb_q/cepheid_v3-202108271034-2-0yg0eblw.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpr09dsb_q/cepheid_v3-202108271034-3-onz77cbw.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpr09dsb_q/cepheid_v3-202108271034-4-axis39q5.csv
 
 Checking sampler transitions treedepth.
 Treedepth satisfactory for all transitions.
 
 Checking sampler transitions for divergences.
-24 of 4000 (0.6%) transitions ended with a divergence.
+619 of 4000 (15%) transitions ended with a divergence.
 These divergent transitions indicate that HMC is not fully able to explore the posterior distribution.
 Try increasing adapt delta closer to 1.
 If this doesn&#39;t remove all divergences, try to reparameterize the model.
@@ -688,7 +692,10 @@ E-BFMI satisfactory.
 
 Effective sample size satisfactory.
 
-Split R-hat values satisfactory all parameters.
+The following parameters had split R-hat greater than 1.1:
+  alpha[2], beta[2], M_true[108], M_true[110], M_true[114], M_true[120], M_true[125], M_true[128], M_true[129], M_true[130], M_true[132], M_true[134], M_true[138], M_true[141], M_true[143], M_true[144], M_true[147], M_true[149], M_true[157], M_true[158], M_true[159], M_true[160], M_true[161], m_true[108], m_true[110], m_true[114], m_true[120], m_true[125], m_true[128], m_true[129], m_true[130], m_true[132], m_true[134], m_true[138], m_true[141], m_true[143], m_true[144], m_true[147], m_true[149], m_true[157], m_true[158], m_true[159], m_true[160], m_true[161]
+Such high values indicate incomplete mixing and biased estimation.
+You should consider regularizating your model with additional prior information or a more effective parameterization.
 
 Processing complete.
 </pre></div></div>
@@ -751,62 +758,62 @@ Processing complete.
   <tbody>
     <tr>
       <th>lp__</th>
-      <td>-720.00</td>
-      <td>0.09100</td>
-      <td>2.600</td>
-      <td>-720.00</td>
-      <td>-720.00</td>
-      <td>-710.0</td>
-      <td>800.0</td>
-      <td>410.0</td>
-      <td>1.0</td>
+      <td>-450.00</td>
+      <td>0.4900</td>
+      <td>2.800</td>
+      <td>-450.000</td>
+      <td>-450.00</td>
+      <td>-440.0</td>
+      <td>33.0</td>
+      <td>25.0</td>
+      <td>1.1</td>
     </tr>
     <tr>
       <th>mu_alpha</th>
-      <td>-0.85</td>
-      <td>0.09200</td>
-      <td>2.200</td>
-      <td>-3.20</td>
-      <td>-0.81</td>
-      <td>1.3</td>
-      <td>550.0</td>
-      <td>290.0</td>
+      <td>-1.40</td>
+      <td>0.0580</td>
+      <td>1.700</td>
+      <td>-3.800</td>
+      <td>-1.50</td>
+      <td>1.5</td>
+      <td>910.0</td>
+      <td>680.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>tau_alpha</th>
-      <td>1.80</td>
-      <td>0.12000</td>
-      <td>2.600</td>
-      <td>0.30</td>
-      <td>1.10</td>
-      <td>5.5</td>
-      <td>490.0</td>
+      <td>2.20</td>
+      <td>0.1200</td>
+      <td>2.200</td>
+      <td>0.670</td>
+      <td>1.50</td>
+      <td>6.1</td>
+      <td>340.0</td>
       <td>250.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>mu_beta</th>
-      <td>-4.30</td>
-      <td>0.04300</td>
-      <td>1.800</td>
-      <td>-7.10</td>
-      <td>-4.20</td>
-      <td>-1.5</td>
-      <td>1600.0</td>
-      <td>850.0</td>
+      <td>-4.10</td>
+      <td>0.0290</td>
+      <td>0.860</td>
+      <td>-5.300</td>
+      <td>-4.10</td>
+      <td>-3.0</td>
+      <td>880.0</td>
+      <td>650.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>tau_beta</th>
-      <td>2.50</td>
-      <td>0.07200</td>
-      <td>2.500</td>
-      <td>0.71</td>
-      <td>1.80</td>
-      <td>6.5</td>
-      <td>1200.0</td>
-      <td>630.0</td>
+      <td>0.87</td>
+      <td>0.0840</td>
+      <td>1.600</td>
+      <td>0.039</td>
+      <td>0.37</td>
+      <td>3.1</td>
+      <td>360.0</td>
+      <td>270.0</td>
       <td>1.0</td>
     </tr>
     <tr>
@@ -822,73 +829,73 @@ Processing complete.
       <td>...</td>
     </tr>
     <tr>
-      <th>m_true[295]</th>
+      <th>m_true[158]</th>
       <td>28.00</td>
-      <td>0.00190</td>
-      <td>0.081</td>
-      <td>28.00</td>
+      <td>0.0220</td>
+      <td>0.160</td>
+      <td>28.000</td>
       <td>28.00</td>
       <td>29.0</td>
-      <td>1851.0</td>
-      <td>958.0</td>
-      <td>1.0</td>
+      <td>52.0</td>
+      <td>39.0</td>
+      <td>1.1</td>
     </tr>
     <tr>
-      <th>m_true[296]</th>
-      <td>27.00</td>
-      <td>0.00160</td>
-      <td>0.068</td>
-      <td>27.00</td>
-      <td>27.00</td>
-      <td>28.0</td>
-      <td>1897.0</td>
-      <td>981.0</td>
-      <td>1.0</td>
+      <th>m_true[159]</th>
+      <td>25.00</td>
+      <td>0.0081</td>
+      <td>0.070</td>
+      <td>25.000</td>
+      <td>25.00</td>
+      <td>25.0</td>
+      <td>75.0</td>
+      <td>56.0</td>
+      <td>1.1</td>
     </tr>
     <tr>
-      <th>m_true[297]</th>
+      <th>m_true[160]</th>
+      <td>25.00</td>
+      <td>0.0083</td>
+      <td>0.071</td>
+      <td>25.000</td>
+      <td>25.00</td>
+      <td>25.0</td>
+      <td>72.0</td>
+      <td>54.0</td>
+      <td>1.1</td>
+    </tr>
+    <tr>
+      <th>m_true[161]</th>
+      <td>27.00</td>
+      <td>0.0160</td>
+      <td>0.110</td>
+      <td>27.000</td>
+      <td>27.00</td>
+      <td>27.0</td>
+      <td>49.0</td>
+      <td>36.0</td>
+      <td>1.1</td>
+    </tr>
+    <tr>
+      <th>m_true[162]</th>
       <td>24.00</td>
-      <td>0.00072</td>
-      <td>0.039</td>
-      <td>24.00</td>
+      <td>0.0030</td>
+      <td>0.070</td>
+      <td>24.000</td>
       <td>24.00</td>
       <td>24.0</td>
-      <td>2984.0</td>
-      <td>1544.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>m_true[298]</th>
-      <td>20.00</td>
-      <td>0.00091</td>
-      <td>0.050</td>
-      <td>20.00</td>
-      <td>20.00</td>
-      <td>21.0</td>
-      <td>3084.0</td>
-      <td>1595.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>m_true[299]</th>
-      <td>23.00</td>
-      <td>0.00054</td>
-      <td>0.036</td>
-      <td>23.00</td>
-      <td>23.00</td>
-      <td>23.0</td>
-      <td>4425.0</td>
-      <td>2289.0</td>
+      <td>555.0</td>
+      <td>414.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
 </table>
-<p>607 rows × 9 columns</p>
+<p>333 rows × 9 columns</p>
 </div></div>
 </div>
 <p>Hmmm, it seems something is off. Let’s check the trace and pair plots…</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -896,9 +903,16 @@ Processing complete.
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_model_development_14_0.png" src="../_images/notebooks_model_development_14_0.png" />
+</div>
+</div>
 <p>To make a sensibly-sized pair plot and view divergent transitions, we have to pass some more information to <code class="docutils literal notranslate"><span class="pre">arviz</span></code>. Let’s focus on the relationship between the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> hyperparameters and <code class="docutils literal notranslate"><span class="pre">M_true</span></code> latent parameters for now:</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -911,9 +925,36 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 </pre></div>
 </div>
 </div>
-<p>The goemetry of a hierarchical model with its many latent parameters is much more complex than that of a single model, and divergent transitions can occur. Fortunately, these can be used to help us understand and fix our model.</p>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_model_development_16_0.png" src="../_images/notebooks_model_development_16_0.png" />
+</div>
+</div>
+<p>The geometry of a hierarchical model with its many latent parameters is much more complex than that of a single model, and divergent transitions can occur. Fortunately, these can be used to help us understand and fix our model.</p>
 <p>Here, we can see that the misspecification of the magnitude uncertainty causes problems, although these issues become less servere if we add data from more galaxies, as I’ll now demonstrate. It is important to remember that <strong>the geometry the sampler sees depends on both the model and the data</strong>.</p>
-<p><strong>Exercsie 4.2.1:</strong> Update the above Stan code with your improvements from the single galaxy case that you carried out in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> and display the code. Verify that you can run the above demo with no divergent transitions.</p>
+<p><strong>Exercise 2:</strong> Update the above Stan code with your improvements from the single galaxy case that you carried out in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> and display the code. Verify that you can run the above demo with no divergent transitions.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p><strong>Exercise 3:</strong> Perform a joint fit of all the galaxies using your improved model, and visualise the posterior predictive distribution of your fit. Can you fit the data well?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># to be completed...
+</pre></div>
+</div>
+</div>
+<p><strong>Homework exercise 1:</strong> Compare the galaxy-level <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> distributions to those found from individual fits that you completed as part of the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a>. What differences can you see?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -923,27 +964,7 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 4.2.2:</strong> Perform a joint fit of all the galaxies using your improved model, and visualise the posterior predictive distribution of your fit. Can you fit the data well?</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
-</pre></div>
-</div>
-</div>
-<p><strong>Exercise 4.2.3:</strong> Compare the galaxy-level <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> distributions to those found from individual fits that you completed as part of the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a>. What differences can you see?</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
-</pre></div>
-</div>
-</div>
-<p><strong>Exercise 4.2.4:</strong> Make a plot to show how the constraints on the parent distributions for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> change depending on the number of galaxies used in the sample. What happens when we only use one or two galaxies?</p>
+<p><strong>Homework exercise 2:</strong> Make a plot to show how the constraints on the parent distributions for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> change depending on the number of galaxies used in the sample. What happens when we only use one or two galaxies?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -954,10 +975,10 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 </div>
 </div>
 </section>
-<section id="4.3.-Estimation-of-the-Hubble-constant">
-<h2>4.3. Estimation of the Hubble constant<a class="headerlink" href="#4.3.-Estimation-of-the-Hubble-constant" title="Permalink to this headline">¶</a></h2>
+<section id="Estimation-of-the-Hubble-constant">
+<h2>Estimation of the Hubble constant<a class="headerlink" href="#Estimation-of-the-Hubble-constant" title="Permalink to this headline">¶</a></h2>
 <p>So far we have assumed a value for <code class="docutils literal notranslate"><span class="pre">H0</span></code> in our fits in order to convert between apparent and absolute magnitude. This is necessary to fit for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Let’s think about how we can extend the model to make an estimate of <code class="docutils literal notranslate"><span class="pre">H0</span></code>, rather than assuming it.</p>
-<p><strong>Exercise 4.3.1:</strong> What happens if we simply leave <code class="docutils literal notranslate"><span class="pre">H0</span></code> as a free parameter in our existing hierarchical model? Why is this?</p>
+<p><strong>Exercise 4:</strong> What happens if we simply leave <code class="docutils literal notranslate"><span class="pre">H0</span></code> as a free parameter in our existing hierarchical model? Why is this?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -967,7 +988,7 @@ av.plot_pair(fit_a, var_names=[&quot;M_true&quot;, &quot;alpha&quot;, &quot;beta
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 4.3.2:</strong> What happens if we change the value of <code class="docutils literal notranslate"><span class="pre">H0</span></code> assumed in our analysis? Which results change, and which stay the same?</p>
+<p><strong>Exercise 5:</strong> What happens if we change the value of <code class="docutils literal notranslate"><span class="pre">H0</span></code> assumed in our analysis? Which results change, and which stay the same?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -992,7 +1013,7 @@ P = mw_cepheids.T[2] # period in days
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 4.3.1:</strong> Use this new data set to make an independent estimate of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, without assuming <code class="docutils literal notranslate"><span class="pre">H0</span></code>, what do you find?</p>
+<p><strong>Homework exercise 3:</strong> Use this new data set to make an independent estimate of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, without assuming <code class="docutils literal notranslate"><span class="pre">H0</span></code>, what do you find?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -1002,11 +1023,11 @@ P = mw_cepheids.T[2] # period in days
 </pre></div>
 </div>
 </div>
-<p><strong>Exercise 4.3.2:</strong> Update the hierarchical model that you have to include key information from the calibration data into your joint fit. If done correctly, this should allow you to break the degeneracy in the model and directly estimate the Hubble constant. Try to include all relevant uncertainties.</p>
+<p><strong>Homework exercise 4:</strong> Update the hierarchical model that you have to include key information from the calibration data into your joint fit. If done correctly, this should allow you to break the degeneracy in the model and directly estimate the Hubble constant. Try to include all relevant uncertainties.</p>
 <blockquote>
 <div><p><strong>Hint</strong>: Assume that <code class="docutils literal notranslate"><span class="pre">alpha</span></code> from the Milky Way dataset is a fair representaion of <code class="docutils literal notranslate"><span class="pre">mu_alpha</span></code></p>
 </div></blockquote>
-<p><strong>Exercise 4.3.4:</strong> What factors affect the uncertainties in your estimate? How could you get a more constrained result?</p>
+<p><strong>Homework exercise 5:</strong> What factors affect the uncertainties in your estimate? How could you get a more constrained result?</p>
 </section>
 <section id="Further-reading">
 <h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline">¶</a></h2>
@@ -1029,7 +1050,7 @@ P = mw_cepheids.T[2] # period in days
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="experiment_design.html" class="btn btn-neutral float-right" title="6. Experiment design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="experiment_design.html" class="btn btn-neutral float-right" title="7. Experiment design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="model_checking.html" class="btn btn-neutral float-left" title="3. Model checking" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
