@@ -8,27 +8,31 @@ This course is part of the ORIGINS Data Science Laboratory's Block courses. Plea
 Installation
 ------------
 
-To run the course notebooks, you have a few different options. I recommend to follow the standard install, and use docker or binder if there are problems.
+To run the course notebooks, you have a few different options. I recommend to follow the standard install, and use docker or binder if there are problems. 
 
-* **Standard install:** Fork/clone/download material from this `GitHub repository <https://github.com/cescalara/BayesianWorkflow>`_
+* **Plan A: Standard install:** Fork/clone/download material from this `GitHub repository <https://github.com/cescalara/BayesianWorkflow>`_, everything you need is in ``src/notebooks``
 
-  * Everything you need is in ``src/notebooks``
-  * ``pip install scipy cython==0.29.24 cmdstanpy==0.9.76 arviz==0.11.2 ultranest==3.3.0``
-  * Run ``install_cmdstan`` as described in the `cmdstanpy docs <https://cmdstanpy.readthedocs.io/en/v0.9.76/installation.html>`_
+  * I recommend using a `virtual environment <https://docs.python.org/3/tutorial/venv.html>`_ if possible
+  * Install the basics if necessary: ``pip install numpy scipy matplotlib``
+  * Install: ``pip install cython==0.29.24 cmdstanpy==0.9.76 arviz==0.11.2 ultranest==3.3.0``
+  * Run ``install_cmdstan`` (as described in the `cmdstanpy docs <https://cmdstanpy.readthedocs.io/en/v0.9.76/installation.html>`_)
+  * If using a virtual environment, set up an ipython kernel with this environment (as described `here <https://ipython.readthedocs.io/en/stable/install/kernel_install.html>`_)
+  * Open a notebook using jupyter, select correct kernel and get running
 
-* **Binder:** Click `here <https://mybinder.org/v2/gh/cescalara/BayesianWorkflow/HEAD>`_ to launch a working environment via binder, all notebooks are in ``work/``
-
-  * Using binder you will automatically time out of sessions if you are inactive
-  * It is possible to download notebooks edited here, but not trivial to upload them
-
-* **Docker:** Use the ``Dockerfile`` provided in the `GitHub repository <https://github.com/cescalara/BayesianWorkflow>`_ to set up a docker environment
+* **Plan B: Docker:** Fork/clone/download material from this `GitHub repository <https://github.com/cescalara/BayesianWorkflow>`_, everything you need is in ``src/notebooks``
 
   * Install `docker <https://www.docker.com>`_ on your computer
-  * In the same directory as the ``Dockerfile``, run ``docker build --rm -t jupyter/my-datascience-notebook .``
-  * Run ``docker run -p 8888:8888 -v "${PWD}":/home/jovyan/work jupyter/my-datascience-notebook jupyter lab``
+  * Get a ready made docker enironment: ``docker pull cescalara/bayesian_workflow``
+  * Run ``docker run -p 8888:8888 -v "${PWD}":/home/jovyan/work cescalara/bayesian_workflow jupyter-notebook``
   * Open the given url ``http://127.0.0.1:8888/lab?token=....`` in your browser
-  * The current directory will be mounted to the docker and the jupyter server has the enviroment needed to run the notebooks
+  * The current directory will be mounted to the docker and the jupyter server has the environment needed to run the notebooks
+    
+* **Plan C: Binder:** Click `here <https://mybinder.org/v2/gh/cescalara/BayesianWorkflow/HEAD>`_ to launch a working environment via binder, all notebooks are in ``work/``
 
+  * The binder may take a while to load, this is normal
+  * Using binder you will automatically time out of sessions if you are inactive, so save your work frequently
+  * The changes that you make are *not persistent* - if you close and repoen a tab your changes will be lost
+  * To work continuously, download and upload your changes between sessions
     
 Acknowledgements
 ----------------

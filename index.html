@@ -196,26 +196,31 @@
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>To run the course notebooks, you have a few different options. I recommend to follow the standard install, and use docker or binder if there are problems.</p>
 <ul class="simple">
-<li><p><strong>Standard install:</strong> Fork/clone/download material from this <a class="reference external" href="https://github.com/cescalara/BayesianWorkflow">GitHub repository</a></p>
+<li><p><strong>Plan A: Standard install:</strong> Fork/clone/download material from this <a class="reference external" href="https://github.com/cescalara/BayesianWorkflow">GitHub repository</a>, everything you need is in <code class="docutils literal notranslate"><span class="pre">src/notebooks</span></code></p>
 <ul>
-<li><p>Everything you need is in <code class="docutils literal notranslate"><span class="pre">src/notebooks</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">scipy</span> <span class="pre">cython==0.29.24</span> <span class="pre">cmdstanpy==0.9.76</span> <span class="pre">arviz==0.11.2</span> <span class="pre">ultranest==3.3.0</span></code></p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">install_cmdstan</span></code> as described in the <a class="reference external" href="https://cmdstanpy.readthedocs.io/en/v0.9.76/installation.html">cmdstanpy docs</a></p></li>
+<li><p>I recommend using a <a class="reference external" href="https://docs.python.org/3/tutorial/venv.html">virtual environment</a> if possible</p></li>
+<li><p>Install the basics if necessary: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">numpy</span> <span class="pre">scipy</span> <span class="pre">matplotlib</span></code></p></li>
+<li><p>Install: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">cython==0.29.24</span> <span class="pre">cmdstanpy==0.9.76</span> <span class="pre">arviz==0.11.2</span> <span class="pre">ultranest==3.3.0</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">install_cmdstan</span></code> (as described in the <a class="reference external" href="https://cmdstanpy.readthedocs.io/en/v0.9.76/installation.html">cmdstanpy docs</a>)</p></li>
+<li><p>If using a virtual environment, set up an ipython kernel with this environment (as described <a class="reference external" href="https://ipython.readthedocs.io/en/stable/install/kernel_install.html">here</a>)</p></li>
+<li><p>Open a notebook using jupyter, select correct kernel and get running</p></li>
 </ul>
 </li>
-<li><p><strong>Binder:</strong> Click <a class="reference external" href="https://mybinder.org/v2/gh/cescalara/BayesianWorkflow/HEAD">here</a> to launch a working environment via binder, all notebooks are in <code class="docutils literal notranslate"><span class="pre">work/</span></code></p>
-<ul>
-<li><p>Using binder you will automatically time out of sessions if you are inactive</p></li>
-<li><p>It is possible to download notebooks edited here, but not trivial to upload them</p></li>
-</ul>
-</li>
-<li><p><strong>Docker:</strong> Use the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> provided in the <a class="reference external" href="https://github.com/cescalara/BayesianWorkflow">GitHub repository</a> to set up a docker environment</p>
+<li><p><strong>Plan B: Docker:</strong> Fork/clone/download material from this <a class="reference external" href="https://github.com/cescalara/BayesianWorkflow">GitHub repository</a>, everything you need is in <code class="docutils literal notranslate"><span class="pre">src/notebooks</span></code></p>
 <ul>
 <li><p>Install <a class="reference external" href="https://www.docker.com">docker</a> on your computer</p></li>
-<li><p>In the same directory as the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>, run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span> <span class="pre">--rm</span> <span class="pre">-t</span> <span class="pre">jupyter/my-datascience-notebook</span> <span class="pre">.</span></code></p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-p</span> <span class="pre">8888:8888</span> <span class="pre">-v</span> <span class="pre">&quot;${PWD}&quot;:/home/jovyan/work</span> <span class="pre">jupyter/my-datascience-notebook</span> <span class="pre">jupyter</span> <span class="pre">lab</span></code></p></li>
+<li><p>Get a ready made docker enironment: <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">cescalara/bayesian_workflow</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-p</span> <span class="pre">8888:8888</span> <span class="pre">-v</span> <span class="pre">&quot;${PWD}&quot;:/home/jovyan/work</span> <span class="pre">cescalara/bayesian_workflow</span> <span class="pre">jupyter-notebook</span></code></p></li>
 <li><p>Open the given url <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8888/lab?token=....</span></code> in your browser</p></li>
-<li><p>The current directory will be mounted to the docker and the jupyter server has the enviroment needed to run the notebooks</p></li>
+<li><p>The current directory will be mounted to the docker and the jupyter server has the environment needed to run the notebooks</p></li>
+</ul>
+</li>
+<li><p><strong>Plan C: Binder:</strong> Click <a class="reference external" href="https://mybinder.org/v2/gh/cescalara/BayesianWorkflow/HEAD">here</a> to launch a working environment via binder, all notebooks are in <code class="docutils literal notranslate"><span class="pre">work/</span></code></p>
+<ul>
+<li><p>The binder may take a while to load, this is normal</p></li>
+<li><p>Using binder you will automatically time out of sessions if you are inactive, so save your work frequently</p></li>
+<li><p>The changes that you make are <em>not persistent</em> - if you close and repoen a tab your changes will be lost</p></li>
+<li><p>To work continuously, download and upload your changes between sessions</p></li>
 </ul>
 </li>
 </ul>
