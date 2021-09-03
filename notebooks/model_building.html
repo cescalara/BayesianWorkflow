@@ -596,8 +596,8 @@ pass
 <span></span># plot the true and observed apparent magnitudes
 log10_P_grid = np.linspace(0, 3)
 fig, ax = plt.subplots()
-#ax.scatter(log10_P, m_true, label=&quot;m_obs&quot;)
-#ax.scatter(log10_P, m_obs, label=&quot;m_obs&quot;)
+#ax.scatter(log10P, m_true, label=&quot;m_true&quot;)
+#ax.scatter(log10P, m_obs, label=&quot;m_obs&quot;)
 ax.invert_yaxis() # so brighter as y-axis increases
 ax.legend()
 ax.set_xlabel(&quot;log10(P/days)&quot;)
@@ -635,11 +635,11 @@ Text(0, 0.5, &#39;m&#39;)
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span># plot the true and observed absolute magnitudes, compare with true P-L relation
-log10_P_grid = np.linspace(0, 3)
+log10P_grid = np.linspace(0, 3)
 fig, ax = plt.subplots()
-#ax.scatter(log10_P, M_true, label=&quot;M_true&quot;)
-#ax.scatter(log10_P, M_obs, label=&quot;M_obs&quot;)
-ax.plot(log10_P_grid, alpha + beta * log10_P_grid)
+#ax.scatter(log10P, M_true, label=&quot;M_true&quot;)
+#ax.scatter(log10P, M_obs, label=&quot;M_obs&quot;)
+ax.plot(log10P_grid, alpha + beta * log10P_grid)
 ax.invert_yaxis() # so brighter as y-axis increases
 ax.legend()
 ax.set_xlabel(&quot;log10(P/days)&quot;)
@@ -687,10 +687,10 @@ N_sims = 250
 for i in range(N_sims):
     # to be completed...
     # run simulation
-    # ax.scatter(log10_P, M_true, color=&quot;r&quot;, alpha=0.01)
+    # ax.scatter(log10P, M_obs, color=&quot;r&quot;, alpha=0.01)
     pass
-#ax.scatter(log10_P, M_obs, label=&quot;M_obs&quot;, color=&quot;g&quot;) # will not change per sim
-ax.plot(log10_P_grid, alpha + beta * log10_P_grid, color=&quot;k&quot;, alpha=0.5)
+#ax.scatter(log10P, M_true, label=&quot;M_true&quot;, color=&quot;g&quot;) # will not change per sim
+ax.plot(log10P_grid, alpha + beta * log10_P_grid, color=&quot;k&quot;, alpha=0.5)
 ax.invert_yaxis() # so brighter as y-axis increases
 ax.legend()
 ax.set_xlabel(&quot;log10(P/days)&quot;)
@@ -965,6 +965,7 @@ for g in galaxies:
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span># plot for absolute magnitude this time
 fig, ax = plt.subplots()
+fig.set_size_inches((10, 7))
 for g in galaxies:
     # to be completed...
     pass
@@ -1000,9 +1001,9 @@ No handles with labels found to put in legend.
 </div>
 </div>
 <p>We should now see a stronger global relation, but still with considerable intrinsic scatter and potential differences between galaxies.</p>
-<p>We can see other quantities in the provided files, such as a measure of the metallicity of each star, <code class="docutils literal notranslate"><span class="pre">delta_log_O_H</span></code>.</p>
+<p>We can see other quantities in the provided files, such as a measure of the metallicity of each star, <code class="docutils literal notranslate"><span class="pre">delta_logO_H</span></code>.</p>
 <ul class="simple">
-<li><p>What do the distributions of <code class="docutils literal notranslate"><span class="pre">delta_logO_H</span></code> look like for different galaxies? Is there any relationship between <code class="docutils literal notranslate"><span class="pre">delta_log_O_H</span></code> and <code class="docutils literal notranslate"><span class="pre">M_obs</span></code>?</p></li>
+<li><p>What do the distributions of <code class="docutils literal notranslate"><span class="pre">delta_logO_H</span></code> look like for different galaxies? Is there any relationship between <code class="docutils literal notranslate"><span class="pre">delta_logO_H</span></code> and <code class="docutils literal notranslate"><span class="pre">M_obs</span></code>?</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:

@@ -505,7 +505,7 @@ ax.axvline(mu, color=&quot;k&quot;, linestyle=&quot;:&quot;)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.lines.Line2D at 0x142039a00&gt;
+&lt;matplotlib.lines.Line2D at 0x142f92a90&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -523,7 +523,7 @@ ax.axvline(mu, color=&quot;k&quot;, linestyle=&quot;:&quot;)
 
 <span class="n">parameters</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="n">real</span><span class="w"> </span><span class="n">mu</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">real</span><span class="w"> </span><span class="n">sigma</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">real</span><span class="o">&lt;</span><span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="o">&gt;</span><span class="w"> </span><span class="n">sigma</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
 <span class="n">model</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -532,7 +532,7 @@ ax.axvline(mu, color=&quot;k&quot;, linestyle=&quot;:&quot;)
 </pre></div>
 </div>
 <blockquote>
-<div><p>NB: by not specifying priors or bounds on the parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code>, we implicitly define uniform priors over +/- infinity.</p>
+<div><p>NB: by not specifying priors on the parameters <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code>, we implicitly define uniform priors over +/- infinity, or within the bounds given by <code class="docutils literal notranslate"><span class="pre">&lt;lower=L,</span> <span class="pre">upper=U&gt;</span></code>.</p>
 </div></blockquote>
 <p>You can find this model in the file <code class="docutils literal notranslate"><span class="pre">stan/normal.stan</span></code>.</p>
 <div class="nbinput docutils container">
@@ -650,38 +650,38 @@ INFO:cmdstanpy:finish chain 4
   <tbody>
     <tr>
       <th>lp__</th>
-      <td>-87.0</td>
-      <td>0.0270</td>
-      <td>1.10</td>
-      <td>-89.0</td>
-      <td>-86.0</td>
-      <td>-86.0</td>
-      <td>1600.0</td>
-      <td>23000.0</td>
+      <td>-83.0</td>
+      <td>0.0260</td>
+      <td>1.00</td>
+      <td>-85.0</td>
+      <td>-82.0</td>
+      <td>-82.0</td>
+      <td>1500.0</td>
+      <td>22000.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>mu</th>
-      <td>4.5</td>
-      <td>0.0089</td>
-      <td>0.49</td>
-      <td>3.7</td>
-      <td>4.5</td>
-      <td>5.2</td>
-      <td>3000.0</td>
-      <td>44000.0</td>
+      <td>4.6</td>
+      <td>0.0083</td>
+      <td>0.47</td>
+      <td>3.8</td>
+      <td>4.6</td>
+      <td>5.4</td>
+      <td>3300.0</td>
+      <td>46000.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td>3.5</td>
-      <td>0.0072</td>
-      <td>0.37</td>
-      <td>2.9</td>
-      <td>3.5</td>
-      <td>4.1</td>
-      <td>2600.0</td>
-      <td>37000.0</td>
+      <td>3.3</td>
+      <td>0.0063</td>
+      <td>0.34</td>
+      <td>2.8</td>
+      <td>3.3</td>
+      <td>3.9</td>
+      <td>2900.0</td>
+      <td>41000.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -703,7 +703,7 @@ fit.diagnose();
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpcxu82mzt/normal-202108271540-1-2zsk09lm.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpcxu82mzt/normal-202108271540-2-zp2wwq_y.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpcxu82mzt/normal-202108271540-3-_p_rvi8b.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpcxu82mzt/normal-202108271540-4-yjeqr2al.csv
+INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpb0698seu/normal-202109031825-1-s6u3qyt6.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpb0698seu/normal-202109031825-2-k1t3aeih.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpb0698seu/normal-202109031825-3-z1ss6up9.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpb0698seu/normal-202109031825-4-w_mnq3pl.csv
 
 Checking sampler transitions treedepth.
 Treedepth satisfactory for all transitions.
@@ -726,7 +726,243 @@ Processing complete, no problems detected.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># use arviz to visualise the results
+<span></span># access parameter chains
+mu_chain = fit.stan_variable(&quot;mu&quot;)
+
+fig, ax = plt.subplots()
+ax.hist(mu_chain)
+
+print(np.mean(mu_chain))
+print(np.shape(mu_chain)) # 1000 iterations x 4 chains
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+4.610008310000001
+(4000,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_introduction_9_1.png" src="../_images/notebooks_introduction_9_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># access all parameter chains in dict
+fit.stan_variables()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;mu&#39;: array([4.57199, 4.16903, 4.58235, ..., 4.45103, 4.51904, 4.67652]),
+ &#39;sigma&#39;: array([2.4773 , 3.92432, 2.74607, ..., 3.491  , 3.01159, 3.29009])}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># access all chains and sample info
+# e.g. lp__: log posterior value
+# Don&#39;t worry too much about all the names with underscores__
+fit.draws_pd()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lp__</th>
+      <th>accept_stat__</th>
+      <th>stepsize__</th>
+      <th>treedepth__</th>
+      <th>n_leapfrog__</th>
+      <th>divergent__</th>
+      <th>energy__</th>
+      <th>mu</th>
+      <th>sigma</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-85.8295</td>
+      <td>0.699286</td>
+      <td>0.725380</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>87.4636</td>
+      <td>4.57199</td>
+      <td>2.47730</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-83.7962</td>
+      <td>0.983581</td>
+      <td>0.725380</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>86.8479</td>
+      <td>4.16903</td>
+      <td>3.92432</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-83.1709</td>
+      <td>0.970982</td>
+      <td>0.725380</td>
+      <td>3.0</td>
+      <td>7.0</td>
+      <td>0.0</td>
+      <td>84.9906</td>
+      <td>4.58235</td>
+      <td>2.74607</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-83.1750</td>
+      <td>0.826682</td>
+      <td>0.725380</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>85.5702</td>
+      <td>4.16775</td>
+      <td>2.85137</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-82.3767</td>
+      <td>0.789408</td>
+      <td>0.725380</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>85.7000</td>
+      <td>4.61250</td>
+      <td>3.60720</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3995</th>
+      <td>-81.8448</td>
+      <td>0.968753</td>
+      <td>0.849615</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>82.2562</td>
+      <td>4.45911</td>
+      <td>3.20455</td>
+    </tr>
+    <tr>
+      <th>3996</th>
+      <td>-82.5267</td>
+      <td>0.934572</td>
+      <td>0.849615</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>82.6128</td>
+      <td>4.71077</td>
+      <td>2.86769</td>
+    </tr>
+    <tr>
+      <th>3997</th>
+      <td>-82.1453</td>
+      <td>0.766064</td>
+      <td>0.849615</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>84.9536</td>
+      <td>4.45103</td>
+      <td>3.49100</td>
+    </tr>
+    <tr>
+      <th>3998</th>
+      <td>-82.0387</td>
+      <td>0.994238</td>
+      <td>0.849615</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>82.2948</td>
+      <td>4.51904</td>
+      <td>3.01159</td>
+    </tr>
+    <tr>
+      <th>3999</th>
+      <td>-81.8205</td>
+      <td>0.917242</td>
+      <td>0.849615</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>82.8157</td>
+      <td>4.67652</td>
+      <td>3.29009</td>
+    </tr>
+  </tbody>
+</table>
+<p>4000 rows × 9 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># use arviz to visualise the results if you like, it has common functionality built in
 av.plot_trace(fit);
 
 av.plot_pair(fit, marginals=True);
@@ -737,14 +973,70 @@ av.plot_pair(fit, marginals=True);
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_introduction_9_0.png" src="../_images/notebooks_introduction_9_0.png" />
+<img alt="../_images/notebooks_introduction_12_0.png" src="../_images/notebooks_introduction_12_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_introduction_9_1.png" src="../_images/notebooks_introduction_9_1.png" />
+<img alt="../_images/notebooks_introduction_12_1.png" src="../_images/notebooks_introduction_12_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># the av.plot.. calls return an axis that you can continue plotting on
+ax = av.plot_pair(fit, var_names=[&quot;mu&quot;, &quot;sigma&quot;])
+ax.axvline(mu, color=&quot;r&quot;)
+ax.axhline(sigma, color=&quot;r&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.lines.Line2D at 0x14346e760&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_introduction_13_1.png" src="../_images/notebooks_introduction_13_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># or you can pass them an axis
+fig, ax = plt.subplots()
+ax.scatter(mu, sigma, color=&quot;r&quot;)
+av.plot_pair(fit, var_names=[&quot;mu&quot;, &quot;sigma&quot;], ax=ax)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;AxesSubplot:xlabel=&#39;mu&#39;, ylabel=&#39;sigma&#39;&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_introduction_14_1.png" src="../_images/notebooks_introduction_14_1.png" />
 </div>
 </div>
 <p>Ok, so it looks like everything is up and running. You can try changing the input data and see how the results change accordingly. Let’s investigate a few specific cases in the exercise below.</p>
@@ -753,10 +1045,11 @@ av.plot_pair(fit, marginals=True);
 <ul class="simple">
 <li><p>Very little data (small <code class="docutils literal notranslate"><span class="pre">N</span></code>)</p></li>
 <li><p>Large amounts of data (large <code class="docutils literal notranslate"><span class="pre">N</span></code>)</p></li>
-<li><p>Narrow priors on <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code> Make plots to summarise the comparison with the original case.</p></li>
+<li><p>Narrow priors on <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code></p></li>
 </ul>
+<p>Make plots to summarise the comparison with the original case. What differences can be seen with what we might expect from a point estimate of these parameters using e.g. maximum likelihood.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -781,10 +1074,10 @@ used to <strong>draw conclusions</strong> via <strong>inference</strong>. With t
 <p>In this short course, we will <em>not</em> learn about <strong>frequentist</strong> statistical methods or <strong>machine learning</strong> approaches, which are both things you have probably heard of and may be interested in using in your research. While I might make fun of them a bit below, there are certainly cases where these could be more appropriate than what we will focus on.</p>
 <p>So, before jumping into the Bayesian workflow, I’ll try to <em>briefly</em> highlight some similarities and differences between these topics, from the Bayesian perspective.</p>
 <p>Let’s start by recalling Bayes’ theorem with data, <span class="math notranslate nohighlight">\(x\)</span>, and model parameters <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
-<p><img alt="e4abcfbe7fa5452f89bcbfd9ec94f989" class="no-scaled-link" src="../_images/bayes_theorem.pdf" style="width: 700px;" /></p>
+<p><img alt="be3bf958042e415aaf8d0896bf7be1b7" class="no-scaled-link" src="../_images/bayes_theorem.pdf" style="width: 700px;" /></p>
 <p>Frequentist methods</p>
 <p>We can start to think about some differences between Bayesian and frequentist statistical views by studying the following xkcd comic:</p>
-<p><img alt="5f6103aa86234f948a5b18a9ee2d92d4" class="no-scaled-link" src="https://imgs.xkcd.com/comics/frequentists_vs_bayesians.png" style="width: 350px;" /></p>
+<p><img alt="64c6151a1c1445679877b7f28e3639d8" class="no-scaled-link" src="https://imgs.xkcd.com/comics/frequentists_vs_bayesians.png" style="width: 350px;" /></p>
 <p>Both approaches involve a likelihood - <span class="math notranslate nohighlight">\(p(\mathrm{answer}~|~\mathrm{sun~status})\)</span>. For this problem, the probability of the machine saying “yes” given the sun has <em>not</em> exploded is equal to the probablity of rolling two sixes, i.e.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}p(\mathrm{yes}~|~\mathrm{sun~ok}) = 1/36, \\
@@ -797,11 +1090,11 @@ p(\mathrm{yes}~|~\mathrm{sun~exploded}) = 35/36.\end{split}\]</div>
 <p>So is frequentist statistics just Bayesian statistics without priors? Unfortunately, it is not so simple. Sure, we can think about the cases where they might seem equivalent. In frequentist approaches it is typical to find the <em>maximum likelihood estimate</em> of a parameter based on data. Could this be the same as the <em>maximum a posterior</em> value of a parameter for a uniform prior?</p>
 <p>However, it is important to keep in mind the different definitions of probability that the two views are based on: probability as a <em>degree of belief</em> vs. probability as a <em>frequency in the limit of infinte observations</em>. This also comes into the treatment of uncertainty. In the Bayesian view, <strong>the data are fixed and parameters are uncertain</strong>, whereas in the frequentist case, <strong>the true parameters are fixed, and we estimate them imperfectly due to uncertainty present in the data from finite
 sampling</strong>.</p>
-<p><img alt="4c5950663ca94c4dbb2d4035653f6aa9" class="no-scaled-link" src="../_images/bayes_vs_freq.png" style="width: 800px;" /></p>
+<p><img alt="3b8bbacda0da465ca422ccbc26656005" class="no-scaled-link" src="../_images/bayes_vs_freq.png" style="width: 800px;" /></p>
 <p>Machine learning</p>
 <p>Machine learning is used to describe basically anything these days, but here I am referring to methods based on neural networks.</p>
-<p><img alt="b27990d4b4974be784eab9bacaacf9c7" class="no-scaled-link" src="https://imgs.xkcd.com/comics/machine_learning.png" style="width: 350px;" /></p>
-<p>We can think about standard machine learning approaches as similar to maximum likliehood estimation. If we don’t know what the likelihood looks like, or cannot come up with a functional form for it, we can choose to represent it as a matrix of unknown weights.</p>
+<p><img alt="4099205706784213acc12f329c321593" class="no-scaled-link" src="https://imgs.xkcd.com/comics/machine_learning.png" style="width: 350px;" /></p>
+<p>We can think about standard machine learning approaches as similar to maximum likelihood estimation. If we don’t know what the likelihood looks like, or cannot come up with a functional form for it, we can choose to represent it as a matrix of unknown weights.</p>
 <p>We can then <em>train</em> a neural network with simulated or labelled data in order to <em>learn</em> the appropriate weights, an optimisation process that can be thought of as maximising the likelihood. Once trained, the resulting matrix of weights can be used like an operator to return the maximum likelihood estimate for new input data.</p>
 <p>A key difference in this approach is that the likelihood itself is now a <em>black box</em>, and so <strong>it is not so clear how we should interpret our model or the resulting inferences</strong>. <strong>The quantification of uncertainty is also not straightforward</strong>. This is fine if you just want to make classifications or predictions, without asking why. That said, there is plenty of work being done on ways to interpret neural networks and methods exist to bring more Bayesian thinking in and allow uncertainty
 quantification.</p>
@@ -817,7 +1110,7 @@ quantification.</p>
 <p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is a known quantity that is constant for all observations.</p>
 <p><strong>Exercise 2 (5 points):</strong> Write a Stan model for the above model, considering the dataset introduced below. Verify that it compiles.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -836,7 +1129,7 @@ ax.set_ylabel(&quot;y&quot;)
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -848,11 +1141,11 @@ Text(0, 0.5, &#39;y&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_introduction_17_1.png" src="../_images/notebooks_introduction_17_1.png" />
+<img alt="../_images/notebooks_introduction_22_1.png" src="../_images/notebooks_introduction_22_1.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -865,7 +1158,7 @@ Text(0, 0.5, &#39;y&#39;)
 </div>
 <p><strong>Exercise 3 (5 points):</strong> Build a dictionary to pass the data to Stan and fit the model. Visualise your results for <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(c\)</span>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -876,9 +1169,9 @@ Text(0, 0.5, &#39;y&#39;)
 <p><strong>Exercise 4 (5 points):</strong> We now learn that the <span class="math notranslate nohighlight">\(x\)</span> observations also have an associated uncertainty, <span class="math notranslate nohighlight">\(\tau\)</span>, such that</p>
 <div class="math notranslate nohighlight">
 \[\hat{x} \sim \mathcal{N}(x, \tau)\]</div>
-<p>We are told that <span class="math notranslate nohighlight">\(\tau = 1\)</span>. Update your Stan model to include this information and repeat the fit to data. How does this affect our results for the line fit?</p>
+<p>We are told that <span class="math notranslate nohighlight">\(\tau = 2\)</span>. Update your Stan model to include this information and repeat the fit to data. How does this affect our results for the line fit?</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -893,7 +1186,7 @@ Text(0, 0.5, &#39;y&#39;)
 <li><p>Make another 5 observations of coin flips and add these to your original sample. How does this affect the result for <span class="math notranslate nohighlight">\(p\)</span>?</p></li>
 </ul>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
