@@ -20,7 +20,7 @@ stan::math::profile_map profiles__;
 static constexpr std::array<const char*, 7> locations_array__ = 
 {" (found before start of program)",
  " (in '/Users/fran/projects/BayesianWorkflow/src/notebooks/stan/normal.stan', line 7, column 4 to column 12)",
- " (in '/Users/fran/projects/BayesianWorkflow/src/notebooks/stan/normal.stan', line 8, column 4 to column 15)",
+ " (in '/Users/fran/projects/BayesianWorkflow/src/notebooks/stan/normal.stan', line 8, column 4 to column 24)",
  " (in '/Users/fran/projects/BayesianWorkflow/src/notebooks/stan/normal.stan', line 12, column 4 to column 26)",
  " (in '/Users/fran/projects/BayesianWorkflow/src/notebooks/stan/normal.stan', line 2, column 4 to column 10)",
  " (in '/Users/fran/projects/BayesianWorkflow/src/notebooks/stan/normal.stan', line 3, column 11 to column 12)",
@@ -128,7 +128,8 @@ class normal_model final : public model_base_crtp<normal_model> {
       sigma = DUMMY_VAR__;
       
       current_statement__ = 2;
-      sigma = in__.template read<local_scalar_t__>();
+      sigma = in__.template read_constrain_lb<local_scalar_t__, jacobian__>(
+                0, lp__);
       {
         current_statement__ = 3;
         lp_accum__.add(normal_lpdf<propto__>(x, mu, sigma));
@@ -176,7 +177,8 @@ class normal_model final : public model_base_crtp<normal_model> {
       sigma = std::numeric_limits<double>::quiet_NaN();
       
       current_statement__ = 2;
-      sigma = in__.template read<local_scalar_t__>();
+      sigma = in__.template read_constrain_lb<local_scalar_t__, jacobian__>(
+                0, lp__);
       vars__.emplace_back(mu);
       vars__.emplace_back(sigma);
       if (logical_negation((primitive_value(emit_transformed_parameters__) ||
@@ -219,8 +221,13 @@ class normal_model final : public model_base_crtp<normal_model> {
       
       current_statement__ = 2;
       sigma = context__.vals_r("sigma")[(1 - 1)];
+      double sigma_free__;
+      sigma_free__ = std::numeric_limits<double>::quiet_NaN();
+      
+      current_statement__ = 2;
+      sigma_free__ = stan::math::lb_free(sigma, 0);
       vars__.emplace_back(mu);
-      vars__.emplace_back(sigma);
+      vars__.emplace_back(sigma_free__);
     } catch (const std::exception& e) {
       stan::lang::rethrow_located(e, locations_array__[current_statement__]);
       // Next line prevents compiler griping about no return
