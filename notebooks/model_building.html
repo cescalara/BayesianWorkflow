@@ -558,18 +558,32 @@ beta = -4
 </pre></div>
 </div>
 </div>
+<p>Recall:</p>
+<div class="math notranslate nohighlight">
+\[M = \alpha + \beta \log_{10} \bigg( \frac{P}{\mathrm{days}} \bigg),\]</div>
+<div class="math notranslate nohighlight">
+\[m = M + 5 \log_{10} \bigg( \frac{d_L(z)}{\mathrm{Mpc}} \bigg) + 25.\]</div>
+<div class="math notranslate nohighlight">
+\[d_L(z) = \frac{cz}{H_0},\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span># define some useful functions
+# dL: luminosity distance
 def luminosity_distance(z):
-    # To be completed...
+    # to be completed...
     pass
 
-def absolute_magnitude(m, z):
-    # To be completed...
+# M: absolute magnitude
+def absolute_magnitude(alpha, beta, P):
+    # to be completed...
+    pass
+
+# m: apparent magnitude
+def apparent_magnitude(m, z):
+    # to be completed...
     pass
 </pre></div>
 </div>
@@ -626,7 +640,7 @@ Text(0, 0.5, &#39;m&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_model_building_10_2.png" src="../_images/notebooks_model_building_10_2.png" />
+<img alt="../_images/notebooks_model_building_11_2.png" src="../_images/notebooks_model_building_11_2.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -668,7 +682,7 @@ Text(0, 0.5, &#39;M&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_model_building_11_2.png" src="../_images/notebooks_model_building_11_2.png" />
+<img alt="../_images/notebooks_model_building_12_2.png" src="../_images/notebooks_model_building_12_2.png" />
 </div>
 </div>
 <p>In the above plots, you may have been tempted to use <code class="docutils literal notranslate"><span class="pre">ax.errorbar()</span></code> or <code class="docutils literal notranslate"><span class="pre">plt.errorbar()</span></code> to show the data, <code class="docutils literal notranslate"><span class="pre">m</span></code> or <code class="docutils literal notranslate"><span class="pre">M</span></code> together with the uncertainty, <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code>.</p>
@@ -719,7 +733,7 @@ Text(0, 0.5, &#39;M&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_model_building_13_2.png" src="../_images/notebooks_model_building_13_2.png" />
+<img alt="../_images/notebooks_model_building_14_2.png" src="../_images/notebooks_model_building_14_2.png" />
 </div>
 </div>
 <p>Now you should see a nice distribution of possible <code class="docutils literal notranslate"><span class="pre">M_true</span></code> values for each known <code class="docutils literal notranslate"><span class="pre">M_obs</span></code>. If we do want to plot errorbars, we can think of them as marking out the standard deviation of these <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> distributions.</p>
@@ -907,7 +921,7 @@ Text(0, 0.5, &#39;m&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_model_building_20_1.png" src="../_images/notebooks_model_building_20_1.png" />
+<img alt="../_images/notebooks_model_building_21_1.png" src="../_images/notebooks_model_building_21_1.png" />
 </div>
 </div>
 <p>We can immediately see that here there are individual <span class="math notranslate nohighlight">\(\sigma_m\)</span> for each Cepheid, and a somewhat visible linear relationship. Now for all the galaxies…</p>
@@ -941,7 +955,7 @@ ax.legend()
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_model_building_22_1.png" src="../_images/notebooks_model_building_22_1.png" />
+<img alt="../_images/notebooks_model_building_23_1.png" src="../_images/notebooks_model_building_23_1.png" />
 </div>
 </div>
 <p>We can see rough linear relationships for each galaxy, but not a universal one. To better assess this, we should convert to absolute magnitude.</p>
@@ -997,7 +1011,7 @@ No handles with labels found to put in legend.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_model_building_25_2.png" src="../_images/notebooks_model_building_25_2.png" />
+<img alt="../_images/notebooks_model_building_26_2.png" src="../_images/notebooks_model_building_26_2.png" />
 </div>
 </div>
 <p>We should now see a stronger global relation, but still with considerable intrinsic scatter and potential differences between galaxies.</p>
