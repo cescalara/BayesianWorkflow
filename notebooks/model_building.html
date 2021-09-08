@@ -562,9 +562,9 @@ beta = -4
 <div class="math notranslate nohighlight">
 \[M = \alpha + \beta \log_{10} \bigg( \frac{P}{\mathrm{days}} \bigg),\]</div>
 <div class="math notranslate nohighlight">
-\[m = M + 5 \log_{10} \bigg( \frac{d_L(z)}{\mathrm{Mpc}} \bigg) + 25.\]</div>
+\[m = M + 5 \log_{10} \bigg( \frac{d_L(z)}{\mathrm{Mpc}} \bigg) + 25,\]</div>
 <div class="math notranslate nohighlight">
-\[d_L(z) = \frac{cz}{H_0},\]</div>
+\[d_L(z) = \frac{cz}{H_0}.\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -582,7 +582,7 @@ def absolute_magnitude(alpha, beta, P):
     pass
 
 # m: apparent magnitude
-def apparent_magnitude(m, z):
+def apparent_magnitude(M, z):
     # to be completed...
     pass
 </pre></div>

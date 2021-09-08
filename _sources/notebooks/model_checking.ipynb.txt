@@ -1120,15 +1120,11 @@
     "\n",
     "Nreps = 250\n",
     "\n",
-    "for i in range(Nreps):\n",
-    "    pass\n",
-    "    # to be completed...\n",
-    "    # sample alpha and beta from chains\n",
-    "    \n",
-    "    # simulate to get m_obs_rep\n",
-    "    \n",
-    "    # plot comparison of many simulated m_obs_rep datasets with m_obs used in fit\n",
-    "    # or equivalently for M_obs_rep/M_obs"
+    "# to be completed... \n",
+    "# sample Nreps alpha and beta from chains\n",
+    "# for each, simulate to get m_obs_rep\n",
+    "# plot comparison of many simulated m_obs_rep datasets with m_obs used in fit\n",
+    "# or equivalently for M_obs_rep/M_obs"
    ]
   },
   {
@@ -1159,7 +1155,7 @@
     "**Homework exercise 1 (20 points):** Now, let's use our `cepheid_v1.stan` model to fit the actual data introduced in the [model building notebook](model_building.ipynb). Here we have a model for one galaxy only, so let's pick one at random to start with. Complete the following steps:\n",
     "\n",
     "* Note that the actual data have individual `sigma_m` for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this.\n",
-    "* Fit the data. Make a plot summarising the posterior of the line fit and compare it to the `M_obs` data values. \n",
+    "* Load the data into Stan and perform a fit. Make a plot summarising the posterior of the line fit and compare it to the `M_obs` data values. \n",
     "* Complete a posterior predictive check for this fit. \n",
     "* Repeat steps 2 and 3 for a few other galaxies to compare. Comment on the overall results. "
    ]
@@ -1247,7 +1243,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.9.6"
+   "version": "3.9.7"
   }
  },
  "nbformat": 4,

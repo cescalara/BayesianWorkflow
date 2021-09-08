@@ -1232,15 +1232,11 @@ beta_chain = fit.stan_variable(&quot;beta&quot;)
 
 Nreps = 250
 
-for i in range(Nreps):
-    pass
-    # to be completed...
-    # sample alpha and beta from chains
-
-    # simulate to get m_obs_rep
-
-    # plot comparison of many simulated m_obs_rep datasets with m_obs used in fit
-    # or equivalently for M_obs_rep/M_obs
+# to be completed...
+# sample Nreps alpha and beta from chains
+# for each, simulate to get m_obs_rep
+# plot comparison of many simulated m_obs_rep datasets with m_obs used in fit
+# or equivalently for M_obs_rep/M_obs
 </pre></div>
 </div>
 </div>
@@ -1253,7 +1249,7 @@ for i in range(Nreps):
 <p><strong>Homework exercise 1 (20 points):</strong> Now, let’s use our <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code> model to fit the actual data introduced in the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>. Here we have a model for one galaxy only, so let’s pick one at random to start with. Complete the following steps:</p>
 <ul class="simple">
 <li><p>Note that the actual data have individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this.</p></li>
-<li><p>Fit the data. Make a plot summarising the posterior of the line fit and compare it to the <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> data values.</p></li>
+<li><p>Load the data into Stan and perform a fit. Make a plot summarising the posterior of the line fit and compare it to the <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> data values.</p></li>
 <li><p>Complete a posterior predictive check for this fit.</p></li>
 <li><p>Repeat steps 2 and 3 for a few other galaxies to compare. Comment on the overall results.</p></li>
 </ul>
