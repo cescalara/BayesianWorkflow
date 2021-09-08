@@ -580,7 +580,7 @@ INFO:cmdstanpy:finish chain 4
 </div>
 <p>It seems our current “experimental setup” with <span class="math notranslate nohighlight">\(N=20\)</span> will not be capable of doing this. In this simple demo, there is only really one obvious way we can reduce our uncertainty in the estimate of <span class="math notranslate nohighlight">\(\mu\)</span>: increasing the number of observations.</p>
 <p>We can play around with our simulation to understand roughly how many observations would be needed.</p>
-<p>We could make a plot of the standard deviation of our posterior for <span class="math notranslate nohighlight">\(\mu\)</span> as a function fo <span class="math notranslate nohighlight">\(N\)</span>:</p>
+<p>We could make a plot of the standard deviation of our posterior for <span class="math notranslate nohighlight">\(\mu\)</span> as a function of <span class="math notranslate nohighlight">\(N\)</span>:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -645,7 +645,7 @@ Text(0, 0.5, &#39;Width of mu distribution&#39;)
 <li><p>We can see that the above plot fluctuates depending on the exact simulated realisation at any <span class="math notranslate nohighlight">\(N\)</span> value. We could repeat an experiment a number of times at each <span class="math notranslate nohighlight">\(N\)</span> to account for this.</p></li>
 <li><p>For posteriors that may have non-standard shapes, the highest density interval (HDI) is a better measure of the width of a distribution.</p></li>
 </ul>
-<p><strong>Exercise 1 (10 points):</strong> Consider the simple mixture model example from the <a class="reference external" href="model_comparison.ipynb">model comparison</a> notebook. We decide that we can conclude signal is present if the tail probability of the marginal posterior, <span class="math notranslate nohighlight">\(p(f&lt;0.1)\)</span>, is less than 0.01. How many observations are required to achieve this if the true <span class="math notranslate nohighlight">\(f=0.5\)</span>?</p>
+<p><strong>Exercise 1 (10 points):</strong> Consider the simple mixture model example from the <a class="reference internal" href="model_comparison_part1.html"><span class="doc">model comparison (part1)</span></a> notebook. We decide that we can conclude signal is present if the tail probability of the marginal posterior, <span class="math notranslate nohighlight">\(p(f&lt;0.1)\)</span>, is less than 0.01. How many observations are required to achieve this if the true <span class="math notranslate nohighlight">\(f=0.5\)</span>?</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
