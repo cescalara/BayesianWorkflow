@@ -467,7 +467,7 @@ div.rendered_html tbody tr:hover {
 <p><strong>Exercise 1 (10 points):</strong> Sketch the graphical model for our hierarchical model for Cepheids over all galaxies</p>
 <p>A simplified Stan model for the full hierarchy can be found in <code class="docutils literal notranslate"><span class="pre">cepheid_v3.stan</span></code>. Note that this is based on <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code>, and you should also incorporate the changes that you made during the exercises in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> in order to achieve a good fit to the data. I will use <code class="docutils literal notranslate"><span class="pre">cepheid_v3.stan</span></code> here to demonstrate a few important points about hierarchical modelling.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -566,7 +566,7 @@ model {
 </ul>
 <p>Now, let’s see how the model performs when fitting our dataset.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -578,7 +578,7 @@ from cmdstanpy import CmdStanModel
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -603,7 +603,7 @@ for g in galaxies:
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -624,7 +624,7 @@ input_data[&quot;sigma_m&quot;] = 0.5
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -642,7 +642,7 @@ INFO:cmdstanpy:compiled model file: /Users/fran/projects/BayesianWorkflow/src/no
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -659,15 +659,15 @@ INFO:cmdstanpy:start chain 1
 INFO:cmdstanpy:start chain 2
 INFO:cmdstanpy:start chain 3
 INFO:cmdstanpy:start chain 4
-INFO:cmdstanpy:finish chain 2
-INFO:cmdstanpy:finish chain 1
-INFO:cmdstanpy:finish chain 4
 INFO:cmdstanpy:finish chain 3
+INFO:cmdstanpy:finish chain 1
+INFO:cmdstanpy:finish chain 2
+INFO:cmdstanpy:finish chain 4
 </pre></div></div>
 </div>
 <p>We should always check the sampler diagnostics first!</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -680,13 +680,13 @@ INFO:cmdstanpy:finish chain 3
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpd69k6lls/cepheid_v3-202109081203-1-kj8j7wp1.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpd69k6lls/cepheid_v3-202109081203-2-cwnmtjaz.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpd69k6lls/cepheid_v3-202109081203-3-jwor03gr.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpd69k6lls/cepheid_v3-202109081203-4-z3efvkty.csv
+INFO:cmdstanpy:Processing csv files: /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpomivi5y3/cepheid_v3-202109111349-1-i76uz3kv.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpomivi5y3/cepheid_v3-202109111349-2-sdcvnxp4.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpomivi5y3/cepheid_v3-202109111349-3-mp1dna27.csv, /var/folders/8d/cyg0_lx54mggm8v350vlx91r0000gn/T/tmpomivi5y3/cepheid_v3-202109111349-4-ywx326xl.csv
 
 Checking sampler transitions treedepth.
 Treedepth satisfactory for all transitions.
 
 Checking sampler transitions for divergences.
-293 of 4000 (7.3%) transitions ended with a divergence.
+208 of 4000 (5.2%) transitions ended with a divergence.
 These divergent transitions indicate that HMC is not fully able to explore the posterior distribution.
 Try increasing adapt delta closer to 1.
 If this doesn&#39;t remove all divergences, try to reparameterize the model.
@@ -702,7 +702,7 @@ Processing complete.
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -711,7 +711,7 @@ Processing complete.
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -760,61 +760,61 @@ Processing complete.
     <tr>
       <th>lp__</th>
       <td>-450.0</td>
-      <td>0.0960</td>
-      <td>2.400</td>
-      <td>-450.000</td>
+      <td>0.1100</td>
+      <td>2.600</td>
+      <td>-450.00</td>
       <td>-450.00</td>
       <td>-440.0</td>
-      <td>650.0</td>
-      <td>380.0</td>
+      <td>560.0</td>
+      <td>340.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>mu_alpha</th>
-      <td>-1.5</td>
-      <td>0.1000</td>
-      <td>2.100</td>
-      <td>-4.900</td>
-      <td>-1.40</td>
-      <td>1.5</td>
-      <td>400.0</td>
-      <td>240.0</td>
+      <td>-1.3</td>
+      <td>0.0630</td>
+      <td>1.800</td>
+      <td>-3.90</td>
+      <td>-1.30</td>
+      <td>1.6</td>
+      <td>800.0</td>
+      <td>490.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>tau_alpha</th>
-      <td>2.6</td>
-      <td>0.0970</td>
+      <td>2.4</td>
+      <td>0.0890</td>
       <td>2.500</td>
-      <td>0.650</td>
-      <td>1.80</td>
+      <td>0.61</td>
+      <td>1.70</td>
       <td>6.4</td>
-      <td>670.0</td>
-      <td>400.0</td>
+      <td>800.0</td>
+      <td>490.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>mu_beta</th>
-      <td>-4.1</td>
-      <td>0.0300</td>
-      <td>0.920</td>
-      <td>-5.400</td>
+      <td>-4.2</td>
+      <td>0.0340</td>
+      <td>0.980</td>
+      <td>-5.70</td>
       <td>-4.10</td>
-      <td>-2.8</td>
-      <td>920.0</td>
-      <td>540.0</td>
+      <td>-2.9</td>
+      <td>820.0</td>
+      <td>500.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>tau_beta</th>
       <td>1.0</td>
-      <td>0.0530</td>
-      <td>1.600</td>
-      <td>0.077</td>
-      <td>0.54</td>
-      <td>3.5</td>
-      <td>900.0</td>
-      <td>530.0</td>
+      <td>0.0680</td>
+      <td>1.900</td>
+      <td>0.06</td>
+      <td>0.47</td>
+      <td>3.4</td>
+      <td>760.0</td>
+      <td>470.0</td>
       <td>1.0</td>
     </tr>
     <tr>
@@ -832,37 +832,37 @@ Processing complete.
     <tr>
       <th>m_true[158]</th>
       <td>28.0</td>
-      <td>0.0039</td>
-      <td>0.140</td>
-      <td>28.000</td>
+      <td>0.0038</td>
+      <td>0.150</td>
+      <td>28.00</td>
       <td>28.00</td>
       <td>29.0</td>
-      <td>1376.0</td>
-      <td>807.0</td>
+      <td>1508.0</td>
+      <td>925.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>m_true[159]</th>
       <td>25.0</td>
-      <td>0.0013</td>
-      <td>0.066</td>
-      <td>25.000</td>
+      <td>0.0014</td>
+      <td>0.068</td>
+      <td>25.00</td>
       <td>25.00</td>
       <td>25.0</td>
-      <td>2711.0</td>
-      <td>1591.0</td>
+      <td>2472.0</td>
+      <td>1516.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>m_true[160]</th>
       <td>25.0</td>
-      <td>0.0013</td>
-      <td>0.067</td>
-      <td>25.000</td>
+      <td>0.0014</td>
+      <td>0.068</td>
+      <td>25.00</td>
       <td>25.00</td>
       <td>25.0</td>
-      <td>2696.0</td>
-      <td>1582.0</td>
+      <td>2445.0</td>
+      <td>1499.0</td>
       <td>1.0</td>
     </tr>
     <tr>
@@ -870,23 +870,23 @@ Processing complete.
       <td>27.0</td>
       <td>0.0025</td>
       <td>0.100</td>
-      <td>27.000</td>
+      <td>27.00</td>
       <td>27.00</td>
       <td>27.0</td>
-      <td>1631.0</td>
-      <td>957.0</td>
+      <td>1707.0</td>
+      <td>1046.0</td>
       <td>1.0</td>
     </tr>
     <tr>
       <th>m_true[162]</th>
       <td>24.0</td>
-      <td>0.0019</td>
-      <td>0.073</td>
-      <td>24.000</td>
+      <td>0.0018</td>
+      <td>0.074</td>
+      <td>24.00</td>
       <td>24.00</td>
       <td>24.0</td>
-      <td>1435.0</td>
-      <td>842.0</td>
+      <td>1625.0</td>
+      <td>996.0</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -896,7 +896,7 @@ Processing complete.
 </div>
 <p>Hmmm, it seems something is off. Let’s check the trace and pair plots…</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -913,7 +913,7 @@ Processing complete.
 </div>
 <p>To make a sensibly-sized pair plot and view divergent transitions, we have to pass some more information to <code class="docutils literal notranslate"><span class="pre">arviz</span></code>. Let’s focus on the high level parameters now, seeing as these are the new things we have introduced. The <code class="docutils literal notranslate"><span class="pre">Ng</span></code> and <code class="docutils literal notranslate"><span class="pre">Nt</span></code> indicies are also specified, in case you want to use arviz to explore some other cases.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -935,7 +935,10 @@ av.plot_pair(fit_a, var_names=[&quot;mu_alpha&quot;, &quot;mu_beta&quot;, &quot;
 </div>
 <p>The geometry of a hierarchical model with its many latent parameters is much more complex than that of a single model, and divergent transitions can occur. Fortunately, these can be used to help us understand and fix our model.</p>
 <p>Here, we can see that the misspecification of the model causes problems, although these issues become less servere if we add data from more galaxies, as I’ll now demonstrate. It is important to remember that <strong>the geometry the sampler sees depends on both the model and the data</strong>.</p>
-<p><strong>Exercise 2 (5 points):</strong> Update the above Stan code with your improvements from the single galaxy case that you carried out in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> and display the code. Verify that you can run the above demo to fit all galaxies with no divergent transitions.</p>
+<p><strong>Exercise 2 (5 points):</strong> Update the above Stan code with your improvements from the single galaxy case that you carried out in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a> and display the code. Verify that you can run the above demo to fit <em>all</em> galaxies with no divergent transitions.</p>
+<blockquote>
+<div><p>Note: To start with, you can experiment with adding the reparametrisation and/or individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> into the model. If you complete the homework in the <a class="reference internal" href="model_checking.html"><span class="doc">model checking notebook</span></a>, you’ll also figure out some other updates that you could use to get a better fit to the data.</p>
+</div></blockquote>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
