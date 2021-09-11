@@ -690,7 +690,10 @@ Text(0, 0.5, &#39;M&#39;)
 <div><p>Note: The uncertainties on <code class="docutils literal notranslate"><span class="pre">M</span></code> and <code class="docutils literal notranslate"><span class="pre">m</span></code> are equivalent, due to the additive relationship between the two.</p>
 </div></blockquote>
 <p>This can be a helpful visualisation, and you are free to do so if you wish! However, it is important to remember that in the Bayesian way of thinking, data <strong>do not</strong> have errors, rather, <strong>the model has uncertainty</strong>. So the <em>observed</em> magnitude is not uncertain, we saw it! What is really uncertain is what it implies for the <em>true</em> magnitude, that we cannot see.</p>
-<p>To get a feel for this, let’s re-run our simulation multiple times, and add the distribution of the true magnitudes to the above plot:</p>
+<p>To get a feel for this, let’s consider the last step in our generative model - the connection between the true and observed magnitudes - in isolation for a moment. We can reverse our simulation for this step, and add the distribution of possible <em>true</em> magnitudes to the above plot for the given <em>observed</em> magnitudes:</p>
+<blockquote>
+<div><p>Note: We can use Bayes’ theorem to find a proportional relationship for p(<code class="docutils literal notranslate"><span class="pre">M_true</span></code> | <code class="docutils literal notranslate"><span class="pre">M_obs</span></code>) given P(<code class="docutils literal notranslate"><span class="pre">M_obs</span></code> | <code class="docutils literal notranslate"><span class="pre">M_true</span></code>) and assuming P(<code class="docutils literal notranslate"><span class="pre">M_true</span></code>) = constant. This is intended as an illustration. It is important to note that we will need to perform a fit including our entire model to get the full P(<code class="docutils literal notranslate"><span class="pre">M_true</span></code> | <code class="docutils literal notranslate"><span class="pre">M_obs</span></code>) in this context, as we will see in the next notebook.</p>
+</div></blockquote>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -700,10 +703,10 @@ Text(0, 0.5, &#39;M&#39;)
 N_sims = 250
 for i in range(N_sims):
     # to be completed...
-    # run simulation
-    # ax.scatter(log10P, M_obs, color=&quot;r&quot;, alpha=0.01)
+    # run &quot;reverse&quot; simulation
+    # ax.scatter(log10P, M_true, color=&quot;r&quot;, alpha=0.01)
     pass
-#ax.scatter(log10P, M_true, label=&quot;M_true&quot;, color=&quot;g&quot;) # will not change per sim
+#ax.scatter(log10P, M_obs, label=&quot;M_obs&quot;, color=&quot;g&quot;) # will not change per sim
 ax.plot(log10P_grid, alpha + beta * log10_P_grid, color=&quot;k&quot;, alpha=0.5)
 ax.invert_yaxis() # so brighter as y-axis increases
 ax.legend()
@@ -948,7 +951,7 @@ ax.legend()
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x12ddb7ca0&gt;
+&lt;matplotlib.legend.Legend at 0x1226b9f40&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1004,7 +1007,7 @@ No handles with labels found to put in legend.
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x12dfc5970&gt;
+&lt;matplotlib.legend.Legend at 0x1228f3ee0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
