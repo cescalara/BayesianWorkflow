@@ -576,7 +576,7 @@ INFO:cmdstanpy:compiled model file: /Users/fran/projects/BayesianWorkflow/src/no
 <div class="section" id="The-first-check:-fitting-simulated-data">
 <h2>The first check: fitting simulated data<a class="headerlink" href="#The-first-check:-fitting-simulated-data" title="Permalink to this headline">¶</a></h2>
 <p>While we developed our initial generative and statistical models with the goal to fit <em>real</em> data, in doing so we now have a simple simulation program that contains exactly the same information as is included in our model. We can use this to generate <em>simulated</em> data where we <em>know</em> the values of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, and can verify that our fit gives us reasonable results.</p>
-<p><img alt="Fitting simulated data" class="no-scaled-link" src="../_images/sim_fit.pdf" style="width: 300px;" /></p>
+<p><img alt="Fitting simulated data" class="no-scaled-link" src="../_images/sim_fit.png" style="width: 300px;" /></p>
 <p>If we are not able to recover the known simulated truth, this means there is some kind of discrepancy between the generative model and the statistical model. This fact can be a <strong>powerful tool for debugging</strong>, especially when working with more complex models, as it allows us to check if our Stan model is doing what we think it should be. <em>Just because it compiles, it doesn’t mean that it is correct!</em></p>
 <p>So, let’s use our work in the <a class="reference internal" href="model_building.html"><span class="doc">model building</span></a> to simulate a test dataset using the same assumptions that we did there:</p>
 <div class="nbinput nblast docutils container">
@@ -928,7 +928,7 @@ ax[1,0].axhline(beta_true, color=&quot;r&quot;)
 <p><strong>Exercise 2 (5 points):</strong> Try using the following reparametrisation for the period-luminosity relation:</p>
 <div class="math notranslate nohighlight">
 \[y = \alpha + \beta x \rightarrow y = \alpha^\prime + \beta (x - x_0)\]</div>
-<p>where <span class="math notranslate nohighlight">\(x_0\)</span> is roughly the mean value of <span class="math notranslate nohighlight">\(x\)</span>, typically called the <em>pivot</em>. Compare the number of effective samples with the previous version. Additionally, compare the joint posterior for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> with that for <code class="docutils literal notranslate"><span class="pre">alpha_prime</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Why is this parametrisation so much more efficient?</p>
+<p>where <span class="math notranslate nohighlight">\(x_0\)</span> is the mean value of <span class="math notranslate nohighlight">\(x\)</span>, typically called the <em>pivot</em>. Compare the number of effective samples with the previous version. Additionally, compare the joint posterior for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> with that for <code class="docutils literal notranslate"><span class="pre">alpha_prime</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>. Why is this parametrisation so much more efficient?</p>
 <p>We can also use our <code class="docutils literal notranslate"><span class="pre">generated</span> <span class="pre">quantities</span></code> block to quickly visualise the posterior for the line fit:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -1034,7 +1034,7 @@ consider <code class="docutils literal notranslate"><span class="pre">alpha</spa
 </div>
 </div>
 <p>Your results should look something like the following:</p>
-<p><img alt="Prior predictive checks" class="no-scaled-link" src="../_images/prior_predictive.pdf" style="width: 500px;" /></p>
+<p><img alt="Prior predictive checks" class="no-scaled-link" src="../_images/prior_predictive.png" style="width: 500px;" /></p>
 <p>For our problem, let’s update the Stan model with the following priors:</p>
 <div class="math notranslate nohighlight">
 \[\alpha \sim N(0, 10)\]</div>
@@ -1241,7 +1241,7 @@ Nreps = 250
 </div>
 </div>
 <p>Your results should look something like the following:</p>
-<p><img alt="Prior predictive checks" class="no-scaled-link" src="../_images/posterior_predictive.pdf" style="width: 500px;" /></p>
+<p><img alt="Prior predictive checks" class="no-scaled-link" src="../_images/posterior_predictive.png" style="width: 500px;" /></p>
 <p>There are a number of ways to study and quantify the posterior predictive distribution in order to use it to assess the “goodness of fit” of a model. Here, we only consider graphical checks, but more information can be found in Section 6.3 of <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis</a> by Gelman et al.</p>
 </div>
 <div class="section" id="Application-to-actual-data">

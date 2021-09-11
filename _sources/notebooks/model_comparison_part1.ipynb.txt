@@ -20,7 +20,7 @@
     "\n",
     "> Is there signal in my data?\n",
     "\n",
-    "<img src=\"figures/model_comparison.pdf\" alt=\"What kind of question are you asking?\" width=\"600\"/>\n",
+    "<img src=\"figures/model_comparison.png\" alt=\"What kind of question are you asking?\" width=\"600\"/>\n",
     "\n",
     "As we will discuss further, there are several different approaches to model comparison. The right one for the job will depend largely on **what question you are trying to answer and what you know about the models that you are comparing**.\n"
    ]

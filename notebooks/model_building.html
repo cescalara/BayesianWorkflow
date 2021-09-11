@@ -468,7 +468,7 @@ div.rendered_html tbody tr:hover {
 </ul>
 <p>The model-building problem then comes down to <strong>defining a connection between your parameters and data</strong> (the likelihood/observational model) and <strong>incorporating relevant domain expertise</strong> (the prior model).</p>
 <p>To get a feel for how this can work, consider the following examples:</p>
-<p><img alt="Going from a scientific question to a statistical model" class="no-scaled-link" src="../_images/science_stats.pdf" style="width: 750px;" /></p>
+<p><img alt="Going from a scientific question to a statistical model" class="no-scaled-link" src="../_images/science_stats.png" style="width: 750px;" /></p>
 <p><strong>Exercise 1 (10 points):</strong> Fill out this table for some more complicated examples such as:</p>
 <ul class="simple">
 <li><p>What is the value of the Hubble constant?</p></li>
@@ -485,7 +485,7 @@ div.rendered_html tbody tr:hover {
 <p>When starting the model-building process, it can also be helpful to think about the ideal model that you would fit if you had no restrictions on model complexity or computational resources. The purpose of this is to consider each step of the <em>data generating process</em> in detail, from start to finish. We are forced to think about complexities of the physical system and measurement process that may or may not be important for our later inference. The model itself may be impossible to actually write
 down or implement, but in doing this, we give can identify important steps and give context to the simpler models we will later go on to create.</p>
 <p>Taking the first example in the table above, consider what other effects may be important…</p>
-<p><img alt="Thinking about more complete models" class="no-scaled-link" src="../_images/ball_drop.pdf" style="width: 750px;" /></p>
+<p><img alt="Thinking about more complete models" class="no-scaled-link" src="../_images/ball_drop.png" style="width: 750px;" /></p>
 <p><strong>Exercise 2 (5 points):</strong> Can you expand the complexity for one of the other models that we discussed? List possible factors.</p>
 </div>
 <div class="section" id="Probabilistic-graphical-models">
@@ -493,7 +493,7 @@ down or implement, but in doing this, we give can identify important steps and g
 <p>For both of the above steps, it can be useful to sketch out connections between data and parameters using directed acyclic graphs (DAGs), often also called probabilistic graphical models (PGMs). These can be thought of as a visualisation of the data generating process, with parameters in unshaded circles, data or observations in shaded circles, and the arrows representing the connections between them.</p>
 <p>Here is a trivial example for that of data sampled from a normal distribution, such as what we looked at when introducing Stan in the <em>Are you ready?</em> section of the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>. The normal distribution is defined by two parameters, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. <span class="math notranslate nohighlight">\(N\)</span> independent samples from this distribution are then taken, shown by <span class="math notranslate nohighlight">\(x_i\)</span>. The box around <span class="math notranslate nohighlight">\(x_i\)</span> shows that there are a number of repeated samples, that we can think of as
 observations or measurements.</p>
-<p><img alt="A simple DAG or PGM for normally-distributed data" class="no-scaled-link" src="../_images/simple_dag.pdf" style="width: 200px;" /></p>
+<p><img alt="A simple DAG or PGM for normally-distributed data" class="no-scaled-link" src="../_images/simple_dag.png" style="width: 200px;" /></p>
 <p><strong>Exercise 3 (5 points):</strong> Now it’s your turn! Sketch graphical models for the first two examples in the above table (measurement of gravitational acceleration and radioactivity).</p>
 </div>
 <div class="section" id="An-example:-the-period-luminosity-relation-of-Cepheid-variable-stars">
@@ -504,7 +504,7 @@ observations or measurements.</p>
 <p>where <span class="math notranslate nohighlight">\(M\)</span> is the absolute magnitude, related to the apparent magnitude, <span class="math notranslate nohighlight">\(m\)</span>, by the luminosity distance, <span class="math notranslate nohighlight">\(d_L(z)\)</span></p>
 <div class="math notranslate nohighlight">
 \[m = M + 5 \log_{10} \bigg( \frac{d_L(z)}{\mathrm{Mpc}} \bigg) + 25.\]</div>
-<p><img alt="Cepheid variables and the period-luminosity relation" class="no-scaled-link" src="../_images/cepheid_intro.pdf" style="width: 600px;" /></p>
+<p><img alt="Cepheid variables and the period-luminosity relation" class="no-scaled-link" src="../_images/cepheid_intro.png" style="width: 600px;" /></p>
 <p>In astronomy, it is common to work with magnitudes instead of flux and luminosity, so the above expression is basically the equivalent of <span class="math notranslate nohighlight">\(F = L / 4 \pi d_L^2(z)\)</span>. The magnitude is related to the logarithm of flux/luminosity and it is important to remember that magnitude <em>decreases</em> with increasing brightness, although we typically invert the y-axis when plotting magnitude for easier interpretation. So, <strong>intrinsically brighter Cepheids have longer periods</strong>.</p>
 <p>We know this because we can measure the distance to nearby Cepheids using <em>parallax</em>. By determining the period-luminosity relation, we can then measure the distance to Cepheids that are further away, extending the <a class="reference external" href="https://en.wikipedia.org/wiki/Cosmic_distance_ladder">cosmic distance ladder</a>. Measuring distances to far away objects allows us to compare their luminosity distance and redshift, giving us an estimate of the <a class="reference external" href="https://en.wikipedia.org/wiki/Hubble%27s_law">Hubble constant</a>.</p>
 <p>In the coming notebooks, we will explore a series of scientific questions related to Cepheid variable observations:</p>
@@ -526,7 +526,7 @@ observations or measurements.</p>
 \[d_L(z) = \frac{cz}{H_0},\]</div>
 <p>where <span class="math notranslate nohighlight">\(c\)</span> is the speed of light, and <span class="math notranslate nohighlight">\(H_0\)</span> is the Hubble constant. Again, for simplicity, let’s assume that for now we just look at <span class="math notranslate nohighlight">\(N_c\)</span> Cepheids in a single galaxy with a known redshift, <span class="math notranslate nohighlight">\(z\)</span>.</p>
 <p><strong>Exercise 4 (5 points):</strong> With these simplifying assumptions in mind, sketch the corresponding graphical model for our initial Cepheid variable model. The parameters and known quantities are summarised below, just arrange them into a graph.</p>
-<p><img alt="Blobs for the simple Cepheid graphical model" class="no-scaled-link" src="../_images/cepheid_graph_bits.pdf" style="width: 750px;" /></p>
+<p><img alt="Blobs for the simple Cepheid graphical model" class="no-scaled-link" src="../_images/cepheid_graph_bits.png" style="width: 750px;" /></p>
 <p><strong>Exercise 5 (10 points):</strong> Using the parameter and fixed quantity values given below, as well as your graphical model, write a simulation for the observed apparent magnitudes, <span class="math notranslate nohighlight">\(m_i\)</span>. Plot your results in <span class="math notranslate nohighlight">\(\log_{10}(P/\mathrm{days})\)</span>-<span class="math notranslate nohighlight">\(m\)</span> space, comparing with the true period-luminosity relation.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:

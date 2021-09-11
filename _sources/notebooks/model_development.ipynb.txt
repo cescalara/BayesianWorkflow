@@ -33,7 +33,7 @@
     "\n",
     "<br>\n",
     "\n",
-    "<img src=\"figures/hierarchical_model.pdf\" alt=\"Going from a single-level normal model to an hierarchical normal model\" width=\"600\"/>\n",
+    "<img src=\"figures/hierarchical_model.png\" alt=\"Going from a single-level normal model to an hierarchical normal model\" width=\"600\"/>\n",
     "\n",
     "<br>\n",
     "\n",
