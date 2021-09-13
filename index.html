@@ -210,7 +210,7 @@
 <ul>
 <li><p>Install <a class="reference external" href="https://www.docker.com">docker</a> on your computer</p></li>
 <li><p>Get a ready made docker enironment: <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">cescalara/bayesian_workflow</span></code></p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-p</span> <span class="pre">8888:8888</span> <span class="pre">-v</span> <span class="pre">&quot;${PWD}&quot;:/home/jovyan/work</span> <span class="pre">cescalara/bayesian_workflow</span> <span class="pre">jupyter-notebook</span></code></p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-p</span> <span class="pre">8888:8888</span> <span class="pre">-v</span> <span class="pre">&quot;${PWD}&quot;:/home/jovyan/work</span> <span class="pre">cescalara/bayesian_workflow</span> <span class="pre">jupyter-notebook</span> <span class="pre">--allow-root</span></code></p></li>
 <li><p>Open the given url <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8888/lab?token=....</span></code> in your browser</p></li>
 <li><p>The current directory will be mounted to the docker and the jupyter server has the environment needed to run the notebooks</p></li>
 </ul>
