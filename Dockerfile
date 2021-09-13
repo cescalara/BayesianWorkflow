@@ -32,7 +32,7 @@ COPY src/notebooks/data work/data
 USER root
 RUN chmod -R 777 work/
 RUN chown -R ${NB_UID}:${NB_GID} work/
-USER ${NB_UID}
+#USER ${NB_UID}
 
 # run from the home directory
 WORKDIR "${HOME}"
