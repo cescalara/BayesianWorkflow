@@ -23,7 +23,7 @@ To run the course notebooks, you have a few different options. I recommend to fo
 
   * Install `docker <https://www.docker.com>`_ on your computer
   * Get a ready made docker enironment: ``docker pull cescalara/bayesian_workflow``
-  * Run ``docker run -p 8888:8888 -v "${PWD}":/home/jovyan/work cescalara/bayesian_workflow jupyter-notebook``
+  * Run ``docker run -p 8888:8888 -v "${PWD}":/home/jovyan/work cescalara/bayesian_workflow jupyter-notebook --allow-root``
   * Open the given url ``http://127.0.0.1:8888/lab?token=....`` in your browser
   * The current directory will be mounted to the docker and the jupyter server has the environment needed to run the notebooks
     
