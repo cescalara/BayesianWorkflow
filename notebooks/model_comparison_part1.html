@@ -1,36 +1,15 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>5. Model comparison (Part I) &mdash; Bayesian workflow  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
@@ -38,39 +17,20 @@
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6. Model comparison (Part II)" href="model_comparison_part2.html" />
     <link rel="prev" title="4. Model development" href="model_development.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Bayesian workflow
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -78,18 +38,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
@@ -108,71 +57,30 @@
 <li class="toctree-l1"><a class="reference internal" href="homework_project.html">8. Homework project</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Bayesian workflow</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>5. Model comparison (Part I)</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/notebooks/model_comparison_part1.ipynb.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS for nbsphinx extension */
@@ -444,7 +352,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <div class="section" id="5.-Model-comparison-(Part-I)">
-<h1>5. Model comparison (Part I)<a class="headerlink" href="#5.-Model-comparison-(Part-I)" title="Permalink to this headline">¶</a></h1>
+<h1>5. Model comparison (Part I)<a class="headerlink" href="#5.-Model-comparison-(Part-I)" title="Permalink to this headline"></a></h1>
 <p>So far we have focussed on using a Bayesian workflow to design and develop a single model to describe our data. Much of the time, this will be enough to answer the scientific questions that we come across in our research. By using <a class="reference internal" href="model_checking.html"><span class="doc">model checking</span></a> to develop a model and verify that it is capable of representing the data, we are implicity using <em>predictive performance</em> to compare models, in a process of continuous model expansion.</p>
 <p>However, there may be cases where it makes sense to compare two or more distinct models in a more discrete way. E.g. Models for the <strong>presence or absence</strong> of an effect, or <strong>signal over background</strong> models. Consider the following questions: &gt; What signal shape best describes my data?</p>
 <p>vs.</p>
@@ -454,7 +362,7 @@ div.rendered_html tbody tr:hover {
 <p><img alt="What kind of question are you asking?" class="no-scaled-link" src="../_images/model_comparison.png" style="width: 600px;" /></p>
 <p>As we will discuss further, there are several different approaches to model comparison. The right one for the job will depend largely on <strong>what question you are trying to answer and what you know about the models that you are comparing</strong>.</p>
 <div class="section" id="The-\mathcal{M}-universe">
-<h2>The <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>-universe<a class="headerlink" href="#The-\mathcal{M}-universe" title="Permalink to this headline">¶</a></h2>
+<h2>The <span class="math notranslate nohighlight">\(\mathcal{M}\)</span>-universe<a class="headerlink" href="#The-\mathcal{M}-universe" title="Permalink to this headline"></a></h2>
 <blockquote>
 <div><p>“All models are wrong but some are useful” - George Box</p>
 </div></blockquote>
@@ -475,7 +383,7 @@ div.rendered_html tbody tr:hover {
 <p>It is important to note that many of the more standard and widely used methods for Bayesian model comparison that rely on the <strong>model marginal likelihood</strong>, <span class="math notranslate nohighlight">\(p(\mathrm{data}|\mathrm{model})\)</span>, and/or <strong>model priors</strong>, <span class="math notranslate nohighlight">\(p(\mathrm{model})\)</span>, assume that we are in the M-closed regime. As soon as we are not sure that we are in this regime, we should be very careful about interpreting the results of such approaches, and the further away we go, the worse it gets…</p>
 </div>
 <div class="section" id="Computing-the-model-marginal-likelihood">
-<h2>Computing the model marginal likelihood<a class="headerlink" href="#Computing-the-model-marginal-likelihood" title="Permalink to this headline">¶</a></h2>
+<h2>Computing the model marginal likelihood<a class="headerlink" href="#Computing-the-model-marginal-likelihood" title="Permalink to this headline"></a></h2>
 <p>Recall Bayes’ theorem</p>
 <div class="math notranslate nohighlight">
 \[p(\theta| d) = \frac{p(d|\theta)p(\theta)}{p(d)} = \frac{p(\theta | d, M)p(\theta|M)}{p(d|M)},\]</div>
@@ -489,7 +397,7 @@ div.rendered_html tbody tr:hover {
 <p>The marginal likelihood is a natural byproduct of <em>nested sampling</em> methods, which has contributed to their popularity. We will discuss the use of nested sampling further in the next section of the course.</p>
 </div>
 <div class="section" id="Model-comparison-as-parameter-estimation">
-<h2>Model comparison as parameter estimation<a class="headerlink" href="#Model-comparison-as-parameter-estimation" title="Permalink to this headline">¶</a></h2>
+<h2>Model comparison as parameter estimation<a class="headerlink" href="#Model-comparison-as-parameter-estimation" title="Permalink to this headline"></a></h2>
 <p>If all of this has put you off model comparison, you’ll be relieved to find out that a lot of model comparison problems can similarly be expressed as parameter estimation problems. Here, we will explore a simple illustrative example in Stan.</p>
 <p>Consider a uniform background model and a normal signal model for some data, <span class="math notranslate nohighlight">\(x\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -556,7 +464,7 @@ f = 0.2
 </ul>
 </div>
 <div class="section" id="Further-reading">
-<h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline">¶</a></h2>
+<h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline"></a></h2>
 <ul class="simple">
 <li><p>Chapter 7 of <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis</a> by Gelman et al.</p></li>
 <li><p>Vehtari, A. &amp; Ojanen, J. A survey of Bayesian predictive methods for model assessment, selection and comparison. Statistics Surveys 6, 142–228 (2012).</p></li>
@@ -575,50 +483,33 @@ f = 0.2
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="model_comparison_part2.html" class="btn btn-neutral float-right" title="6. Model comparison (Part II)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="model_development.html" class="btn btn-neutral float-left" title="4. Model development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="model_comparison_part2.html" class="btn btn-neutral float-right" title="6. Model comparison (Part II)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Francesca Capel.
-
-    </p>
+    <p>&#169; Copyright 2021, Francesca Capel.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

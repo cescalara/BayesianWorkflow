@@ -202,7 +202,6 @@
    },
    "outputs": [],
    "source": [
-    "import h5py\n",
     "import numpy as np\n",
     "import arviz as av\n",
     "from cmdstanpy import CmdStanModel"

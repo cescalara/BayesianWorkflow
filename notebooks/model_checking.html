@@ -1,36 +1,15 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>3. Model checking &mdash; Bayesian workflow  documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
@@ -38,39 +17,20 @@
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Model development" href="model_development.html" />
     <link rel="prev" title="2. Model building" href="model_building.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Bayesian workflow
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -78,18 +38,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
@@ -109,71 +58,30 @@
 <li class="toctree-l1"><a class="reference internal" href="homework_project.html">8. Homework project</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Bayesian workflow</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>3. Model checking</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/notebooks/model_checking.ipynb.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   
 <style>
 /* CSS for nbsphinx extension */
@@ -445,10 +353,10 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <div class="section" id="3.-Model-checking">
-<h1>3. Model checking<a class="headerlink" href="#3.-Model-checking" title="Permalink to this headline">¶</a></h1>
+<h1>3. Model checking<a class="headerlink" href="#3.-Model-checking" title="Permalink to this headline"></a></h1>
 <p>Last time we focussed on building a simple initial model for the Cepheid variable data. In this notebook, we explore the next steps in the workflow, <strong>model implementation</strong> and <strong>model checking</strong>. Along the way, we’ll also introduce <strong>prior predictive checks</strong> and <strong>posterior predictive checks</strong>.</p>
 <div class="section" id="Implementation-in-Stan">
-<h2>Implementation in Stan<a class="headerlink" href="#Implementation-in-Stan" title="Permalink to this headline">¶</a></h2>
+<h2>Implementation in Stan<a class="headerlink" href="#Implementation-in-Stan" title="Permalink to this headline"></a></h2>
 <p>In the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>, we developed a simple model to fit the period-luminosity relation of Cepheid variable stars. We can now implement this model in Stan and use it to infer the parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> that describe the relation.</p>
 <p>As we’ve seen before in the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>, Stan files consist of different blocks that divide information into <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">parameters</span></code> and <code class="docutils literal notranslate"><span class="pre">model</span></code>. You can find more detailed information on how to write models in Stan code <a class="reference external" href="https://mc-stan.org/docs/2_27/reference-manual/index.html#overview">here</a>, but for now we can just take a look at this model: <code class="docutils literal notranslate"><span class="pre">stan/cepheid_v0.stan</span></code>.</p>
 <div class="nbinput docutils container">
@@ -574,7 +482,7 @@ INFO:cmdstanpy:compiled model file: /Users/fran/projects/BayesianWorkflow/src/no
 </div>
 </div>
 <div class="section" id="The-first-check:-fitting-simulated-data">
-<h2>The first check: fitting simulated data<a class="headerlink" href="#The-first-check:-fitting-simulated-data" title="Permalink to this headline">¶</a></h2>
+<h2>The first check: fitting simulated data<a class="headerlink" href="#The-first-check:-fitting-simulated-data" title="Permalink to this headline"></a></h2>
 <p>While we developed our initial generative and statistical models with the goal to fit <em>real</em> data, in doing so we now have a simple simulation program that contains exactly the same information as is included in our model. We can use this to generate <em>simulated</em> data where we <em>know</em> the values of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, and can verify that our fit gives us reasonable results.</p>
 <p><img alt="Fitting simulated data" class="no-scaled-link" src="../_images/sim_fit.png" style="width: 300px;" /></p>
 <p>If we are not able to recover the known simulated truth, this means there is some kind of discrepancy between the generative model and the statistical model. This fact can be a <strong>powerful tool for debugging</strong>, especially when working with more complex models, as it allows us to check if our Stan model is doing what we think it should be. <em>Just because it compiles, it doesn’t mean that it is correct!</em></p>
@@ -1004,7 +912,7 @@ ax.legend()
 </div>
 </div>
 <div class="section" id="Prior-selection-and-prior-predictive-checks">
-<h2>Prior selection and prior predictive checks<a class="headerlink" href="#Prior-selection-and-prior-predictive-checks" title="Permalink to this headline">¶</a></h2>
+<h2>Prior selection and prior predictive checks<a class="headerlink" href="#Prior-selection-and-prior-predictive-checks" title="Permalink to this headline"></a></h2>
 <p>As discussed in Section 3.1, we left our priors for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> to be uniform over all real numbers. In the end, this didn’t seem to be a major problem and the data were informative enough to constrain the posterior. However, we should be wary of these kind of <em>uninformative priors</em>. The first motivation is common sense - from studying the data and literature, we have a fairly good idea of what the period-luminosity relationship looks like. Additionally, our sampler currently has to
 consider <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> values from <em>negative to positive infinity</em>.</p>
 <p>It is rarely the case that we have zero prior knowledge on the value of our model parameters. At the same time, we don’t want to bias our results by introduing too much information with so-called <em>informative priors</em>. After all, we are trying to find out what the values of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> are.</p>
@@ -1214,7 +1122,7 @@ ax.legend()
 </div>
 </div>
 <div class="section" id="Posterior-predictive-checks">
-<h2>Posterior predictive checks<a class="headerlink" href="#Posterior-predictive-checks" title="Permalink to this headline">¶</a></h2>
+<h2>Posterior predictive checks<a class="headerlink" href="#Posterior-predictive-checks" title="Permalink to this headline"></a></h2>
 <p>If our model fits the data well, then data generated by the model should look similar to observed data. To test if this is true, we can perform a <strong>posterior predictive check</strong>.</p>
 <p>If we have observed data <span class="math notranslate nohighlight">\(\hat{m}\)</span> and model parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>, we can express the joint posterior predictive distribution as</p>
 <div class="math notranslate nohighlight">
@@ -1245,7 +1153,7 @@ Nreps = 250
 <p>There are a number of ways to study and quantify the posterior predictive distribution in order to use it to assess the “goodness of fit” of a model. Here, we only consider graphical checks, but more information can be found in Section 6.3 of <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis</a> by Gelman et al.</p>
 </div>
 <div class="section" id="Application-to-actual-data">
-<h2>Application to actual data<a class="headerlink" href="#Application-to-actual-data" title="Permalink to this headline">¶</a></h2>
+<h2>Application to actual data<a class="headerlink" href="#Application-to-actual-data" title="Permalink to this headline"></a></h2>
 <p><strong>Homework exercise 1 (20 points):</strong> Now, let’s use our <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code> model to fit the actual data introduced in the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>. Here we have a model for one galaxy only, so let’s pick one at random to start with. Complete the following steps:</p>
 <ul class="simple">
 <li><p>Note that the actual data have individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this.</p></li>
@@ -1289,50 +1197,33 @@ measure certain periods.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="model_development.html" class="btn btn-neutral float-right" title="4. Model development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="model_building.html" class="btn btn-neutral float-left" title="2. Model building" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="model_development.html" class="btn btn-neutral float-right" title="4. Model development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, Francesca Capel.
-
-    </p>
+    <p>&#169; Copyright 2021, Francesca Capel.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
