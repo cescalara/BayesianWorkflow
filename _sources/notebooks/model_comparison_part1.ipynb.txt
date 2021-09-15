@@ -235,17 +235,11 @@
     "### Further reading\n",
     "\n",
     "* Chapter 7 of [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/) by Gelman et al.\n",
-    "* Vehtari, A. & Ojanen, J. A survey of Bayesian predictive methods for model assessment, selection and comparison. Statistics Surveys 6, 142–228 (2012).\n",
+    "* Vehtari, A. & Ojanen, J. A survey of Bayesian predictive methods for model assessment, selection and comparison. Statistics Surveys 6, 142–228 (2012). [DOI: 10.1214/12-SS102](https://projecteuclid.org/journals/statistics-surveys/volume-6/issue-none/A-survey-of-Bayesian-predictive-methods-for-model-assessment-selection/10.1214/12-SS102.full).\n",
+    "* Kamary, K., Mengersen, K., Robert, C. P. & Rousseau, J. Testing hypotheses via a mixture estimation model. arXiv.org stat.ME, (2014). [arXiv:1412.2044](https://arxiv.org/abs/1412.2044).\n",
+    "  \n",
     "  "
    ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "74ae7d9a",
-   "metadata": {},
-   "outputs": [],
-   "source": []
   }
  ],
  "metadata": {

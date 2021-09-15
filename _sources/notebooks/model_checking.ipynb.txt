@@ -1225,6 +1225,28 @@
    "source": [
     "# to be completed..."
    ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4f8b185b",
+   "metadata": {},
+   "source": [
+    "### Further reading\n",
+    "\n",
+    "<br>\n",
+    "\n",
+    "* Weakly informative priors: Simpson, D., Rue, H., Riebler, A., Martins, T. G. & Sørbye, S. H. Penalising Model Component Complexity: A Principled, Practical Approach to Constructing Priors. Statistical Science 32, 1–28 (2017). [DOI: 10.1214/16-STS576](https://projecteuclid.org/journals/statistical-science/volume-32/issue-1/Penalising-Model-Component-Complexity--A-Principled-Practical-Approach-to/10.1214/16-STS576.full).\n",
+    "  \n",
+    "* Posterior predictive checks: Section 6.3 of [Bayesian Data Analysis](http://www.stat.columbia.edu/~gelman/book/) by Gelman et al."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "41639f4b",
+   "metadata": {},
+   "outputs": [],
+   "source": []
   }
  ],
  "metadata": {
