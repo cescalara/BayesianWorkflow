@@ -135,8 +135,8 @@
    "id": "71d62fe3",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-27T08:23:14.595066Z",
-     "start_time": "2021-08-27T08:23:13.772686Z"
+     "end_time": "2021-09-15T12:01:53.319298Z",
+     "start_time": "2021-09-15T12:01:52.044220Z"
     }
    },
    "outputs": [],
@@ -153,8 +153,8 @@
    "id": "91c2a771",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-27T08:23:14.599866Z",
-     "start_time": "2021-08-27T08:23:14.597216Z"
+     "end_time": "2021-09-15T12:01:53.323387Z",
+     "start_time": "2021-09-15T12:01:53.321104Z"
     }
    },
    "outputs": [],
@@ -169,7 +169,7 @@
    "id": "8aead9c0",
    "metadata": {},
    "source": [
-    "**Exercise 2 (5 points):** Write the Stan code for this model and display it. Then fit the model to your simulated data. Assume that $\\mu$ is known and therefore $f$ is the only free parameter. Plot the marginal posterior for f.\n",
+    "**Exercise 2 (5 points):** Write the Stan code for this model and display it. Then fit the model to your simulated data. Assume that both the mean and standard deviation of the signal distribution, $\\mu=0.5$, $\\sigma=0.2$, are known and therefore $f$ is the only free parameter. Plot the marginal posterior for f.\n",
     "\n",
     ">**Hint:** See [this page](https://mc-stan.org/docs/2_27/stan-users-guide/summing-out-the-responsibility-parameter.html) in the Stan manual for some tips."
    ]
@@ -180,8 +180,8 @@
    "id": "cd3cc8b1",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-27T08:23:14.603674Z",
-     "start_time": "2021-08-27T08:23:14.601437Z"
+     "end_time": "2021-09-15T12:01:53.956173Z",
+     "start_time": "2021-09-15T12:01:53.953678Z"
     }
    },
    "outputs": [],
@@ -203,8 +203,8 @@
    "id": "8caa0caf",
    "metadata": {
     "ExecuteTime": {
-     "end_time": "2021-08-27T08:23:14.607623Z",
-     "start_time": "2021-08-27T08:23:14.605873Z"
+     "end_time": "2021-09-15T12:01:54.968596Z",
+     "start_time": "2021-09-15T12:01:54.966202Z"
     }
    },
    "outputs": [],
