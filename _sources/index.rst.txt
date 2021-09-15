@@ -33,7 +33,12 @@ To run the course notebooks, you have a few different options. I recommend to fo
   * Using binder you will automatically time out of sessions if you are inactive for more than 10 minutes, so save your work frequently
   * The changes that you make are *not persistent* - if you close and repoen a tab your changes will be lost
   * To work continuously, download and upload your changes between active sessions
-    
+
+Solutions
+---------
+
+Complete solutions to the notebooks can be made available upon request. Please contact f.capel@tum.de.
+
 Acknowledgements
 ----------------
 
