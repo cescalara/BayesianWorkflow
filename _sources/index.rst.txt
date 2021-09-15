@@ -49,6 +49,6 @@ I would like to highlight the `many resources <https://betanalpha.github.io/writ
    notebooks/model_checking.ipynb
    notebooks/model_development.ipynb
    notebooks/model_comparison_part1.ipynb
-   notebooks/model_comparison_part2.ipynb
+   notebooks/example-sine-modelcomparison.ipynb
    notebooks/experiment_design.ipynb
    notebooks/homework_project.ipynb

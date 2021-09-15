@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Model comparison &mdash; Bayesian workflow  documentation</title>
+  <title>Model comparison (part 2) &mdash; Bayesian workflow  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,9 @@
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. Experiment design" href="experiment_design.html" />
+    <link rel="prev" title="5. Model comparison (Part I)" href="model_comparison_part1.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -38,13 +40,23 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">1. Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_building.html">2. Model building</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_checking.html">3. Model checking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_development.html">4. Model development</a></li>
 <li class="toctree-l1"><a class="reference internal" href="model_comparison_part1.html">5. Model comparison (Part I)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model_comparison_part2.html">6. Model comparison (Part II)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Model comparison (part 2)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Model">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Generating-data">Generating data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Visualise-the-data">Visualise the data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Plot-the-parameter-posterior-probability-distribution">Plot the parameter posterior probability distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Plot-the-fit:">Plot the fit:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Model-comparison-methods">Model comparison methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Bayesian-model-comparison">Bayesian model comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Calibrating-Bayes-factor-thresholds">Calibrating Bayes factor thresholds</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="experiment_design.html">7. Experiment design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="homework_project.html">8. Homework project</a></li>
 </ul>
@@ -63,7 +75,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Model comparison</li>
+      <li>Model comparison (part 2)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/notebooks/example-sine-modelcomparison.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -343,8 +355,9 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<div class="section" id="Model-comparison">
-<h1>Model comparison<a class="headerlink" href="#Model-comparison" title="Permalink to this headline"></a></h1>
+<div class="section" id="Model-comparison-(part-2)">
+<h1>Model comparison (part 2)<a class="headerlink" href="#Model-comparison-(part-2)" title="Permalink to this headline"></a></h1>
+<p>Slides introducing this section are available <a class="reference external" href="model_comparison_part2_slides.pdf">here</a>.</p>
 <div class="section" id="Model">
 <h2>Model<a class="headerlink" href="#Model" title="Permalink to this headline"></a></h2>
 <p>We again consider the sine model with gaussian measurement errors.</p>
@@ -893,25 +906,37 @@ for i in range(20):
 </pre></div>
 </div>
 </div>
+<p><strong>Exercise 1 (10 points):</strong></p>
+<ul class="simple">
+<li><p>Plot the distribution of Bayes factors.</p></li>
+<li><p>How many false positives and false negatives would you have if you applied a threshold of Bayes factor 10?</p></li>
+<li><p>Where does the real Bayes factor lie? Do you trust the result?</p></li>
+</ul>
+<p><strong>Homework exercise 1 (20 points):</strong></p>
+<ul class="simple">
+<li><p>Make a <a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">ROC curve</a>, by plotting the false positive vs false negative rates as a function of thresholds.</p></li>
+<li><p>Add a ROC curve of likelihood ratios (hint: the highest log-likelihood found is in <code class="docutils literal notranslate"><span class="pre">sampler.results['maximum</span> <span class="pre">likelihood']['logl']</span></code>).</p></li>
+<li><p>Can you think of another method to identify a second sine signal? Compute its indicator as well, and add a ROC curve. Which method is better overall? Which method is more efficient (lower false negative rate) at a 5% false positive rate?</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
 </div>
-<div class="section" id="Exercise-1:">
-<h2>Exercise 1:<a class="headerlink" href="#Exercise-1:" title="Permalink to this headline"></a></h2>
-<p>Plot the distribution of Bayes factors.</p>
-<p>How many false positives and false negatives would you have if you applied a threshold of Bayes factor 10?</p>
-<p>Where does the real Bayes factor lie? Do you trust the result?</p>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
 </div>
-<div class="section" id="Homework-exercise-1:">
-<h2>Homework exercise 1:<a class="headerlink" href="#Homework-exercise-1:" title="Permalink to this headline"></a></h2>
-<p>Make a <a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">ROC curve</a>, by plotting the false positive vs false negative rates as a function of thresholds.</p>
-<p>Add a ROC curve of likelihood ratios (hint: the highest log-likelihood found is in <code class="docutils literal notranslate"><span class="pre">sampler.results['maximum</span> <span class="pre">likelihood']['logl']</span></code>).</p>
-<p>Can you think of another method to identify a second sine signal? Compute its indicator as well, and add a ROC curve. Which method is better overall? Which method is more efficient (lower false negative rate) at a 5% false positive rate?</p>
+</div>
 </div>
 </div>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="model_comparison_part1.html" class="btn btn-neutral float-left" title="5. Model comparison (Part I)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="experiment_design.html" class="btn btn-neutral float-right" title="7. Experiment design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
