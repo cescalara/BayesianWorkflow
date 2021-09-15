@@ -4,7 +4,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# Model comparison (part 2)\n",
+    "# 6. Model comparison (part II)\n",
     "\n",
     "Slides introducing this section are available [here](model_comparison_part2_slides.pdf)."
    ]
