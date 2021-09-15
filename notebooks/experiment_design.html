@@ -392,7 +392,7 @@ ax.axvline(mu, color=&quot;k&quot;, linestyle=&quot;:&quot;)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.lines.Line2D at 0x13ceb2550&gt;
+&lt;matplotlib.lines.Line2D at 0x1468a22e0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -483,7 +483,7 @@ INFO:cmdstanpy:finish chain 4
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.8967419754818061
+0.7756438840295403
 </pre></div></div>
 </div>
 <p>It seems our current “experimental setup” with <span class="math notranslate nohighlight">\(N=20\)</span> will not be capable of doing this. In this simple demo, there is only really one obvious way we can reduce our uncertainty in the estimate of <span class="math notranslate nohighlight">\(\mu\)</span>: increasing the number of observations.</p>
@@ -546,7 +546,7 @@ Text(0, 0.5, &#39;Width of mu distribution&#39;)
 <img alt="../_images/notebooks_experiment_design_10_1.png" src="../_images/notebooks_experiment_design_10_1.png" />
 </div>
 </div>
-<p>So we can see that we would probably need something like &gt; 900 observations to constrain the standard deviation of the <span class="math notranslate nohighlight">\(\mu\)</span> posterior to &lt; 1.</p>
+<p>So we can see that we would probably need something like &gt; 900 observations to constrain the standard deviation of the <span class="math notranslate nohighlight">\(\mu\)</span> posterior to &lt; 0.1.</p>
 <p>A few notes on implementing this in practice:</p>
 <ul class="simple">
 <li><p>We skipped our usual sampler checks when running the fit many times, of course we should still include this, and find a way to automate it.</p></li>
@@ -565,7 +565,7 @@ Text(0, 0.5, &#39;Width of mu distribution&#39;)
 </div>
 <p><strong>Homework exercise 1 (40 points):</strong> Return to the Cepheid variable example and the Hubble constant estimate completed in the <a class="reference internal" href="model_development.html"><span class="doc">model development</span></a> notebook. Investigate what changes could be made to our Cepheid observations to better constrain the Hubble constant. How could we reach a 90% HDI region of &lt; 10? Make some plots to summarise your results.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
