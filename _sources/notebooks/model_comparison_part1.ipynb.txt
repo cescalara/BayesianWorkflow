@@ -5,7 +5,7 @@
    "id": "1be47306",
    "metadata": {},
    "source": [
-    "## 5. Model comparison (Part I)\n",
+    "## 5. Model comparison (part I)\n",
     "\n",
     "<br>\n",
     "\n",
