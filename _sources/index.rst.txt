@@ -8,7 +8,10 @@ This course is part of the ORIGINS Data Science Laboratory's Block courses. Plea
 Installation
 ------------
 
-To run the course notebooks, you have a few different options. I recommend to follow the standard install, and use docker or binder if there are problems. 
+To run the course notebooks, you have a few different options. I recommend to follow the standard install, and use docker or binder if there are problems.
+
+.. note::
+   The notebooks have been tested with Python 3.9 and updates may need to be made to for Python > 3.9 to work.
 
 * **Plan A - Standard install:** Fork/clone/download material from this `GitHub repository <https://github.com/cescalara/BayesianWorkflow>`_, everything you need is in ``src/notebooks``
 

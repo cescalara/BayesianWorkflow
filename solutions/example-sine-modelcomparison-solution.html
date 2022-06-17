@@ -13,10 +13,11 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -283,11 +284,12 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -296,10 +298,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -311,12 +317,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -344,9 +353,9 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <div class="section" id="Model-comparison">
-<h1>Model comparison<a class="headerlink" href="#Model-comparison" title="Permalink to this headline"></a></h1>
+<h1>Model comparison<a class="headerlink" href="#Model-comparison" title="Permalink to this heading"></a></h1>
 <div class="section" id="Model">
-<h2>Model<a class="headerlink" href="#Model" title="Permalink to this headline"></a></h2>
+<h2>Model<a class="headerlink" href="#Model" title="Permalink to this heading"></a></h2>
 <p>We again consider the sine model with gaussian measurement errors.</p>
 <div class="math notranslate nohighlight">
 \[y = A_1 \sin\left(2 \pi \left(\frac{t}{P_1} + t_1\right)\right) + B + \epsilon\]</div>
@@ -356,8 +365,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import numpy as np
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
 from numpy import pi, sin
 
 def sine_model1(t, B, A1, P1, t1):
@@ -377,14 +385,13 @@ def sine_model0(t, B):
 </ul>
 </div>
 <div class="section" id="Generating-data">
-<h2>Generating data<a class="headerlink" href="#Generating-data" title="Permalink to this headline"></a></h2>
+<h2>Generating data<a class="headerlink" href="#Generating-data" title="Permalink to this heading"></a></h2>
 <p>Lets generate some data following this model:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>np.random.seed(42)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.random.seed(42)
 
 n_data = 50
 
@@ -393,20 +400,18 @@ t = np.random.uniform(0, 5, size=n_data)
 # measurement values
 yerr = 1.0
 y = np.random.normal(sine_model1(t, B=1.0, A1=0.9, P1=3, t1=0), yerr)
-
-</pre></div>
+<br/></pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="Visualise-the-data">
-<h2>Visualise the data<a class="headerlink" href="#Visualise-the-data" title="Permalink to this headline"></a></h2>
+<h2>Visualise the data<a class="headerlink" href="#Visualise-the-data" title="Permalink to this heading"></a></h2>
 <p>Lets plot the data first to see what is going on:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>%matplotlib inline
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%matplotlib inline
 import matplotlib.pyplot as plt
 
 plt.figure()
@@ -415,8 +420,7 @@ plt.ylabel(&#39;y&#39;)
 plt.errorbar(x=t, y=y, yerr=yerr,
              marker=&#39;o&#39;, ls=&#39; &#39;, color=&#39;orange&#39;)
 t_range = np.linspace(0, 5, 1000)
-
-</pre></div>
+<br/></pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -433,8 +437,7 @@ t_range = np.linspace(0, 5, 1000)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>parameters1 = [&#39;B&#39;, &#39;A1&#39;, &#39;P1&#39;, &#39;t1&#39;]
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>parameters1 = [&#39;B&#39;, &#39;A1&#39;, &#39;P1&#39;, &#39;t1&#39;]
 
 def prior_transform1(cube):
     # the argument, cube, consists of values from 0 to 1
@@ -461,8 +464,7 @@ def prior_transform0(cube):
     # let background level go from -10 to +10
     params[0] = cube[0] * 20 - 10
     return params
-
-</pre></div>
+<br/></pre></div>
 </div>
 </div>
 <p>Define the likelihood, which measures how far the data are from the model predictions. More precisely, how often the parameters would arise under the given parameters. We assume gaussian measurement errors of known size (yerr).</p>
@@ -475,8 +477,7 @@ def prior_transform0(cube):
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>def log_likelihood1(params):
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def log_likelihood1(params):
     # unpack the current parameters:
     B, A1, P1, t1 = params
 
@@ -503,22 +504,19 @@ def log_likelihood0(params):
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import ultranest
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ultranest
 
 sampler1 = ultranest.ReactiveNestedSampler(parameters1, log_likelihood1, prior_transform1)
 
 sampler0 = ultranest.ReactiveNestedSampler(parameters0, log_likelihood0, prior_transform0)
-
-</pre></div>
+<br/></pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>result1 = sampler1.run(min_num_live_points=400)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result1 = sampler1.run(min_num_live_points=400)
 sampler1.print_results()
 </pre></div>
 </div>
@@ -567,8 +565,7 @@ insert order U test : converged: True correlation: inf iterations
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>result0 = sampler0.run(min_num_live_points=400)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result0 = sampler0.run(min_num_live_points=400)
 sampler0.print_results()
 </pre></div>
 </div>
@@ -612,14 +609,13 @@ insert order U test : converged: True correlation: inf iterations
 </div>
 </div>
 <div class="section" id="Plot-the-parameter-posterior-probability-distribution">
-<h2>Plot the parameter posterior probability distribution<a class="headerlink" href="#Plot-the-parameter-posterior-probability-distribution" title="Permalink to this headline"></a></h2>
+<h2>Plot the parameter posterior probability distribution<a class="headerlink" href="#Plot-the-parameter-posterior-probability-distribution" title="Permalink to this heading"></a></h2>
 <p>A classic corner plot of the parameter pairs and the marginal distributions:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>from ultranest.plot import cornerplot
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from ultranest.plot import cornerplot
 cornerplot(result1)
 </pre></div>
 </div>
@@ -635,8 +631,7 @@ cornerplot(result1)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>cornerplot(result0)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cornerplot(result0)
 </pre></div>
 </div>
 </div>
@@ -652,8 +647,7 @@ cornerplot(result1)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import pandas as pd
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
 df = pd.DataFrame(data=result1[&#39;samples&#39;], columns=result1[&#39;paramnames&#39;])
 df.describe()
 </pre></div>
@@ -751,14 +745,13 @@ df.describe()
 </div>
 </div>
 <div class="section" id="Plot-the-fit:">
-<h2>Plot the fit:<a class="headerlink" href="#Plot-the-fit:" title="Permalink to this headline"></a></h2>
+<h2>Plot the fit:<a class="headerlink" href="#Plot-the-fit:" title="Permalink to this heading"></a></h2>
 <p>To evaluate whether the results make any sense, we want to look whether the fitted function goes through the data points.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>plt.figure()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure()
 plt.title(&quot;1-sine fit&quot;)
 plt.xlabel(&#39;x&#39;)
 plt.ylabel(&#39;y&#39;)
@@ -781,9 +774,7 @@ band.line(color=&#39;k&#39;)
 band.shade(color=&#39;k&#39;, alpha=0.3)
 # add wider quantile (0.01 .. 0.99)
 band.shade(q=0.49, color=&#39;gray&#39;, alpha=0.2)
-
-
-</pre></div>
+<br/><br/></pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -804,7 +795,7 @@ band.shade(q=0.49, color=&#39;gray&#39;, alpha=0.2)
 </div>
 </div>
 <div class="section" id="Model-comparison-methods">
-<h2>Model comparison methods<a class="headerlink" href="#Model-comparison-methods" title="Permalink to this headline"></a></h2>
+<h2>Model comparison methods<a class="headerlink" href="#Model-comparison-methods" title="Permalink to this heading"></a></h2>
 <p>We now want to know:</p>
 <p><strong>Is the model with 2 components better than the model with one component?</strong></p>
 <p>What do we mean by “better” (“it fits better”, “the component is significant”)?</p>
@@ -815,7 +806,7 @@ band.shade(q=0.49, color=&#39;gray&#39;, alpha=0.2)
 </ol>
 </div>
 <div class="section" id="Bayesian-model-comparison">
-<h2>Bayesian model comparison<a class="headerlink" href="#Bayesian-model-comparison" title="Permalink to this headline"></a></h2>
+<h2>Bayesian model comparison<a class="headerlink" href="#Bayesian-model-comparison" title="Permalink to this heading"></a></h2>
 <p>Here we will focus on b, and apply Bayesian model comparison.</p>
 <p>For simplicity, we will assume equal a-prior model probabilities.</p>
 <p>The Bayes factor is:</p>
@@ -823,8 +814,7 @@ band.shade(q=0.49, color=&#39;gray&#39;, alpha=0.2)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>K = np.exp(result1[&#39;logz&#39;] - result0[&#39;logz&#39;])
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>K = np.exp(result1[&#39;logz&#39;] - result0[&#39;logz&#39;])
 print(&quot;K = %.2f&quot; % K)
 print(&quot;The 1-sine model is %.2f times more probable than the no-signal model&quot; % K)
 print(&quot;assuming the models are equally probable a priori.&quot;)
@@ -845,14 +835,13 @@ assuming the models are equally probable a priori.
 <p>For making decisions, thresholds are needed. They can be calibrated to desired low false decisions rates with simulations (generate data under the simpler model, look at K distribution).</p>
 </div>
 <div class="section" id="Calibrating-Bayes-factor-thresholds">
-<h2>Calibrating Bayes factor thresholds<a class="headerlink" href="#Calibrating-Bayes-factor-thresholds" title="Permalink to this headline"></a></h2>
+<h2>Calibrating Bayes factor thresholds<a class="headerlink" href="#Calibrating-Bayes-factor-thresholds" title="Permalink to this heading"></a></h2>
 <p>Lets generate some data sets under the null hypothesis (noise-only model) and see how often we would get a large Bayes factor. For this, we need to fit with both models.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import logging
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import logging
 logging.getLogger(&#39;ultranest&#39;).setLevel(logging.FATAL)
 </pre></div>
 </div>
@@ -861,8 +850,7 @@ logging.getLogger(&#39;ultranest&#39;).setLevel(logging.FATAL)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>K_simulated = []
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>K_simulated = []
 LR_simulated = []
 var_simulated = []
 
@@ -961,13 +949,13 @@ Bayes factor: 0.33
 </div>
 </div>
 <div class="section" id="Exercise-1:">
-<h2>Exercise 1:<a class="headerlink" href="#Exercise-1:" title="Permalink to this headline"></a></h2>
+<h2>Exercise 1:<a class="headerlink" href="#Exercise-1:" title="Permalink to this heading"></a></h2>
 <p>Plot the distribution of Bayes factors.</p>
 <p>How many false positives and false negatives would you have if you applied a threshold of Bayes factor 10?</p>
 <p>Where does the real Bayes factor lie? Do you trust the result?</p>
 </div>
 <div class="section" id="Homework-exercise-1:">
-<h2>Homework exercise 1:<a class="headerlink" href="#Homework-exercise-1:" title="Permalink to this headline"></a></h2>
+<h2>Homework exercise 1:<a class="headerlink" href="#Homework-exercise-1:" title="Permalink to this heading"></a></h2>
 <p>Make a <a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">ROC curve</a>, by plotting the false positive vs false negative rates as a function of thresholds.</p>
 <p>Add a ROC curve of likelihood ratios (hint: the highest log-likelihood found is in <code class="docutils literal notranslate"><span class="pre">sampler.results['maximum</span> <span class="pre">likelihood']['logl']</span></code>).</p>
 <p>Can you think of another method to identify a second sine signal? Compute its indicator as well, and add a ROC curve. Which method is better overall? Which method is more efficient (lower false negative rate) at a 5% false positive rate?</p>
@@ -975,8 +963,7 @@ Bayes factor: 0.33
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[82]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>plt.figure(figsize=(10, 5))
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(10, 5))
 plt.hist(K_simulated, histtype=&#39;step&#39;, label=&#39;From simulated noise data&#39;)
 ylo, yhi = plt.ylim()
 plt.vlines(K, ylo, yhi, label=&#39;From our real data&#39;, color=&#39;r&#39;)
@@ -999,8 +986,7 @@ plt.legend(loc=&#39;upper left&#39;);
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1008,8 +994,7 @@ plt.legend(loc=&#39;upper left&#39;);
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1017,8 +1002,7 @@ plt.legend(loc=&#39;upper left&#39;);
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1026,8 +1010,7 @@ plt.legend(loc=&#39;upper left&#39;);
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>K1_simulated = []
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>K1_simulated = []
 LR1_simulated = []
 var1_simulated = []
 
@@ -1145,8 +1128,7 @@ Bayes factor: 0.34
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[78]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>plt.figure(figsize=(10, 5))
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(10, 5))
 plt.hist(np.log10(K1_simulated), histtype=&#39;step&#39;, label=&#39;From simulated sine data&#39;, bins=20)
 plt.hist(np.log10(K_simulated), histtype=&#39;step&#39;, label=&#39;From simulated noise data&#39;)
 #ylo, yhi = plt.ylim()
@@ -1171,8 +1153,7 @@ plt.legend(loc=&#39;upper right&#39;, prop=dict(size=14));
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>#LR_simulated, LR1_simulated
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#LR_simulated, LR1_simulated
 </pre></div>
 </div>
 </div>
@@ -1180,8 +1161,7 @@ plt.legend(loc=&#39;upper right&#39;, prop=dict(size=14));
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>def plot_roc_curve(valuesA, valuesB, **kwargs):
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def plot_roc_curve(valuesA, valuesB, **kwargs):
     #thresholds = [-np.inf] + sorted(list(valuesA) + list(valuesB)) + [np.inf]
     thresholds = sorted(list(valuesA) + list(valuesB))
 

@@ -13,10 +13,11 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -294,11 +295,12 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -307,10 +309,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -322,12 +328,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -355,7 +364,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <div class="section" id="2.-Model-building">
-<h1>2. Model building<a class="headerlink" href="#2.-Model-building" title="Permalink to this headline"></a></h1>
+<h1>2. Model building<a class="headerlink" href="#2.-Model-building" title="Permalink to this heading"></a></h1>
 <p>A <strong>Bayesian statistical model</strong> is specified by the <strong>likelihood model</strong> (also called observational model) and <strong>prior model</strong>. This can be expressed as the joint probability density of the data, <span class="math notranslate nohighlight">\(x\)</span>, and model parameters, <span class="math notranslate nohighlight">\(\theta\)</span>, such that</p>
 <div class="math notranslate nohighlight">
 \[p(x, \theta) = p(x | \theta) p(\theta).\]</div>
@@ -365,7 +374,7 @@ div.rendered_html tbody tr:hover {
 <p>we note that the results of our inference are <em>completely dependent on the assumed model</em>. Bayes’ theorem is not some magical guarantee, and if our model does not represent the actual <em>data generating process</em> our inference will yield results that are meaningless in practice. Even worse, if we are not careful, a misspecified model may produce results that “look good” but are far from the truth - leading us to draw the wrong conclusions from our analysis.</p>
 <p>Our workflow begins with building our first sensible model as a starting point, that we can later check and iterate upon to make sure our inferences are useful. The first model doesn’t need to be perfect, and in fact should be as simple as possible while still including the scientific phenomenon of interest. This process is what we will focus on here.</p>
 <div class="section" id="Going-from-a-scientific-question-to-a-statistical-model">
-<h2>Going from a scientific question to a statistical model<a class="headerlink" href="#Going-from-a-scientific-question-to-a-statistical-model" title="Permalink to this headline"></a></h2>
+<h2>Going from a scientific question to a statistical model<a class="headerlink" href="#Going-from-a-scientific-question-to-a-statistical-model" title="Permalink to this heading"></a></h2>
 <p>So, model building is very important, but where to start? It can be helpful to break down the problem into the following components:</p>
 <ul class="simple">
 <li><p>Scientific question</p></li>
@@ -389,7 +398,7 @@ div.rendered_html tbody tr:hover {
 <p><img alt="https://atlas.cern/updates/feature/higgs-boson" class="no-scaled-link" src="../_images/higgs.png" style="width: 500px;" /></p>
 </div>
 <div class="section" id="The-impossible-model">
-<h2>The impossible model<a class="headerlink" href="#The-impossible-model" title="Permalink to this headline"></a></h2>
+<h2>The impossible model<a class="headerlink" href="#The-impossible-model" title="Permalink to this heading"></a></h2>
 <p>When starting the model-building process, it can also be helpful to think about the ideal model that you would fit if you had no restrictions on model complexity or computational resources. The purpose of this is to consider each step of the <em>data generating process</em> in detail, from start to finish. We are forced to think about complexities of the physical system and measurement process that may or may not be important for our later inference. The model itself may be impossible to actually write
 down or implement, but in doing this, we give can identify important steps and give context to the simpler models we will later go on to create.</p>
 <p>Taking the first example in the table above, consider what other effects may be important…</p>
@@ -397,7 +406,7 @@ down or implement, but in doing this, we give can identify important steps and g
 <p><strong>Exercise 2 (5 points):</strong> Can you expand the complexity for one of the other models that we discussed? List possible factors.</p>
 </div>
 <div class="section" id="Probabilistic-graphical-models">
-<h2>Probabilistic graphical models<a class="headerlink" href="#Probabilistic-graphical-models" title="Permalink to this headline"></a></h2>
+<h2>Probabilistic graphical models<a class="headerlink" href="#Probabilistic-graphical-models" title="Permalink to this heading"></a></h2>
 <p>For both of the above steps, it can be useful to sketch out connections between data and parameters using directed acyclic graphs (DAGs), often also called probabilistic graphical models (PGMs). These can be thought of as a visualisation of the data generating process, with parameters in unshaded circles, data or observations in shaded circles, and the arrows representing the connections between them.</p>
 <p>Here is a trivial example for that of data sampled from a normal distribution, such as what we looked at when introducing Stan in the <em>Are you ready?</em> section of the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>. The normal distribution is defined by two parameters, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>. <span class="math notranslate nohighlight">\(N\)</span> independent samples from this distribution are then taken, shown by <span class="math notranslate nohighlight">\(x_i\)</span>. The box around <span class="math notranslate nohighlight">\(x_i\)</span> shows that there are a number of repeated samples, that we can think of as
 observations or measurements.</p>
@@ -405,7 +414,7 @@ observations or measurements.</p>
 <p><strong>Exercise 3 (5 points):</strong> Now it’s your turn! Sketch graphical models for the first two examples in the above table (measurement of gravitational acceleration and radioactivity).</p>
 </div>
 <div class="section" id="An-example:-the-period-luminosity-relation-of-Cepheid-variable-stars">
-<h2>An example: the period-luminosity relation of Cepheid variable stars<a class="headerlink" href="#An-example:-the-period-luminosity-relation-of-Cepheid-variable-stars" title="Permalink to this headline"></a></h2>
+<h2>An example: the period-luminosity relation of Cepheid variable stars<a class="headerlink" href="#An-example:-the-period-luminosity-relation-of-Cepheid-variable-stars" title="Permalink to this heading"></a></h2>
 <p>Cepheid variables are a type of star that pulsates in observed flux, such that the apparent magnitude of the star varies in time with a well-defined period and amplitude. This behaviour is interesting in its own right, but also because it has been observed that there is a strong correlation between this period and the intrinsic luminosity of these stars. This <strong>period-luminosity</strong> relation has the form</p>
 <div class="math notranslate nohighlight">
 \[M = \alpha + \beta \log_{10} \bigg( \frac{P}{\mathrm{days}} \bigg),\]</div>
@@ -423,7 +432,7 @@ observations or measurements.</p>
 </ol>
 </div>
 <div class="section" id="Generative-modelling">
-<h2>Generative modelling<a class="headerlink" href="#Generative-modelling" title="Permalink to this headline"></a></h2>
+<h2>Generative modelling<a class="headerlink" href="#Generative-modelling" title="Permalink to this heading"></a></h2>
 <p>Using what we know about Cepheid variables and the period-luminosity relation, we can start to build a simple initial model for what we think could be the data-generating process.</p>
 <p>Towards an initial model</p>
 <p>Measuring the period of a Cepheid is relatively straightforward from studying its lightcurve, and so to start with we can assume that the period is a known quantity. However, the observed characteristic apparent magnitude, <span class="math notranslate nohighlight">\(\hat{m}\)</span>, of a Cepheid can be more tricky to reconstruct exactly, so let’s say that it is reported with some fixed uncertainty, <span class="math notranslate nohighlight">\(\sigma_m\)</span>, that is the same for all Cepheids. We can assume that</p>
@@ -440,8 +449,7 @@ observations or measurements.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import numpy as np
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
 from matplotlib import pyplot as plt
 </pre></div>
 </div>
@@ -450,8 +458,7 @@ from matplotlib import pyplot as plt
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># known quantities
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># known quantities
 c = 3.0e5 # km/s
 H0 = 70 # km/s/Mpc
 z = 0.005
@@ -477,8 +484,7 @@ beta = -4
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># define some useful functions
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># define some useful functions
 # dL: luminosity distance
 def luminosity_distance(z):
     # to be completed...
@@ -500,8 +506,7 @@ def apparent_magnitude(M, z):
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># simulate the observed apparent magnitudes
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># simulate the observed apparent magnitudes
 # M_true = ...
 # m_true = ...
 # m_obs = ...
@@ -514,8 +519,7 @@ pass
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># plot the true and observed apparent magnitudes
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># plot the true and observed apparent magnitudes
 log10_P_grid = np.linspace(0, 3)
 fig, ax = plt.subplots()
 #ax.scatter(log10P, m_true, label=&quot;m_true&quot;)
@@ -555,8 +559,7 @@ Text(0, 0.5, &#39;m&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># plot the true and observed absolute magnitudes, compare with true P-L relation
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># plot the true and observed absolute magnitudes, compare with true P-L relation
 log10P_grid = np.linspace(0, 3)
 fig, ax = plt.subplots()
 #ax.scatter(log10P, M_true, label=&quot;M_true&quot;)
@@ -606,8 +609,7 @@ Text(0, 0.5, &#39;M&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>fig, ax = plt.subplots()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots()
 N_sims = 250
 for i in range(N_sims):
     # to be completed...
@@ -650,7 +652,7 @@ Text(0, 0.5, &#39;M&#39;)
 <p>Now you should see a nice distribution of possible <code class="docutils literal notranslate"><span class="pre">M_true</span></code> values for each known <code class="docutils literal notranslate"><span class="pre">M_obs</span></code>. If we do want to plot errorbars, we can think of them as marking out the standard deviation of these <code class="docutils literal notranslate"><span class="pre">M_obs</span></code> distributions.</p>
 </div>
 <div class="section" id="Exploratory-data-analysis">
-<h2>Exploratory data analysis<a class="headerlink" href="#Exploratory-data-analysis" title="Permalink to this headline"></a></h2>
+<h2>Exploratory data analysis<a class="headerlink" href="#Exploratory-data-analysis" title="Permalink to this heading"></a></h2>
 <p>Now that we have some feeling for the generative model, let’s take a look at some Cepheid variable data. You can find two files in the <code class="docutils literal notranslate"><span class="pre">data/</span></code> directory:</p>
 <ol class="arabic simple">
 <li><p>galaxies.dat</p></li>
@@ -663,8 +665,7 @@ Text(0, 0.5, &#39;M&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># read in the files
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># read in the files
 
 # columns: gal z
 galaxy_info = np.loadtxt(&quot;data/galaxies.dat&quot;)
@@ -678,8 +679,7 @@ cepheid_info = np.loadtxt(&quot;data/cepheids.dat&quot;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># reorganise the data into a dictionary indexed by the galaxy number
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># reorganise the data into a dictionary indexed by the galaxy number
 galaxies = [int(ngc_no) for ngc_no in galaxy_info[:, 0]]
 data = {int(x[0]):{&quot;z&quot;:x[1]} for x in galaxy_info}
 
@@ -699,8 +699,7 @@ for g in galaxies:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># have a look at the data structure for the first galaxy
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># have a look at the data structure for the first galaxy
 data[galaxies[0]]
 </pre></div>
 </div>
@@ -809,8 +808,7 @@ data[galaxies[0]]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>fig, ax = plt.subplots()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots()
 g = galaxies[0]
 ax.errorbar(data[g][&quot;log10P&quot;], data[g][&quot;m_obs&quot;], yerr=data[g][&quot;sigma_m&quot;], fmt=&quot;.&quot;)
 ax.invert_yaxis()
@@ -840,8 +838,7 @@ Text(0, 0.5, &#39;m&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>fig, ax = plt.subplots()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig, ax = plt.subplots()
 fig.set_size_inches((10, 7))
 for g in galaxies:
     ax.errorbar(data[g][&quot;log10P&quot;], data[g][&quot;m_obs&quot;], yerr=data[g][&quot;sigma_m&quot;], fmt=&quot;.&quot;,
@@ -874,8 +871,7 @@ ax.legend()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># add absolute magnitude to the data
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># add absolute magnitude to the data
 for g in galaxies:
     # to be completed...
     # data[g][&quot;M_obs&quot;] = absolute_magnitude(...)
@@ -887,8 +883,7 @@ for g in galaxies:
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># plot for absolute magnitude this time
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># plot for absolute magnitude this time
 fig, ax = plt.subplots()
 fig.set_size_inches((10, 7))
 for g in galaxies:
@@ -934,8 +929,7 @@ No handles with labels found to put in legend.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed...
 </pre></div>
 </div>
 </div>
@@ -946,8 +940,7 @@ No handles with labels found to put in legend.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed...
 </pre></div>
 </div>
 </div>
@@ -958,22 +951,20 @@ No handles with labels found to put in legend.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed... make some bullet points
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed... make some bullet points
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="Further-reading">
-<h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline"></a></h2>
+<h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this heading"></a></h2>
 <p>Model building: <a class="reference external" href="https://betanalpha.github.io/assets/case_studies/principled_bayesian_workflow.html">Towards a principled Bayesian workflow</a> and <a class="reference external" href="https://betanalpha.github.io/assets/case_studies/falling.html">Falling (in love with principled modeling)</a> by Michael Betancourt</p>
 <p>The dataset prepared for this course is based on that reported in <a class="reference external" href="https://iopscience.iop.org/article/10.1088/0004-637X/730/2/119">Reiss et al. 2011</a> and used in <a class="reference external" href="https://kipac.github.io/StatisticalMethods/tutorials/cepheids.html">this example</a> of the KIPAC Statistical Methods course.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

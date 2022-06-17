@@ -13,10 +13,11 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -293,11 +294,12 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -306,10 +308,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -321,12 +327,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -354,18 +363,17 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <div class="section" id="3.-Model-checking">
-<h1>3. Model checking<a class="headerlink" href="#3.-Model-checking" title="Permalink to this headline"></a></h1>
+<h1>3. Model checking<a class="headerlink" href="#3.-Model-checking" title="Permalink to this heading"></a></h1>
 <p>Last time we focussed on building a simple initial model for the Cepheid variable data. In this notebook, we explore the next steps in the workflow, <strong>model implementation</strong> and <strong>model checking</strong>. Along the way, we’ll also introduce <strong>prior predictive checks</strong> and <strong>posterior predictive checks</strong>.</p>
 <div class="section" id="Implementation-in-Stan">
-<h2>Implementation in Stan<a class="headerlink" href="#Implementation-in-Stan" title="Permalink to this headline"></a></h2>
+<h2>Implementation in Stan<a class="headerlink" href="#Implementation-in-Stan" title="Permalink to this heading"></a></h2>
 <p>In the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>, we developed a simple model to fit the period-luminosity relation of Cepheid variable stars. We can now implement this model in Stan and use it to infer the parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> that describe the relation.</p>
 <p>As we’ve seen before in the <a class="reference internal" href="introduction.html"><span class="doc">introduction notebook</span></a>, Stan files consist of different blocks that divide information into <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">parameters</span></code> and <code class="docutils literal notranslate"><span class="pre">model</span></code>. You can find more detailed information on how to write models in Stan code <a class="reference external" href="https://mc-stan.org/docs/2_27/reference-manual/index.html#overview">here</a>, but for now we can just take a look at this model: <code class="docutils literal notranslate"><span class="pre">stan/cepheid_v0.stan</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>!cat stan/cepheid_v0.stan
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>!cat stan/cepheid_v0.stan
 </pre></div>
 </div>
 </div>
@@ -455,8 +463,7 @@ for now, and talk about priors more later in this notebook.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import numpy as np
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
 from matplotlib import pyplot as plt
 import arviz as av
 from cmdstanpy import CmdStanModel
@@ -467,8 +474,7 @@ from cmdstanpy import CmdStanModel
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>cepheid_v0 = CmdStanModel(stan_file=&quot;stan/cepheid_v0.stan&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cepheid_v0 = CmdStanModel(stan_file=&quot;stan/cepheid_v0.stan&quot;)
 </pre></div>
 </div>
 </div>
@@ -483,7 +489,7 @@ INFO:cmdstanpy:compiled model file: /Users/fran/projects/BayesianWorkflow/src/no
 </div>
 </div>
 <div class="section" id="The-first-check:-fitting-simulated-data">
-<h2>The first check: fitting simulated data<a class="headerlink" href="#The-first-check:-fitting-simulated-data" title="Permalink to this headline"></a></h2>
+<h2>The first check: fitting simulated data<a class="headerlink" href="#The-first-check:-fitting-simulated-data" title="Permalink to this heading"></a></h2>
 <p>While we developed our initial generative and statistical models with the goal to fit <em>real</em> data, in doing so we now have a simple simulation program that contains exactly the same information as is included in our model. We can use this to generate <em>simulated</em> data where we <em>know</em> the values of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code>, and can verify that our fit gives us reasonable results.</p>
 <p><img alt="Fitting simulated data" class="no-scaled-link" src="../_images/sim_fit.png" style="width: 300px;" /></p>
 <p>If we are not able to recover the known simulated truth, this means there is some kind of discrepancy between the generative model and the statistical model. This fact can be a <strong>powerful tool for debugging</strong>, especially when working with more complex models, as it allows us to check if our Stan model is doing what we think it should be. <em>Just because it compiles, it doesn’t mean that it is correct!</em></p>
@@ -492,8 +498,7 @@ INFO:cmdstanpy:compiled model file: /Users/fran/projects/BayesianWorkflow/src/no
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># known quantities
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># known quantities
 z = 0.005
 
 Nc = 10
@@ -514,8 +519,7 @@ beta_true = -4
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>m_obs = np.array([21.30057715, 22.89477067, 24.63106411,
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>m_obs = np.array([21.30057715, 22.89477067, 24.63106411,
                   22.72569458, 26.29936958, 22.34729756,
                   24.19867534, 24.64700615, 23.19478031, 21.94968928])
 </pre></div>
@@ -529,8 +533,7 @@ beta_true = -4
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>data = {}
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>data = {}
 data[&quot;Nc&quot;] = Nc
 data[&quot;z&quot;] = z
 data[&quot;log10P&quot;] = np.log10(P)
@@ -548,8 +551,7 @@ data[&quot;log10P_grid&quot;] = np.linspace(0, 3)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># run fit
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># run fit
 fit = cepheid_v0.sample(data=data, iter_sampling=1000, chains=4)
 
 # check diagnostics
@@ -779,8 +781,7 @@ Processing complete, no problems detected.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to access chains of parameter values
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to access chains of parameter values
 alpha_chain = fit.stan_variable(&quot;alpha&quot;)
 </pre></div>
 </div>
@@ -789,8 +790,7 @@ alpha_chain = fit.stan_variable(&quot;alpha&quot;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># plot trace
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># plot trace
 av.plot_trace(fit, var_names=[&quot;alpha&quot;, &quot;beta&quot;, &quot;m_true&quot;]);
 </pre></div>
 </div>
@@ -808,8 +808,7 @@ av.plot_trace(fit, var_names=[&quot;alpha&quot;, &quot;beta&quot;, &quot;m_true&
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>ax = av.plot_pair(fit, var_names=[&quot;alpha&quot;, &quot;beta&quot;], marginals=True)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ax = av.plot_pair(fit, var_names=[&quot;alpha&quot;, &quot;beta&quot;], marginals=True)
 
 # overlay truth in red
 ax[1,0].axvline(alpha_true, color=&quot;r&quot;)
@@ -843,8 +842,7 @@ ax[1,0].axhline(beta_true, color=&quot;r&quot;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>line = fit.stan_variable(&quot;line&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>line = fit.stan_variable(&quot;line&quot;)
 
 # 4x1000 iterations, grid of Ngrid points
 np.shape(line)
@@ -864,8 +862,7 @@ np.shape(line)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># get M_obs
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># get M_obs
 dL = (c * z) / H0
 M_obs = m_obs - 25 - 5 * np.log10(dL)
 
@@ -913,7 +910,7 @@ ax.legend()
 </div>
 </div>
 <div class="section" id="Prior-selection-and-prior-predictive-checks">
-<h2>Prior selection and prior predictive checks<a class="headerlink" href="#Prior-selection-and-prior-predictive-checks" title="Permalink to this headline"></a></h2>
+<h2>Prior selection and prior predictive checks<a class="headerlink" href="#Prior-selection-and-prior-predictive-checks" title="Permalink to this heading"></a></h2>
 <p>As discussed in Section 3.1, we left our priors for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> to be uniform over all real numbers. In the end, this didn’t seem to be a major problem and the data were informative enough to constrain the posterior. However, we should be wary of these kind of <em>uninformative priors</em>. The first motivation is common sense - from studying the data and literature, we have a fairly good idea of what the period-luminosity relationship looks like. Additionally, our sampler currently has to
 consider <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> values from <em>negative to positive infinity</em>.</p>
 <p>It is rarely the case that we have zero prior knowledge on the value of our model parameters. At the same time, we don’t want to bias our results by introduing too much information with so-called <em>informative priors</em>. After all, we are trying to find out what the values of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">beta</span></code> are.</p>
@@ -924,8 +921,7 @@ consider <code class="docutils literal notranslate"><span class="pre">alpha</spa
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed
 #alpha = np.random...
 #beta = np.random...
 
@@ -937,8 +933,7 @@ consider <code class="docutils literal notranslate"><span class="pre">alpha</spa
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># plot for different assumptions
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># plot for different assumptions
 </pre></div>
 </div>
 </div>
@@ -955,8 +950,7 @@ consider <code class="docutils literal notranslate"><span class="pre">alpha</spa
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>!cat stan/cepheid_v1.stan
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>!cat stan/cepheid_v1.stan
 </pre></div>
 </div>
 </div>
@@ -1042,8 +1036,7 @@ generated quantities {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>stan_model = CmdStanModel(stan_file=&quot;stan/cepheid_v1.stan&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>stan_model = CmdStanModel(stan_file=&quot;stan/cepheid_v1.stan&quot;)
 fit = stan_model.sample(data=data, iter_sampling=1000, chains=4)
 </pre></div>
 </div>
@@ -1069,8 +1062,7 @@ INFO:cmdstanpy:finish chain 4
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># for plot
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># for plot
 log10P_grid = data[&quot;log10P_grid&quot;]
 line = fit.stan_variable(&quot;line&quot;)
 
@@ -1116,14 +1108,13 @@ ax.legend()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed...
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="Posterior-predictive-checks">
-<h2>Posterior predictive checks<a class="headerlink" href="#Posterior-predictive-checks" title="Permalink to this headline"></a></h2>
+<h2>Posterior predictive checks<a class="headerlink" href="#Posterior-predictive-checks" title="Permalink to this heading"></a></h2>
 <p>If our model fits the data well, then data generated by the model should look similar to observed data. To test if this is true, we can perform a <strong>posterior predictive check</strong>.</p>
 <p>If we have observed data <span class="math notranslate nohighlight">\(\hat{m}\)</span> and model parameters <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>, we can express the joint posterior predictive distribution as</p>
 <div class="math notranslate nohighlight">
@@ -1135,8 +1126,7 @@ ax.legend()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>alpha_chain = fit.stan_variable(&quot;alpha&quot;)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>alpha_chain = fit.stan_variable(&quot;alpha&quot;)
 beta_chain = fit.stan_variable(&quot;beta&quot;)
 
 Nreps = 250
@@ -1154,7 +1144,7 @@ Nreps = 250
 <p>There are a number of ways to study and quantify the posterior predictive distribution in order to use it to assess the “goodness of fit” of a model. Here, we only consider graphical checks, but more information can be found in Section 6.3 of <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis</a> by Gelman et al.</p>
 </div>
 <div class="section" id="Application-to-actual-data">
-<h2>Application to actual data<a class="headerlink" href="#Application-to-actual-data" title="Permalink to this headline"></a></h2>
+<h2>Application to actual data<a class="headerlink" href="#Application-to-actual-data" title="Permalink to this heading"></a></h2>
 <p><strong>Homework exercise 1 (20 points):</strong> Now, let’s use our <code class="docutils literal notranslate"><span class="pre">cepheid_v1.stan</span></code> model to fit the actual data introduced in the <a class="reference internal" href="model_building.html"><span class="doc">model building notebook</span></a>. Here we have a model for one galaxy only, so let’s pick one at random to start with. Complete the following steps:</p>
 <ul class="simple">
 <li><p>Note that the actual data have individual <code class="docutils literal notranslate"><span class="pre">sigma_m</span></code> for each Cepheid. We want to use as much information as possible, so quickly expand the Stan model to include this.</p></li>
@@ -1166,8 +1156,7 @@ Nreps = 250
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed...
 </pre></div>
 </div>
 </div>
@@ -1178,8 +1167,7 @@ measure certain periods.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed...
 </pre></div>
 </div>
 </div>
@@ -1188,14 +1176,13 @@ measure certain periods.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed...
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="Further-reading">
-<h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline"></a></h2>
+<h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Weakly informative priors: Simpson, D., Rue, H., Riebler, A., Martins, T. G. &amp; Sørbye, S. H. Penalising Model Component Complexity: A Principled, Practical Approach to Constructing Priors. Statistical Science 32, 1–28 (2017). <a class="reference external" href="https://projecteuclid.org/journals/statistical-science/volume-32/issue-1/Penalising-Model-Component-Complexity--A-Principled-Practical-Approach-to/10.1214/16-STS576.full">DOI: 10.1214/16-STS576</a>.</p></li>
 <li><p>Posterior predictive checks: Section 6.3 of <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis</a> by Gelman et al.</p></li>
@@ -1204,8 +1191,7 @@ measure certain periods.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>

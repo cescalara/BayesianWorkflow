@@ -13,10 +13,11 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -292,11 +293,12 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -305,10 +307,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -320,12 +326,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -353,7 +362,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <div class="section" id="1.-Introduction">
-<h1>1. Introduction<a class="headerlink" href="#1.-Introduction" title="Permalink to this headline"></a></h1>
+<h1>1. Introduction<a class="headerlink" href="#1.-Introduction" title="Permalink to this heading"></a></h1>
 <p>So, you know what Bayes theorem is and have learned how to write a Markov chain Monte Carlo algorithm. Life feels good and you are ready to set out and start seeing how you can use Bayesian inference to solve problems and impress your friends with posteriors and corner plots. Right!?</p>
 <p><img alt="Alas" class="no-scaled-link" src="../_images/corner_plot.png" style="width: 600px;" /></p>
 <p>Unfortunately, real world research problems are often much more complex than the straightforward examples we encounter in textbooks and statistics classes. While it is always good to start simple, making the leap to something more realistic can be quite daunting…</p>
@@ -373,7 +382,7 @@ div.rendered_html tbody tr:hover {
 <p>Further reading</p>
 <p>It is impossible to cover many interesting and important things in a such a short course, so I will often make references to further reading in the <a class="reference external" href="http://www.stat.columbia.edu/~gelman/book/">Bayesian Data Analysis textbook</a> and <a class="reference external" href="https://betanalpha.github.io/writing/">Michael Betancourt’s tutorials and case studies</a>.</p>
 <div class="section" id="Are-you-ready?">
-<h2>Are you ready?<a class="headerlink" href="#Are-you-ready?" title="Permalink to this headline"></a></h2>
+<h2>Are you ready?<a class="headerlink" href="#Are-you-ready?" title="Permalink to this heading"></a></h2>
 <p>Assumed prerequisites for the course are a basic understanding of Bayesian probability theory and Markov chain Monte Carlo (MCMC) methods.</p>
 <p>We will be using the <a class="reference external" href="https://mc-stan.org">Stan</a> statistical programming language to demonstrate a Bayesian workflow. In particular, we will use Stan’s implementation of <em>Hamiltonian Monte Carlo</em> (HMC) through the <code class="docutils literal notranslate"><span class="pre">cmdstanpy</span></code> python interface.</p>
 <p>To start with, we will make sure everything is working by simulating some data from a normal distribution and verifying that we can fit the parameters of this distribution using <code class="docutils literal notranslate"><span class="pre">cmdstanpy</span></code>.</p>
@@ -381,8 +390,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>import numpy as np
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
 from scipy import stats
 from matplotlib import pyplot as plt
 from cmdstanpy import CmdStanModel
@@ -394,8 +402,7 @@ import arviz as av
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># simulate some data from a normal distribution
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># simulate some data from a normal distribution
 N = 50
 mu = 5
 sigma = 3
@@ -448,8 +455,7 @@ ax.axvline(mu, color=&quot;k&quot;, linestyle=&quot;:&quot;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># compile the Stan model
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># compile the Stan model
 stan_model = CmdStanModel(stan_file=&quot;stan/normal.stan&quot;)
 
 print(stan_model)
@@ -480,8 +486,7 @@ CmdStanModel: name=normal
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># put data in dict to pass to the CmdStanModel
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># put data in dict to pass to the CmdStanModel
 # the keys have to match the variable names in the Stan file data block
 data = {}
 data[&quot;N&quot;] = N
@@ -601,8 +606,7 @@ INFO:cmdstanpy:finish chain 4
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># check diagnostics
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># check diagnostics
 fit.diagnose();
 </pre></div>
 </div>
@@ -634,8 +638,7 @@ Processing complete, no problems detected.
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># access parameter chains
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># access parameter chains
 mu_chain = fit.stan_variable(&quot;mu&quot;)
 
 fig, ax = plt.subplots()
@@ -666,8 +669,7 @@ print(np.shape(mu_chain)) # 1000 iterations x 4 chains
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># access all parameter chains in dict
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># access all parameter chains in dict
 fit.stan_variables()
 </pre></div>
 </div>
@@ -686,8 +688,7 @@ fit.stan_variables()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># access all chains and sample info
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># access all chains and sample info
 # e.g. lp__: log posterior value
 # Don&#39;t worry too much about all the names with underscores__
 fit.draws_pd()
@@ -870,8 +871,7 @@ fit.draws_pd()
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># use arviz to visualise the results if you like, it has common functionality built in
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># use arviz to visualise the results if you like, it has common functionality built in
 av.plot_trace(fit);
 
 av.plot_pair(fit, marginals=True);
@@ -896,8 +896,7 @@ av.plot_pair(fit, marginals=True);
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># the av.plot.. calls return an axis that you can continue plotting on
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># the av.plot.. calls return an axis that you can continue plotting on
 ax = av.plot_pair(fit, var_names=[&quot;mu&quot;, &quot;sigma&quot;])
 ax.axvline(mu, color=&quot;r&quot;)
 ax.axhline(sigma, color=&quot;r&quot;)
@@ -924,8 +923,7 @@ ax.axhline(sigma, color=&quot;r&quot;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># or you can pass them an axis
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># or you can pass them an axis
 fig, ax = plt.subplots()
 ax.scatter(mu, sigma, color=&quot;r&quot;)
 av.plot_pair(fit, var_names=[&quot;mu&quot;, &quot;sigma&quot;], ax=ax)
@@ -961,14 +959,13 @@ av.plot_pair(fit, var_names=[&quot;mu&quot;, &quot;sigma&quot;], ax=ax)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed...
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="Workflow-overview">
-<h2>Workflow overview<a class="headerlink" href="#Workflow-overview" title="Permalink to this headline"></a></h2>
+<h2>Workflow overview<a class="headerlink" href="#Workflow-overview" title="Permalink to this heading"></a></h2>
 <p>As we just saw above, building and fitting Bayesian model can be very easy with the tools available to us. However, for most scientific problems of interest, we won’t be dealing with idealised observations of normally-distributed data. The situation is to start out with <strong>data</strong> and a <strong>question</strong>. There is no simple recipe to go from this starting point to completing your analysis and drawing robust <strong>conclusions</strong>, but the idea of the workflow that we will discuss in this course is to present
 a general strategy for doing so.</p>
 <p><img alt="The workflow!" class="no-scaled-link" src="../_images/workflow0.png" style="width: 600px;" /></p>
@@ -979,14 +976,14 @@ used to <strong>draw conclusions</strong> via <strong>inference</strong>. With t
 <p><img alt="The workflow!" class="no-scaled-link" src="../_images/workflow2.png" style="width: 800px;" /></p>
 </div>
 <div class="section" id="A-note-on-context">
-<h2>A note on context<a class="headerlink" href="#A-note-on-context" title="Permalink to this headline"></a></h2>
+<h2>A note on context<a class="headerlink" href="#A-note-on-context" title="Permalink to this heading"></a></h2>
 <p>In this short course, we will <em>not</em> learn about <strong>frequentist</strong> statistical methods or <strong>machine learning</strong> approaches, which are both things you have probably heard of and may be interested in using in your research. While I might make fun of them a bit below, there are certainly cases where these could be more appropriate than what we will focus on.</p>
 <p>So, before jumping into the Bayesian workflow, I’ll try to <em>briefly</em> highlight some similarities and differences between these topics, from the Bayesian perspective.</p>
 <p>Let’s start by recalling Bayes’ theorem with data, <span class="math notranslate nohighlight">\(x\)</span>, and model parameters <span class="math notranslate nohighlight">\(\theta\)</span>:</p>
-<p><img alt="63cb803e5e9242c0b6c70d80b566d96e" class="no-scaled-link" src="../_images/bayes_theorem.png" style="width: 700px;" /></p>
+<p><img alt="f10947fcf0bc4cd3b501dee695688072" class="no-scaled-link" src="../_images/bayes_theorem.png" style="width: 700px;" /></p>
 <p>Frequentist methods</p>
 <p>We can start to think about some differences between Bayesian and frequentist statistical views by studying the following xkcd comic:</p>
-<p><img alt="e93d06e5c1b448fbb8ea51a6850c43f9" class="no-scaled-link" src="https://imgs.xkcd.com/comics/frequentists_vs_bayesians.png" style="width: 350px;" /></p>
+<p><img alt="bc9d9ce5a1ca4793806625ca6d25e780" class="no-scaled-link" src="https://imgs.xkcd.com/comics/frequentists_vs_bayesians.png" style="width: 350px;" /></p>
 <p>Both approaches involve a likelihood - <span class="math notranslate nohighlight">\(p(\mathrm{answer}~|~\mathrm{sun~status})\)</span>. For this problem, the probability of the machine saying “yes” given the sun has <em>not</em> exploded is equal to the probablity of rolling two sixes, i.e.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}p(\mathrm{yes}~|~\mathrm{sun~ok}) = 1/36, \\
@@ -999,17 +996,17 @@ p(\mathrm{yes}~|~\mathrm{sun~exploded}) = 35/36.\end{split}\]</div>
 <p>So is frequentist statistics just Bayesian statistics without priors? Unfortunately, it is not so simple. Sure, we can think about the cases where they might seem equivalent. In frequentist approaches it is typical to find the <em>maximum likelihood estimate</em> of a parameter based on data. Could this be the same as the <em>maximum a posterior</em> value of a parameter for a uniform prior?</p>
 <p>However, it is important to keep in mind the different definitions of probability that the two views are based on: probability as a <em>degree of belief</em> vs. probability as a <em>frequency in the limit of infinte observations</em>. This also comes into the treatment of uncertainty. In the Bayesian view, <strong>the data are fixed and parameters are uncertain</strong>, whereas in the frequentist case, <strong>the true parameters are fixed, and we estimate them imperfectly due to uncertainty present in the data from finite
 sampling</strong>.</p>
-<p><img alt="9c9dafec7190400f90ec19c9370248e6" class="no-scaled-link" src="../_images/bayes_vs_freq.png" style="width: 800px;" /></p>
+<p><img alt="6efb3851b3fa4938827adcb6adfbeeaf" class="no-scaled-link" src="../_images/bayes_vs_freq.png" style="width: 800px;" /></p>
 <p>Machine learning</p>
 <p>Machine learning is used to describe basically anything these days, but here I am referring to methods based on neural networks.</p>
-<p><img alt="ea2302f4d30c42789960a8da86e2d575" class="no-scaled-link" src="https://imgs.xkcd.com/comics/machine_learning.png" style="width: 350px;" /></p>
+<p><img alt="f5ef7c1f504841bc9afc6ee283f9d233" class="no-scaled-link" src="https://imgs.xkcd.com/comics/machine_learning.png" style="width: 350px;" /></p>
 <p>We can think about standard machine learning approaches as similar to maximum likelihood estimation. If we don’t know what the likelihood looks like, or cannot come up with a functional form for it, we can choose to represent it as a matrix of unknown weights.</p>
 <p>We can then <em>train</em> a neural network with simulated or labelled data in order to <em>learn</em> the appropriate weights, an optimisation process that can be thought of as maximising the likelihood. Once trained, the resulting matrix of weights can be used like an operator to return the maximum likelihood estimate for new input data.</p>
 <p>A key difference in this approach is that the likelihood itself is now a <em>black box</em>, and so <strong>it is not so clear how we should interpret our model or the resulting inferences</strong>. <strong>The quantification of uncertainty is also not straightforward</strong>. This is fine if you just want to make classifications or predictions, without asking why. That said, there is plenty of work being done on ways to interpret neural networks and methods exist to bring more Bayesian thinking in and allow uncertainty
 quantification.</p>
 </div>
 <div class="section" id="Some-more-fun-with-Stan">
-<h2>Some more fun with Stan<a class="headerlink" href="#Some-more-fun-with-Stan" title="Permalink to this headline"></a></h2>
+<h2>Some more fun with Stan<a class="headerlink" href="#Some-more-fun-with-Stan" title="Permalink to this heading"></a></h2>
 <p>Let’s consider a simple linear regression problem. We observe a variable <span class="math notranslate nohighlight">\(y\)</span> that is related to a known quantity <span class="math notranslate nohighlight">\(x\)</span> via</p>
 <div class="math notranslate nohighlight">
 \[y = mx + c,\]</div>
@@ -1022,8 +1019,7 @@ quantification.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># load data
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># load data
 data = np.loadtxt(&quot;data/linear.dat&quot;)
 x_obs = data[0]
 y_obs = data[1]
@@ -1057,8 +1053,7 @@ Text(0, 0.5, &#39;y&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed...
 # write stan code in a seperate .stan file
 # compile
 # stan_model = CmdStanModel(stan_file=&quot;...&quot;)
@@ -1070,8 +1065,7 @@ Text(0, 0.5, &#39;y&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed...
 </pre></div>
 </div>
 </div>
@@ -1083,8 +1077,7 @@ Text(0, 0.5, &#39;y&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># to be completed...
 </pre></div>
 </div>
 </div>
@@ -1098,21 +1091,19 @@ Text(0, 0.5, &#39;y&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>#to be completed...
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>#to be completed...
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="Further-reading">
-<h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this headline"></a></h2>
+<h2>Further reading<a class="headerlink" href="#Further-reading" title="Permalink to this heading"></a></h2>
 <p>This <a class="reference external" href="http://www.stat.columbia.edu/~gelman/research/unpublished/Bayesian_Workflow_article.pdf">Bayesian workflow article</a> by Gelman et al.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
