@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup
-      run: sudo apt-get install -y pandoc
+      run: |
+        sudo apt-get install -y pandoc
+        pip install markupsafe==2.0.1
     - name: Checkout
       uses: actions/checkout@main
       with:
